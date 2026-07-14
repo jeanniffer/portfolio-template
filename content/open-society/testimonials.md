@@ -1,0 +1,22 @@
+---
+eyebrow: "What Clients Say"
+titleA: "Kind words from "
+titleB: "kind people"
+testimonials:
+  - quote: "Jeanniffer is an ideal Graphic Designer. She was initially hired as a part-time contractor and quickly became an integral part of our team, leading to a promotion to full-time. She is smart, easy to work with, kind, and dedicated while extremely professional, proactive and a design genius! She elevated our branding to another level. Jeanniffer, our doors will always be open to you and you'll always be a part of our community. Go shine in other organizations - we're cheering for you!"
+    name: "Allana Rocha"
+    role: "Chief of Staff & Operations Lead at digitalundivided"
+    location: "New York, USA"
+  - quote: "Working with Jeanniffer has been an absolute pleasure! She is incredibly proactive, bringing fresh ideas, insightful questions, and creative solutions to every aspect of our website design. Her communication is top-notch, always clear, responsive, and detail-oriented. Jeanniffer consistently goes above and beyond, ensuring that our vision is met. If you're looking for a designer who is talented, I highly recommend Jeanniffer. Looking forward to collaborating again in the future!"
+    name: "Alina Vasile"
+    role: "Director of Product and Growth"
+    location: "London, UK"
+  - quote: "Jeanniffer is fabulous and I will be seeking her help for future projects. I am a health and wellness coach, a business owner and some of the things I value A TON is transparency and integrity. She has both in surplus! Clear communication, no surprises and very trustworthy. She is a great listener and truly understood what I wanted to visually communicate. She's also very cooperative, open-minded and easy to get along with. I completely trusted letting go and giving her full creative license to do her magic. I am so thankful I found her!!"
+    name: "Sharon Aldeguer"
+    role: "Fitness Trainer"
+    location: "Honolulu, USA"
+  - quote: "Simply one of the best freelance experiences I have had. Jeanniffer grasped what I wanted from a refresh of my website almost immediately. She made great suggestions and her redesign was almost perfect on the first pass. Only very slight modification was needed. Previous projects have had to go through several rounds of modification and explanation, not this project."
+    name: "David Boyce"
+    role: "Conceptual Artist"
+    location: "New Zealand"
+---

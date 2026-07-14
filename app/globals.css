@@ -1,0 +1,32 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+html {
+  scroll-behavior: smooth;
+  scroll-snap-type: y mandatory;
+}
+
+/* Matches the `ink` section color exactly -- avoids a visible seam where
+   the fixed left nav lets the body background show through next to a
+   section's own background. */
+body {
+  background-color: #0b0d1e;
+}
+
+/* Each top-level section snaps to fill the screen -- see the `snap-start`
+   + `min-h-screen` classes on every section component. */
+.snap-start {
+  scroll-snap-align: start;
+  scroll-snap-stop: always;
+}
+
+/* Hides the scrollbar on horizontally-scrollable galleries while keeping
+   them scrollable via drag/trackpad/wheel. */
+.no-scrollbar {
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
