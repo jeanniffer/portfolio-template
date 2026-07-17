@@ -33,12 +33,34 @@ function getCaseStudyGallery(folder: string): {
   const base = path.join(CASE_STUDY_IMAGES_ROOT, folder);
   const thumbDir = path.join(base, "thumbnails");
 
+  // Preference order when the same photo exists in more than one format
+  // (e.g. an original "01.png" next to an optimized "01.jpg") -- keeps the
+  // smaller, web-friendly version and skips the heavier duplicate.
+  const FORMAT_PRIORITY: Record<string, number> = {
+    webp: 0,
+    jpg: 1,
+    jpeg: 1,
+    png: 2,
+  };
+
   function listImages(dir: string): string[] {
     if (!fs.existsSync(dir)) return [];
-    return fs
-      .readdirSync(dir)
-      .filter((f) => IMAGE_EXTENSIONS.test(f))
-      .sort();
+    const files = fs.readdirSync(dir).filter((f) => IMAGE_EXTENSIONS.test(f));
+
+    const byBaseName = new Map<string, string>();
+    for (const f of files) {
+      const ext = path.extname(f).slice(1).toLowerCase();
+      const base = f.slice(0, -(ext.length + 1));
+      const existing = byBaseName.get(base);
+      if (
+        !existing ||
+        FORMAT_PRIORITY[ext] < FORMAT_PRIORITY[path.extname(existing).slice(1).toLowerCase()]
+      ) {
+        byBaseName.set(base, f);
+      }
+    }
+
+    return Array.from(byBaseName.values()).sort();
   }
 
   const thumbnails = listImages(thumbDir).map(
