@@ -2,6 +2,7 @@ import type { Section } from "@/lib/content";
 import Reveal from "./Reveal";
 
 type ServiceItem = { title: string; price?: string; description: string };
+type StackTool = { name: string; icon?: string };
 
 export default function WhatICanBuild({ section }: { section: Section }) {
   const {
@@ -26,13 +27,13 @@ export default function WhatICanBuild({ section }: { section: Section }) {
       <Reveal>
         <div className="mx-auto flex max-w-[1400px] 2xl:max-w-[1600px] flex-col gap-12">
           <div className="flex flex-col items-start justify-between gap-6 md:flex-row md:items-center">
-            <h2 className="font-display text-3xl font-semibold leading-relaxed text-white md:text-5xl">
+            <h2 className="font-display text-3xl font-semibold leading-relaxed text-white md:text-5xl lg:text-4xl xl:text-5xl">
               {titleA}
               <span className="text-accent">{titleB}</span>
             </h2>
           </div>
 
-          <div className="columns-1 gap-4 sm:columns-2 lg:columns-3">
+          <div className="columns-1 gap-4 sm:columns-2 xl:columns-3">
             {services.map((service: ServiceItem) => (
               <div
                 key={service.title}
@@ -76,12 +77,23 @@ export default function WhatICanBuild({ section }: { section: Section }) {
               <p className="font-mono text-sm uppercase tracking-[5px] text-white/70">
                 My Stack
               </p>
-              <div className="flex flex-wrap gap-x-8 gap-y-4">
-                {stack.map((tool: string) => (
-                  <span key={tool} className="font-body text-sm text-white/60">
-                    {tool}
-                  </span>
-                ))}
+              <div className="flex flex-wrap justify-start gap-x-10 gap-y-6">
+                {stack.map((tool: string | StackTool) => {
+                  const { name, icon } =
+                    typeof tool === "string" ? { name: tool, icon: undefined } : tool;
+                  return (
+                    <span
+                      key={name}
+                      className="flex w-16 flex-col items-center gap-3 text-center font-body text-sm text-white/60"
+                    >
+                      {icon ? (
+                        // eslint-disable-next-line @next/next/no-img-element
+                        <img src={icon} alt="" className="h-9 w-9 object-contain" />
+                      ) : null}
+                      {name}
+                    </span>
+                  );
+                })}
               </div>
             </div>
           ) : null}

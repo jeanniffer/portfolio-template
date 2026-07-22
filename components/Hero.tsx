@@ -13,7 +13,7 @@ export default function Hero({ meta }: { meta: SiteMeta }) {
 
       <div className="relative z-10 mx-auto flex w-full max-w-[1200px] flex-1 flex-col items-center justify-center gap-6 text-center">
         <Reveal>
-          <h1 className="font-display text-5xl font-semibold leading-tight text-white sm:text-6xl md:text-7xl lg:text-8xl lg:leading-[1.05]">
+          <h1 className="font-display text-5xl font-semibold leading-tight text-white sm:text-6xl md:text-7xl md:leading-[1.3] lg:text-6xl lg:leading-[1.05] xl:text-8xl">
             {meta.heroTitleA}
             <span className="text-accent">{meta.heroTitleB}</span>
           </h1>

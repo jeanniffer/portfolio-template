@@ -21,7 +21,7 @@ export default function Home() {
   return (
     <>
       <SideNav meta={meta} />
-      <main className="flex flex-col pl-24 md:pl-32">
+      <main className="flex flex-col pl-36 md:pl-32">
       <Hero meta={meta} />
       <About section={about} meta={meta} />
       <ByTheNumbers section={byTheNumbers} />

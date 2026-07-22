@@ -26,13 +26,13 @@ export default function SneakPeek({ section }: { section: Section }) {
       <Reveal>
         <div className="mx-auto flex max-w-[1400px] 2xl:max-w-[1600px] flex-col gap-12">
           <div className="flex flex-col items-start justify-between gap-6 md:flex-row md:items-center">
-            <h2 className="font-display text-3xl font-semibold text-white md:text-5xl">
+            <h2 className="font-display text-3xl font-semibold text-white md:text-5xl lg:text-4xl xl:text-5xl">
               {titleA}
               <span className="text-accent">{titleB}</span>
             </h2>
           </div>
 
-          <div className="columns-1 gap-4 sm:columns-2 lg:columns-3">
+          <div className="columns-1 gap-4 sm:columns-2 xl:columns-3">
             {projects.map((project: Project, i: number) => (
               <div
                 key={i}
@@ -58,7 +58,7 @@ export default function SneakPeek({ section }: { section: Section }) {
                       href={l.url}
                       target="_blank"
                       rel="noreferrer"
-                      className="flex items-center gap-2 rounded-full border border-white px-4 py-2 font-body text-sm font-bold text-white transition hover:bg-white hover:text-ink"
+                      className="flex items-center gap-2 rounded-full border border-white/40 px-5 py-2.5 font-body text-sm font-bold text-white/80 transition hover:border-white hover:text-white"
                     >
                       {l.label}
                       <span aria-hidden>→</span>

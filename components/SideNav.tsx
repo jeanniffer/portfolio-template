@@ -24,6 +24,7 @@ const NAV_ITEMS = [
  */
 export default function SideNav({ meta }: { meta: SiteMeta }) {
   const [label, setLabel] = useState(meta.role);
+  const [activeId, setActiveId] = useState<string | null>(null);
   const [badgeHover, setBadgeHover] = useState(false);
 
   useEffect(() => {
@@ -32,12 +33,27 @@ export default function SideNav({ meta }: { meta: SiteMeta }) {
     );
     if (targets.length === 0) return;
 
+    // Case studies share the "work" nav item but only the first one carries
+    // that id -- walk back to the nearest preceding id so every case study
+    // still highlights "Case Studies".
+    function navIdFor(el: HTMLElement): string | undefined {
+      let current: HTMLElement | null = el;
+      while (current) {
+        if (current.id && NAV_ITEMS.some((n) => n.id === current!.id)) {
+          return current.id;
+        }
+        current = current.previousElementSibling as HTMLElement | null;
+      }
+      return undefined;
+    }
+
     const observer = new IntersectionObserver(
       (entries) => {
         entries.forEach((entry) => {
           const text = entry.target.getAttribute("data-section-label");
           if (entry.isIntersecting) {
             setLabel(text || meta.role);
+            setActiveId(navIdFor(entry.target as HTMLElement) ?? null);
           } else if (
             entry.target === targets[0] &&
             entry.boundingClientRect.top > 0
@@ -47,6 +63,7 @@ export default function SideNav({ meta }: { meta: SiteMeta }) {
             // section's exit was racing against the next section's enter
             // event and could wipe out the correct label while scrolling up.
             setLabel(meta.role);
+            setActiveId(null);
           }
         });
       },
@@ -98,18 +115,25 @@ export default function SideNav({ meta }: { meta: SiteMeta }) {
           (hover doesn't exist on touch); from md up it reverts to the
           hover-reveal line links. */}
       <div className="flex flex-1 flex-col items-start justify-center gap-3 md:gap-0.5">
-        {NAV_ITEMS.map((item) => (
-          <a
-            key={item.id}
-            href={`#${item.id}`}
-            className="group flex items-center gap-2 py-1 md:gap-3 md:py-0"
-          >
-            <span className="h-[3px] w-4 shrink-0 rounded-full bg-accent transition-all duration-300 ease-out md:h-[3px] md:w-8 md:bg-[#2d2f50] md:group-hover:w-12 md:group-hover:bg-accent" />
-            <span className="max-w-[64px] truncate font-mono text-[9px] uppercase tracking-[2px] text-accent opacity-100 transition-all duration-300 ease-out md:max-w-0 md:overflow-hidden md:whitespace-nowrap md:text-sm md:tracking-[4px] md:opacity-0 md:group-hover:max-w-[240px] md:group-hover:opacity-100">
-              {item.label}
-            </span>
-          </a>
-        ))}
+        {NAV_ITEMS.map((item) => {
+          const isActive = item.id === activeId;
+          return (
+            <a
+              key={item.id}
+              href={`#${item.id}`}
+              className="group flex items-center gap-2 py-1 md:gap-3 md:py-0"
+            >
+              <span
+                className={`h-[3px] w-4 shrink-0 rounded-full bg-accent transition-all duration-300 ease-out md:h-[3px] md:group-hover:w-12 md:group-hover:bg-accent ${
+                  isActive ? "md:w-12 md:bg-accent" : "md:w-8 md:bg-[#2d2f50]"
+                }`}
+              />
+              <span className="max-w-[64px] truncate font-mono text-[9px] uppercase tracking-[2px] text-accent opacity-100 transition-all duration-300 ease-out md:max-w-0 md:overflow-hidden md:whitespace-nowrap md:text-sm md:tracking-[4px] md:opacity-0 md:group-hover:max-w-[240px] md:group-hover:opacity-100">
+                {item.label}
+              </span>
+            </a>
+          );
+        })}
       </div>
     </nav>
   );

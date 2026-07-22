@@ -50,22 +50,22 @@ export default function CaseStudy({
         whileInView="show"
         viewport={{ once: true, margin: "-80px" }}
         transition={{ staggerChildren: 0.12 }}
-        className="mx-auto flex max-w-[1100px] flex-col gap-8"
+        className="mx-auto flex w-full max-w-[1400px] flex-col gap-8 2xl:max-w-[1600px]"
       >
-        {/* Header: number, label, client, description/role/deliverables/tools */}
+        {/* Header: client name full-width on its own line, then
+            Description/Role/Deliverables/Tools share a single row from
+            xl (~1440px) up. */}
         <motion.div
           variants={fadeUp}
           transition={{ duration: 0.6, ease: "easeOut" }}
-          className="flex flex-col gap-8 border-b-2 border-accent-soft pb-8 md:flex-row md:gap-10"
+          className="flex flex-col gap-8 border-b-2 border-accent-soft pb-8"
         >
-          <div className="flex flex-col gap-4 md:w-[380px] md:shrink-0">
-            <p className="font-display text-3xl font-semibold text-white md:text-5xl">
-              {client}
-            </p>
-          </div>
+          <p className="font-display text-3xl font-semibold text-white md:text-5xl lg:text-4xl xl:text-5xl">
+            {client}
+          </p>
 
-          <div className="flex min-w-0 flex-1 flex-col gap-6">
-            <div className="flex flex-col gap-2">
+          <div className="flex min-w-0 flex-col gap-6 xl:flex-row xl:gap-10">
+            <div className="flex min-w-0 flex-col gap-2 xl:w-1/2">
               <p className="font-mono text-xs uppercase tracking-[5px] text-white/50">
                 Description
               </p>
@@ -74,49 +74,74 @@ export default function CaseStudy({
               </div>
             </div>
 
-            <div className="grid min-w-0 gap-6 sm:grid-cols-3">
+            <div className="flex min-w-0 flex-col gap-6 xl:w-1/2 xl:flex-row xl:gap-10">
               {role ? (
-                <div className="flex min-w-0 flex-col gap-2">
+                <div className="flex min-w-0 flex-col gap-2 xl:flex-1">
                   <p className="font-mono text-xs uppercase tracking-[5px] text-white/50">
                     Role
                   </p>
-                  <p className="font-body text-base font-bold text-white">{role}</p>
+                  <p className="break-words font-body text-base font-bold text-white">
+                    {role}
+                  </p>
                 </div>
               ) : null}
               {deliverables ? (
-                <div className="flex min-w-0 flex-col gap-2">
+                <div className="flex min-w-0 flex-col gap-2 xl:flex-1">
                   <p className="font-mono text-xs uppercase tracking-[5px] text-white/50">
                     Deliverables
                   </p>
-                  <p className="font-body text-base font-bold text-white">
+                  <p className="break-words font-body text-base font-bold text-white">
                     {deliverables}
                   </p>
                 </div>
               ) : null}
               {tools ? (
-                <div className="flex min-w-0 flex-col gap-2">
+                <div className="flex min-w-0 flex-col gap-2 xl:flex-1">
                   <p className="font-mono text-xs uppercase tracking-[5px] text-white/50">
                     Tools
                   </p>
-                  <p className="font-body text-base font-bold text-white">{tools}</p>
+                  <p className="break-words font-body text-base font-bold text-white">
+                    {tools}
+                  </p>
                 </div>
               ) : null}
             </div>
           </div>
         </motion.div>
 
-        {/* Gallery: infinite horizontal scroll, each image at full natural
-            size/aspect ratio -- a web page can do this, a PDF can't. */}
+        {/* Gallery: a simple 2-column grid on mobile (no horizontal
+            scroll -- easier to browse with a thumb), the infinite
+            horizontal scroll carousel from md up. */}
         <motion.div
           variants={fadeUp}
           transition={{ duration: 0.6, ease: "easeOut" }}
           className="w-full border-b-2 border-accent-soft pb-8"
         >
-          <InfiniteGallery
-            thumbnails={thumbnails}
-            slides={slides}
-            onOpen={setLightboxIndex}
-          />
+          <div className="grid grid-cols-2 gap-4 md:hidden">
+            {galleryImages.map((src, i) => (
+              <button
+                key={src}
+                type="button"
+                onClick={() => setLightboxIndex(i)}
+                className="group relative aspect-square overflow-hidden rounded-xl bg-white/5"
+              >
+                {/* eslint-disable-next-line @next/next/no-img-element */}
+                <img
+                  src={src}
+                  alt=""
+                  className="h-full w-full object-cover"
+                />
+              </button>
+            ))}
+          </div>
+
+          <div className="hidden md:block">
+            <InfiniteGallery
+              thumbnails={thumbnails}
+              slides={slides}
+              onOpen={setLightboxIndex}
+            />
+          </div>
         </motion.div>
 
         {lightboxIndex !== null ? (
@@ -133,7 +158,7 @@ export default function CaseStudy({
           <motion.div
             variants={fadeUp}
             transition={{ duration: 0.6, ease: "easeOut" }}
-            className="flex flex-col gap-6 md:flex-row md:items-start"
+            className="flex flex-col gap-6 lg:flex-row lg:items-start"
           >
             <p className="font-body text-base font-bold text-white md:w-[380px] md:shrink-0">
               Click any link to explore the full work.
@@ -149,7 +174,7 @@ export default function CaseStudy({
                     href={l.url}
                     target="_blank"
                     rel="noreferrer"
-                    className="flex items-center gap-2 rounded-full border border-white px-4 py-2 font-body text-sm font-bold text-white transition hover:bg-white hover:text-ink"
+                    className="flex items-center gap-2 rounded-full border border-white/40 px-5 py-2.5 font-body text-sm font-bold text-white/80 transition hover:border-white hover:text-white"
                   >
                     {l.label}
                     <span aria-hidden>→</span>

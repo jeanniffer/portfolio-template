@@ -16,17 +16,21 @@ export default function ByTheNumbers({ section }: { section: Section }) {
       className="snap-start relative flex min-h-screen flex-col justify-center overflow-y-auto bg-ink px-6 py-20 md:px-20 md:py-28"
     >
       <Reveal>
-        <div className="mx-auto flex w-full max-w-[1400px] flex-col gap-12 md:flex-row md:items-center md:gap-10 2xl:max-w-[1600px]">
+        <div className="mx-auto flex w-full max-w-[1400px] flex-col gap-8 text-center lg:flex-row lg:items-center lg:gap-10 lg:text-left 2xl:max-w-[1600px]">
           {/* Left: heading + stats */}
           <div className="flex flex-1 flex-col gap-8">
             {titleA ? (
-              <h2 className="font-display text-3xl font-semibold text-white md:text-5xl">
+              <h2 className="font-display text-3xl font-semibold text-white md:text-5xl lg:whitespace-nowrap lg:text-4xl xl:text-5xl">
                 {titleA}
                 <span className="text-accent">{titleB}</span>
               </h2>
             ) : null}
 
-            <div className="grid gap-4 sm:grid-cols-2">
+            <p className="font-mono text-xs uppercase tracking-[5px] text-white/50 lg:hidden">
+              Stats
+            </p>
+
+            <div className="grid gap-4 text-left lg:grid-cols-2">
               {stats.map((stat) => (
                 <div
                   key={stat.label}
@@ -37,7 +41,7 @@ export default function ByTheNumbers({ section }: { section: Section }) {
                   }`}
                 >
                   <p
-                    className={`font-display text-4xl font-semibold md:text-5xl ${
+                    className={`font-display text-4xl font-semibold md:text-5xl lg:text-[38px] xl:text-5xl ${
                       stat.highlight ? "text-ink" : "text-accent"
                     }`}
                   >
