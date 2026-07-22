@@ -15,7 +15,8 @@ export default function SneakPeek({ section }: { section: Section }) {
   } = section.frontmatter;
 
   const upworkUrl =
-    process.env.NEXT_PUBLIC_UPWORK_URL || "https://www.upwork.com";
+    process.env.NEXT_PUBLIC_UPWORK_URL ||
+    "https://www.upwork.com/freelancers/jeanniffer?viewMode=1";
 
   return (
     <section
@@ -52,18 +53,20 @@ export default function SneakPeek({ section }: { section: Section }) {
                   {project.description}
                 </p>
                 <div className="flex flex-wrap gap-3">
-                  {project.links.map((l) => (
-                    <a
-                      key={l.label}
-                      href={l.url}
-                      target="_blank"
-                      rel="noreferrer"
-                      className="flex items-center gap-2 rounded-full border border-white/40 px-5 py-2.5 font-body text-sm font-bold text-white/80 transition hover:border-white hover:text-white"
-                    >
-                      {l.label}
-                      <span aria-hidden>→</span>
-                    </a>
-                  ))}
+                  {project.links
+                    .filter((l) => l.url !== "#")
+                    .map((l) => (
+                      <a
+                        key={l.label}
+                        href={l.url}
+                        target="_blank"
+                        rel="noreferrer"
+                        className="flex items-center gap-2 rounded-full border border-white/40 px-5 py-2.5 font-body text-sm font-bold text-white/80 transition hover:border-white hover:text-white"
+                      >
+                        {l.label}
+                        <span aria-hidden>→</span>
+                      </a>
+                    ))}
                 </div>
               </div>
             ))}

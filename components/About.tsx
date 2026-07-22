@@ -1,5 +1,6 @@
 import ReactMarkdown from "react-markdown";
 import type { Section, SiteMeta } from "@/lib/content";
+import { yearsOfExperience } from "@/lib/careerYears";
 import Reveal from "./Reveal";
 
 export default function About({
@@ -10,6 +11,10 @@ export default function About({
   meta: SiteMeta;
 }) {
   const { titleA, titleB, photo } = section.frontmatter;
+  const content = section.content.replace(
+    /\{\{AUTO_YEARS\}\}/g,
+    String(yearsOfExperience())
+  );
 
   return (
     <section
@@ -41,14 +46,14 @@ export default function About({
 
         {/* Copy -- centered under the photo on mobile; pinned to the
             right and vertically centered over the photo on desktop. */}
-        <div className="relative z-10 mx-auto flex w-full max-w-[1400px] flex-1 flex-col items-center justify-center px-6 py-10 text-center md:absolute md:inset-0 md:items-end md:px-16 md:py-0 md:text-left 2xl:max-w-[1600px]">
+        <div className="relative z-10 mx-auto flex w-full max-w-[1400px] flex-1 flex-col items-start justify-center px-6 py-10 text-left md:absolute md:inset-0 md:items-end md:px-16 md:py-0 2xl:max-w-[1600px]">
           <Reveal className="w-full md:w-1/2">
             <h2 className="font-display text-3xl font-semibold leading-normal text-white md:text-5xl md:leading-[1.3] lg:text-4xl lg:leading-normal xl:text-5xl">
               {titleA}
               <span className="text-accent">{titleB}</span>
             </h2>
-            <div className="prose prose-invert mx-auto mt-6 max-w-none font-body text-base leading-relaxed text-white/90 prose-strong:text-accent md:mx-0 md:text-lg">
-              <ReactMarkdown>{section.content}</ReactMarkdown>
+            <div className="prose prose-invert mt-6 max-w-none font-body text-base leading-relaxed text-white/90 prose-strong:text-accent md:mx-0 md:text-lg">
+              <ReactMarkdown>{content}</ReactMarkdown>
             </div>
           </Reveal>
         </div>
@@ -77,7 +82,7 @@ export default function About({
             </h2>
 
             <div className="prose prose-invert max-w-none font-body text-lg leading-relaxed text-white/90 prose-strong:text-accent">
-              <ReactMarkdown>{section.content}</ReactMarkdown>
+              <ReactMarkdown>{content}</ReactMarkdown>
             </div>
           </div>
         </Reveal>

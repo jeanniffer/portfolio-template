@@ -1,4 +1,5 @@
 import type { Section } from "@/lib/content";
+import { yearsOfExperience } from "@/lib/careerYears";
 import Reveal from "./Reveal";
 import WorldMap, { type MapCountry } from "./WorldMap";
 
@@ -6,8 +7,16 @@ type Stat = { value: string; label: string; highlight?: boolean };
 
 export default function ByTheNumbers({ section }: { section: Section }) {
   const { titleA, titleB } = section.frontmatter;
-  const stats: Stat[] = section.frontmatter.stats || [];
+  const rawStats: Stat[] = section.frontmatter.stats || [];
   const countries: MapCountry[] = section.frontmatter.countries || [];
+
+  // The markdown can set a stat's value to "AUTO_YEARS+" as a sentinel --
+  // it gets swapped for the live computed year count here.
+  const stats: Stat[] = rawStats.map((stat) =>
+    stat.value === "AUTO_YEARS+"
+      ? { ...stat, value: `${yearsOfExperience()}+` }
+      : stat
+  );
 
   return (
     <section

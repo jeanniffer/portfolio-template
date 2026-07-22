@@ -8,6 +8,7 @@ import SneakPeek from "@/components/SneakPeek";
 import WhatICanBuild from "@/components/WhatICanBuild";
 import Testimonials from "@/components/Testimonials";
 import ContactBand from "@/components/ContactBand";
+import FloatingCTA from "@/components/FloatingCTA";
 
 export default function Home() {
   const meta = getSiteMeta();
@@ -21,7 +22,8 @@ export default function Home() {
   return (
     <>
       <SideNav meta={meta} />
-      <main className="flex flex-col pl-36 md:pl-32">
+      <FloatingCTA />
+      <main className="flex flex-col pl-0 min-[426px]:pl-36 md:pl-32">
       <Hero meta={meta} />
       <About section={about} meta={meta} />
       <ByTheNumbers section={byTheNumbers} />

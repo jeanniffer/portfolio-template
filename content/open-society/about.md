@@ -3,7 +3,7 @@ titleA: "Kind design doesn't just solve problems, "
 titleB: "it shapes how people feel, connect, and grow."
 photo: "/images/profile-photo.png"
 ---
-I'm a graphic and product designer who has spent **10+ years working with the teams
+I'm a graphic and product designer who has spent **{{AUTO_YEARS}}+ years working with the teams
 defending human rights, equity, and open society:** nonprofits, research institutions,
 and women-led initiatives, including organizations like digitalundivided and the
 Rainforest Foundation US.

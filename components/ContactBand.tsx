@@ -5,7 +5,8 @@ import Reveal from "./Reveal";
 
 export default function ContactBand({ meta }: { meta: SiteMeta }) {
   const upworkUrl =
-    process.env.NEXT_PUBLIC_UPWORK_URL || "https://www.upwork.com";
+    process.env.NEXT_PUBLIC_UPWORK_URL ||
+    "https://www.upwork.com/freelancers/jeanniffer?viewMode=1";
 
   return (
     <section

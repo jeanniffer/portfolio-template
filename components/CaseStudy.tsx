@@ -37,6 +37,11 @@ export default function CaseStudy({
   // pages through, in the same order the gallery cells are shown.
   const galleryImages: string[] = [...thumbnails, ...slides];
 
+  // Placeholder links (url: "#") are hidden from the live preview so the
+  // template can be built out before the real URLs are ready -- just
+  // swap "#" for the real link later and it'll appear automatically.
+  const visibleLinks = links.filter((l: LinkItem) => l.url !== "#");
+
   const [lightboxIndex, setLightboxIndex] = useState<number | null>(null);
 
   return (
@@ -154,7 +159,7 @@ export default function CaseStudy({
         ) : null}
 
         {/* Footer: links */}
-        {links.length ? (
+        {visibleLinks.length ? (
           <motion.div
             variants={fadeUp}
             transition={{ duration: 0.6, ease: "easeOut" }}
@@ -168,7 +173,7 @@ export default function CaseStudy({
                 Links
               </p>
               <div className="flex flex-wrap gap-3">
-                {links.map((l: LinkItem) => (
+                {visibleLinks.map((l: LinkItem) => (
                   <a
                     key={l.label}
                     href={l.url}

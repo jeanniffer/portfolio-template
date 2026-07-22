@@ -6,7 +6,7 @@ stats:
     label: "CTR increase on a product feature"
   - value: "$155k"
     label: "earned on Upwork across 38 projects"
-  - value: "10+"
+  - value: "AUTO_YEARS+"
     label: "years of professional design experience"
   - value: "5,315+"
     label: "hours of tracked client work"

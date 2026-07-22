@@ -75,7 +75,7 @@ export default function SideNav({ meta }: { meta: SiteMeta }) {
   }, [meta.role]);
 
   return (
-    <nav className="fixed left-3 top-0 z-40 flex h-screen shrink-0 flex-col items-start bg-transparent pb-10 pt-4 md:left-10 md:pb-24 md:pt-6">
+    <nav className="fixed left-3 top-0 z-40 hidden h-screen shrink-0 flex-col items-start bg-transparent pb-10 pt-4 min-[426px]:flex md:left-10 md:pb-24 md:pt-6">
       <div className="flex items-center gap-3 rounded-full border border-white/10 bg-ink/80 py-2 pl-2 pr-4 shadow-[0_8px_24px_rgba(0,0,0,0.35)] backdrop-blur-md md:gap-6 md:py-3 md:pl-3 md:pr-6">
         <div
           onMouseEnter={() => setBadgeHover(true)}

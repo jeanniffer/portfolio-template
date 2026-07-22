@@ -16,7 +16,8 @@ export default function WhatICanBuild({ section }: { section: Section }) {
   } = section.frontmatter;
 
   const upworkUrl =
-    process.env.NEXT_PUBLIC_UPWORK_URL || "https://www.upwork.com";
+    process.env.NEXT_PUBLIC_UPWORK_URL ||
+    "https://www.upwork.com/freelancers/jeanniffer?viewMode=1";
 
   return (
     <section
