@@ -89,6 +89,10 @@ export type SiteMeta = {
   dateLabel: string;
   badge: string;
   skills: string;
+  // Optional: when set, CTA buttons across the site link to this mailto:
+  // address instead of the Upwork profile -- used for the social-impact
+  // variant, which targets direct-hire foundations rather than Upwork.
+  contactEmail?: string;
 };
 
 export type Section = {
@@ -97,11 +101,20 @@ export type Section = {
   content: string;
 };
 
+// Always the current month + year, e.g. "July 2026" -- overrides whatever
+// static value site.md has for dateLabel so it never goes stale.
+function currentDateLabel(): string {
+  return new Date().toLocaleDateString("en-US", {
+    month: "long",
+    year: "numeric",
+  });
+}
+
 export function getSiteMeta(): SiteMeta {
   const file = path.join(variantDir(getVariant()), "site.md");
   const raw = fs.readFileSync(file, "utf8");
   const { data } = matter(raw);
-  return data as SiteMeta;
+  return { ...(data as SiteMeta), dateLabel: currentDateLabel() };
 }
 
 export function getSection(slug: string): Section {

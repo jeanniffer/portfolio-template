@@ -22,7 +22,7 @@ export default function Home() {
   return (
     <>
       <SideNav meta={meta} />
-      <FloatingCTA />
+      <FloatingCTA meta={meta} />
       <main className="flex flex-col pl-0 min-[426px]:pl-36 md:pl-32">
       <Hero meta={meta} />
       <About section={about} meta={meta} />
