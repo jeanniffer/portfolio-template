@@ -93,6 +93,8 @@ export type SiteMeta = {
   // address instead of the Upwork profile -- used for the social-impact
   // variant, which targets direct-hire foundations rather than Upwork.
   contactEmail?: string;
+  // Optional: social links shown on the final (ContactBand) screen.
+  socials?: { label: string; url: string }[];
 };
 
 export type Section = {

@@ -54,23 +54,28 @@ export default function WhatICanBuild({ section }: { section: Section }) {
               </div>
             ))}
 
-            {/* Closing CTA card -- links out to Upwork, never a personal email */}
-            <div className="mb-4 flex break-inside-avoid flex-col gap-6 rounded-3xl border border-accent/40 bg-accent p-6 shadow-[0_8px_24px_rgba(0,0,0,0.25)] transition-transform duration-200 ease-out hover:-translate-y-1">
-              <div className="aspect-video w-full rounded-2xl bg-ink/10" />
-              <p className="font-display text-2xl font-semibold text-ink">
-                {ctaTitle}
-              </p>
-              <p className="font-body text-lg font-bold text-ink">{ctaSubtitle}</p>
-              <a
-                href={upworkUrl}
-                target="_blank"
-                rel="noreferrer"
-                className="inline-flex w-fit items-center gap-2 rounded-full bg-ink px-6 py-3 font-body text-lg font-semibold text-accent transition hover:opacity-90"
-              >
-                {ctaButton}
-                <span aria-hidden>→</span>
-              </a>
-            </div>
+            {/* Closing CTA card -- links out to Upwork, never a personal
+                email. Only rendered when the markdown sets a ctaTitle;
+                variants that don't want this card (e.g. social-impact,
+                for now) simply omit it. */}
+            {ctaTitle ? (
+              <div className="mb-4 flex break-inside-avoid flex-col gap-6 rounded-3xl border border-accent/40 bg-accent p-6 shadow-[0_8px_24px_rgba(0,0,0,0.25)] transition-transform duration-200 ease-out hover:-translate-y-1">
+                <div className="aspect-video w-full rounded-2xl bg-ink/10" />
+                <p className="font-display text-2xl font-semibold text-ink">
+                  {ctaTitle}
+                </p>
+                <p className="font-body text-lg font-bold text-ink">{ctaSubtitle}</p>
+                <a
+                  href={upworkUrl}
+                  target="_blank"
+                  rel="noreferrer"
+                  className="inline-flex w-fit items-center gap-2 rounded-full bg-ink px-6 py-3 font-body text-lg font-semibold text-accent transition hover:opacity-90"
+                >
+                  {ctaButton}
+                  <span aria-hidden>→</span>
+                </a>
+              </div>
+            ) : null}
           </div>
 
           {stack.length ? (

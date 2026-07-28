@@ -8,6 +8,12 @@ export default function ContactBand({ meta }: { meta: SiteMeta }) {
     process.env.NEXT_PUBLIC_UPWORK_URL ||
     "https://www.upwork.com/freelancers/jeanniffer?viewMode=1";
 
+  // Variants with a contactEmail (e.g. social-impact) skip Upwork entirely
+  // in favor of a direct email + social links.
+  const primaryCta = meta.contactEmail
+    ? { label: "Email Me", href: `mailto:${meta.contactEmail}`, external: false }
+    : { label: "Hire me on Upwork", href: upworkUrl, external: true };
+
   return (
     <section
       id="contact"
@@ -25,15 +31,34 @@ export default function ContactBand({ meta }: { meta: SiteMeta }) {
 
         <Reveal delay={0.1}>
           <a
-            href={upworkUrl}
-            target="_blank"
-            rel="noreferrer"
+            href={primaryCta.href}
+            {...(primaryCta.external
+              ? { target: "_blank", rel: "noreferrer" }
+              : {})}
             className="inline-flex items-center gap-2 rounded-full bg-accent px-6 py-3 font-body text-lg font-semibold text-ink transition hover:opacity-90"
           >
-            Hire me on Upwork
+            {primaryCta.label}
             <span aria-hidden>→</span>
           </a>
         </Reveal>
+
+        {meta.socials?.length ? (
+          <Reveal delay={0.15}>
+            <div className="flex items-center justify-center gap-4">
+              {meta.socials.map((social) => (
+                <a
+                  key={social.label}
+                  href={social.url}
+                  target="_blank"
+                  rel="noreferrer"
+                  className="rounded-full border border-white/30 px-5 py-2 font-body text-sm font-bold text-white/80 transition hover:border-white hover:text-white"
+                >
+                  {social.label}
+                </a>
+              ))}
+            </div>
+          </Reveal>
+        ) : null}
 
         <Reveal delay={0.2}>
           <div className="flex items-center justify-center gap-3">
