@@ -1,4 +1,9 @@
-import { getSiteMeta, getSection, getCaseStudies } from "@/lib/content";
+import {
+  getSiteMeta,
+  getSection,
+  getCaseStudies,
+  getSneakPeekSection,
+} from "@/lib/content";
 import SideNav from "@/components/SideNav";
 import Hero from "@/components/Hero";
 import About from "@/components/About";
@@ -14,7 +19,7 @@ export default function Home() {
   const meta = getSiteMeta();
   const about = getSection("about");
   const byTheNumbers = getSection("by-the-numbers");
-  const sneakPeek = getSection("sneak-peek");
+  const sneakPeek = getSneakPeekSection();
   const whatICanBuild = getSection("what-i-can-build");
   const testimonials = getSection("testimonials");
   const caseStudies = getCaseStudies();

@@ -24,7 +24,11 @@ import type { Section } from "./content";
 const CONTENT_ROOT = path.join(process.cwd(), "content");
 const SHARED_ROOT = path.join(CONTENT_ROOT, "_shared");
 
-export type SharedKind = "case-studies" | "testimonials" | "services";
+export type SharedKind =
+  | "case-studies"
+  | "testimonials"
+  | "services"
+  | "sneak-peek-projects";
 
 type SelectionEntry = {
   slug: string;
@@ -40,12 +44,14 @@ type Selections = {
   caseStudies?: SelectionEntry[];
   testimonials?: SelectionEntry[];
   services?: SelectionEntry[];
+  sneakPeekProjects?: SelectionEntry[];
 };
 
 const SELECTION_KEY: Record<SharedKind, keyof Selections> = {
   "case-studies": "caseStudies",
   testimonials: "testimonials",
   services: "services",
+  "sneak-peek-projects": "sneakPeekProjects",
 };
 
 function readMasterFile(kind: SharedKind, slug: string): Section {
@@ -112,6 +118,10 @@ export function getSharedTestimonials(variant: string): Section[] {
 
 export function getSharedServices(variant: string): Section[] {
   return getSharedItems("services", variant);
+}
+
+export function getSharedSneakPeekProjects(variant: string): Section[] {
+  return getSharedItems("sneak-peek-projects", variant);
 }
 
 /** Lists every master slug available for a given kind -- handy for a

@@ -3,7 +3,7 @@ import path from "path";
 import matter from "gray-matter";
 // Only imports the Section *type* from this module (see sharedContent.ts),
 // so this doesn't create a runtime circular import.
-import { getSharedCaseStudies } from "./sharedContent";
+import { getSharedCaseStudies, getSharedSneakPeekProjects } from "./sharedContent";
 
 /**
  * Content lives in /content/<variant>/*.md
@@ -127,6 +127,33 @@ export function getSection(slug: string): Section {
   const raw = fs.readFileSync(file, "utf8");
   const { data, content } = matter(raw);
   return { slug, frontmatter: data, content };
+}
+
+/**
+ * Wraps getSection("sneak-peek"): if the active variant has a
+ * `sneakPeekProjects` list in its selections.md, the shared/master
+ * projects (content/_shared/sneak-peek-projects/) replace whatever
+ * hand-typed `projects` array sneak-peek.md has. Falls back to the
+ * markdown's own `projects` field untouched if there's no selections.md
+ * or no sneakPeekProjects entry -- fully opt-in per variant.
+ */
+export function getSneakPeekSection(): Section {
+  const section = getSection("sneak-peek");
+  const variant = getVariant();
+  const dir = variantDir(variant);
+
+  if (!fs.existsSync(path.join(dir, "selections.md"))) return section;
+
+  const projects = getSharedSneakPeekProjects(variant);
+  if (!projects.length) return section;
+
+  return {
+    ...section,
+    frontmatter: {
+      ...section.frontmatter,
+      projects: projects.map((p) => p.frontmatter),
+    },
+  };
 }
 
 // `imagesFolder` in frontmatter points at a folder under
