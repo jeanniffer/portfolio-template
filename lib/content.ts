@@ -1,6 +1,9 @@
 import fs from "fs";
 import path from "path";
 import matter from "gray-matter";
+// Only imports the Section *type* from this module (see sharedContent.ts),
+// so this doesn't create a runtime circular import.
+import { getSharedCaseStudies } from "./sharedContent";
 
 /**
  * Content lives in /content/<variant>/*.md
@@ -126,8 +129,34 @@ export function getSection(slug: string): Section {
   return { slug, frontmatter: data, content };
 }
 
+// `imagesFolder` in frontmatter points at a folder under
+// public/images/case-studies/ -- if set, whatever images live there become
+// the gallery automatically (overriding any hand-typed thumbnails/slides
+// lists in the markdown). Shared across both the legacy per-variant
+// case-study-*.md files and the shared/selections.md system below.
+function applyImagesFolder(data: Record<string, any>) {
+  if (data.imagesFolder) {
+    const { thumbnails, slides } = getCaseStudyGallery(data.imagesFolder);
+    if (thumbnails.length) data.thumbnails = thumbnails;
+    if (slides.length) data.slides = slides;
+  }
+  return data;
+}
+
 export function getCaseStudies(): Section[] {
-  const dir = variantDir(getVariant());
+  const variant = getVariant();
+  const dir = variantDir(variant);
+
+  // If this variant has a selections.md, it's opted into the shared
+  // master-content system (content/_shared/case-studies/ + overrides) --
+  // pull from there instead of scanning for case-study-*.md files.
+  if (fs.existsSync(path.join(dir, "selections.md"))) {
+    return getSharedCaseStudies(variant).map((section: Section) => ({
+      ...section,
+      frontmatter: applyImagesFolder({ ...section.frontmatter }),
+    }));
+  }
+
   return fs
     .readdirSync(dir)
     .filter((f) => f.startsWith("case-study-") && f.endsWith(".md"))
@@ -135,17 +164,7 @@ export function getCaseStudies(): Section[] {
     .map((f) => {
       const raw = fs.readFileSync(path.join(dir, f), "utf8");
       const { data, content } = matter(raw);
-
-      // `imagesFolder` in frontmatter points at a folder under
-      // public/images/case-studies/ -- if set, whatever images live there
-      // become the gallery automatically (overriding any hand-typed
-      // thumbnails/slides lists in the markdown).
-      if (data.imagesFolder) {
-        const { thumbnails, slides } = getCaseStudyGallery(data.imagesFolder);
-        if (thumbnails.length) data.thumbnails = thumbnails;
-        if (slides.length) data.slides = slides;
-      }
-
+      applyImagesFolder(data);
       return { slug: f.replace(/\.md$/, ""), frontmatter: data, content };
     });
 }
