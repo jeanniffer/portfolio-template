@@ -3,7 +3,12 @@ import path from "path";
 import matter from "gray-matter";
 // Only imports the Section *type* from this module (see sharedContent.ts),
 // so this doesn't create a runtime circular import.
-import { getSharedCaseStudies, getSharedSneakPeekProjects } from "./sharedContent";
+import {
+  getSharedCaseStudies,
+  getSharedSneakPeekProjects,
+  getSharedServices,
+  getSharedTestimonials,
+} from "./sharedContent";
 
 /**
  * Content lives in /content/<variant>/*.md
@@ -152,6 +157,58 @@ export function getSneakPeekSection(): Section {
     frontmatter: {
       ...section.frontmatter,
       projects: projects.map((p) => p.frontmatter),
+    },
+  };
+}
+
+/**
+ * Wraps getSection("what-i-can-build"): if the active variant has a
+ * `services` list in its selections.md, the shared/master services
+ * (content/_shared/services/) replace whatever hand-typed `services`
+ * array what-i-can-build.md has. Falls back to the markdown's own
+ * `services` field untouched otherwise -- e.g. osf keeps its own
+ * one-off, job-specific service list since it never opted in.
+ */
+export function getWhatICanBuildSection(): Section {
+  const section = getSection("what-i-can-build");
+  const variant = getVariant();
+  const dir = variantDir(variant);
+
+  if (!fs.existsSync(path.join(dir, "selections.md"))) return section;
+
+  const services = getSharedServices(variant);
+  if (!services.length) return section;
+
+  return {
+    ...section,
+    frontmatter: {
+      ...section.frontmatter,
+      services: services.map((s) => s.frontmatter),
+    },
+  };
+}
+
+/**
+ * Wraps getSection("testimonials"): if the active variant has a
+ * `testimonials` list in its selections.md, the shared/master quotes
+ * (content/_shared/testimonials/) replace whatever hand-typed
+ * `testimonials` array testimonials.md has. Falls back otherwise.
+ */
+export function getTestimonialsSection(): Section {
+  const section = getSection("testimonials");
+  const variant = getVariant();
+  const dir = variantDir(variant);
+
+  if (!fs.existsSync(path.join(dir, "selections.md"))) return section;
+
+  const testimonials = getSharedTestimonials(variant);
+  if (!testimonials.length) return section;
+
+  return {
+    ...section,
+    frontmatter: {
+      ...section.frontmatter,
+      testimonials: testimonials.map((t) => t.frontmatter),
     },
   };
 }

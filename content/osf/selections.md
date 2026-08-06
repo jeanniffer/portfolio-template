@@ -23,4 +23,17 @@ sneakPeekProjects:
     order: 6
   - slug: runatics
     order: 7
+testimonials:
+  - slug: allana-rocha
+    order: 1
+  - slug: alina-vasile
+    order: 2
+  - slug: sharon-aldeguer
+    order: 3
+  - slug: david-boyce
+    order: 4
+  - slug: yvette-harvey
+    order: 5
+  - slug: amanda-butler
+    order: 6
 ---

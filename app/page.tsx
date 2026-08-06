@@ -3,6 +3,8 @@ import {
   getSection,
   getCaseStudies,
   getSneakPeekSection,
+  getWhatICanBuildSection,
+  getTestimonialsSection,
 } from "@/lib/content";
 import SideNav from "@/components/SideNav";
 import Hero from "@/components/Hero";
@@ -20,8 +22,8 @@ export default function Home() {
   const about = getSection("about");
   const byTheNumbers = getSection("by-the-numbers");
   const sneakPeek = getSneakPeekSection();
-  const whatICanBuild = getSection("what-i-can-build");
-  const testimonials = getSection("testimonials");
+  const whatICanBuild = getWhatICanBuildSection();
+  const testimonials = getTestimonialsSection();
   const caseStudies = getCaseStudies();
 
   return (

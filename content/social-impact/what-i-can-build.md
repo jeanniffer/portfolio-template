@@ -1,21 +1,6 @@
 ---
 titleA: "What I can build for"
 titleB: " your organization"
-services:
-  - title: "Website Design"
-    description: "Full website design and development for nonprofits, from UX strategy to launch. Built in Webflow, Framer, or WordPress, designed to convert visitors into donors and volunteers."
-  - title: "Annual & Impact Reports"
-    price: "From $800"
-    description: "Data-driven, visually compelling reports that tell your organization's story and build donor trust. Print-ready and optimized for digital distribution."
-  - title: "Social Media & Campaign Assets"
-    description: "Ready-to-use templates and one-off assets for Instagram, LinkedIn, Facebook, and email campaigns."
-  - title: "Brand Identity"
-    description: "Logo, colors, typography, and usage guidelines built around your mission. A foundation that makes every touchpoint feel intentional and consistent."
-  - title: "Research & Publication Design"
-    description: "Infographics, data visualization, and editorial layouts that make complex findings accessible to any audience."
-  - title: "Canva Workspace Setup"
-    price: "Starting at $350"
-    description: "Full brand kit, custom templates, and organized folders so your team can create on-brand content independently, without needing a designer every time."
 stack:
   - name: "Figma"
     icon: "/images/tools/figma.png"
