@@ -5,9 +5,9 @@ deliverables: "Full website redesign, brand system, research reports, social med
 tools: "Figma, Adobe Suite, Canva, Google Slides"
 links:
   - label: "Full Case Study"
-    url: "#"
+    url: "https://www.jeanniffer.com/case-studies/codesmith-website"
   - label: "Annual Report"
-    url: "#"
+    url: "https://drive.google.com/file/d/1Fzf7WyWtYW0rtwIsb2VVULk51sWLwWsg/view?usp=sharing"
   - label: "Social Media Templates"
     url: "#"
 imagesFolder: "codesmith"

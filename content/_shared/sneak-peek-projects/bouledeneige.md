@@ -3,5 +3,5 @@ description: "Brand identity for a tech lab with a bold, unexpected visual direc
 logo: "/images/logos/bouledeneige.png"
 links:
   - label: "Brand Guidelines"
-    url: "#"
+    url: "https://drive.google.com/file/d/1vmteyHXM38aHDgyFoTd2o4PcLIQB__Nv/view?usp=sharing"
 ---
