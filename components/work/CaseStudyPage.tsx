@@ -25,17 +25,43 @@ function MetaRow({ label, value }: { label: string; value?: string }) {
   );
 }
 
-function StepBlock({ title, text }: { title: string; text?: string }) {
-  if (!text) return null;
+/**
+ * One flexible highlight: a large image paired with a short label + a
+ * couple sentences. Projects list as many of these as make sense for
+ * them (a rebrand might get "Design System" + "Before & After"; a
+ * feature project might just get "Challenge" + "Result") -- not a fixed
+ * Challenge/Solution/Result structure.
+ */
+function CaseStudySection({
+  title,
+  description,
+  image,
+}: {
+  title: string;
+  description: string;
+  image: string;
+}) {
   return (
-    <div className="flex w-[300px] flex-col items-start gap-1">
-      <div className="mb-2 size-[63px] rounded-full border border-[#1a1a1a]" />
-      <p className="font-archivo text-4xl font-medium tracking-[-0.72px] text-[#1a1a1a]">
-        {title}
-      </p>
-      <p className="font-archivo text-xs font-light tracking-[-0.24px] text-[#474746]">
-        {text}
-      </p>
+    <div className="flex w-full flex-col items-start gap-10 md:flex-row">
+      <div className="flex w-full flex-col items-start gap-4 md:w-[420px] md:shrink-0">
+        <div className="size-16 rounded-full border border-[#1a1a1a]" />
+        <p className="font-archivo text-5xl font-medium tracking-[-0.72px] text-[#1a1a1a] md:text-6xl">
+          {title}
+        </p>
+        <p className="font-archivo max-w-sm text-sm font-light leading-relaxed tracking-[-0.24px] text-[#474746]">
+          {description}
+        </p>
+      </div>
+      <VDivider />
+      <div className="relative h-[420px] w-full flex-1 overflow-hidden rounded-2xl bg-[#1a1a1a] md:h-[720px]">
+        <Image
+          src={image}
+          alt={title}
+          fill
+          sizes="(min-width: 768px) 60vw, 90vw"
+          className="object-cover"
+        />
+      </div>
     </div>
   );
 }
@@ -77,7 +103,6 @@ export default function CaseStudyPage({ item }: { item: WorkItem }) {
     ctaLabel?: string;
   };
   const others = getOtherWorkItems(item.slug, 3);
-  const gallery = item.gallery?.length ? item.gallery : [item.cover];
 
   return (
     <div className="relative min-h-screen bg-[#fdfbf5] font-archivo">
@@ -110,43 +135,17 @@ export default function CaseStudyPage({ item }: { item: WorkItem }) {
           </div>
         </div>
 
-        {/* Challenge / Solution / Result + gallery */}
-        {(item.challenge || item.solution || item.result) && (
-          <div className="flex w-full flex-col items-start gap-10 md:flex-row">
-            <div className="flex flex-col items-start justify-center gap-10">
-              <StepBlock title="Challenge" text={item.challenge} />
-              <StepBlock title="Solution" text={item.solution} />
-              <StepBlock title="Result" text={item.result} />
-            </div>
-            <VDivider />
-            <div className="flex flex-1 flex-col items-start justify-center gap-10">
-              {gallery[0] && (
-                <div className="relative h-[372px] w-full overflow-hidden rounded-2xl bg-[#d9d9d9]">
-                  <Image src={gallery[0]} alt={`${item.client} 1`} fill className="object-cover" />
-                </div>
-              )}
-              {gallery[1] && (
-                <div className="relative h-[372px] w-full overflow-hidden rounded-2xl bg-[#d9d9d9]">
-                  <Image src={gallery[1]} alt={`${item.client} 2`} fill className="object-cover" />
-                </div>
-              )}
-              {(gallery[2] || gallery[3]) && (
-                <div className="flex w-full items-start gap-10">
-                  {gallery[2] && (
-                    <div className="relative h-[372px] flex-1 overflow-hidden rounded-2xl bg-[#d9d9d9]">
-                      <Image src={gallery[2]} alt={`${item.client} 3`} fill className="object-cover" />
-                    </div>
-                  )}
-                  {gallery[3] && (
-                    <div className="relative h-[372px] flex-1 overflow-hidden rounded-2xl bg-[#d9d9d9]">
-                      <Image src={gallery[3]} alt={`${item.client} 4`} fill className="object-cover" />
-                    </div>
-                  )}
-                </div>
-              )}
-            </div>
+        {/* Flexible highlight sections -- each is one image + one short
+            description, as many as this specific project needs. Generous
+            vertical spacing between them on purpose (lots of white
+            space, one thing at a time as you scroll). */}
+        {item.sections?.length ? (
+          <div className="flex w-full flex-col items-start gap-24 md:gap-32">
+            {item.sections.map((section, i) => (
+              <CaseStudySection key={i} {...section} />
+            ))}
           </div>
-        )}
+        ) : null}
 
         {HR}
 

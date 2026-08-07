@@ -30,10 +30,11 @@ export type WorkItem = {
   description?: string;
   timeline?: string;
   services?: string;
-  gallery?: string[];
-  challenge?: string;
-  solution?: string;
-  result?: string;
+  // Flexible, per-project scroll sections -- each is one image + one
+  // short highlight (Design System, Before & After, whatever's relevant
+  // to that specific project). Not a fixed Challenge/Solution/Result
+  // structure -- projects can have as many or as few as make sense.
+  sections?: { title: string; description: string; image: string }[];
 };
 
 function readWorkFile(f: string): WorkItem {
@@ -51,10 +52,7 @@ function readWorkFile(f: string): WorkItem {
     description: data.description,
     timeline: data.timeline,
     services: data.services,
-    gallery: data.gallery,
-    challenge: data.challenge,
-    solution: data.solution,
-    result: data.result,
+    sections: data.sections,
   };
 }
 
