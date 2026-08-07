@@ -1,8 +1,7 @@
 import { getSiteMeta } from "@/lib/content";
-import { getWorkItems, filterWorkItems, type WorkType } from "@/lib/work";
+import { getWorkItems, type WorkType } from "@/lib/work";
 import WorkHeader from "./WorkHeader";
-import WorkFilterSidebar from "./WorkFilterSidebar";
-import WorkGrid from "./WorkGrid";
+import WorkGallery from "./WorkGallery";
 import WorkFooter from "./WorkFooter";
 
 export default function WorkHome({ activeTypes }: { activeTypes: WorkType[] }) {
@@ -13,7 +12,7 @@ export default function WorkHome({ activeTypes }: { activeTypes: WorkType[] }) {
     titleA?: string;
     titleB?: string;
   };
-  const items = filterWorkItems(getWorkItems(), activeTypes);
+  const items = getWorkItems();
 
   return (
     <div className="relative min-h-screen bg-[#fdfbf5] font-archivo">
@@ -33,15 +32,12 @@ export default function WorkHome({ activeTypes }: { activeTypes: WorkType[] }) {
 
       <div className="relative z-10 mx-auto flex max-w-[1800px] flex-col gap-6 px-6 py-6 md:px-[90px]">
         <WorkHeader meta={meta} />
-        <main className="flex min-h-screen flex-col gap-6 border-b border-[#1a1a1a] md:flex-row md:items-stretch">
-          <WorkFilterSidebar
-            activeTypes={activeTypes}
-            titleA={meta.titleA || "Selected"}
-            titleB={meta.titleB || "Works"}
-          />
-          <div className="hidden w-px shrink-0 bg-[#1a1a1a] md:block" />
-          <WorkGrid items={items} />
-        </main>
+        <WorkGallery
+          items={items}
+          initialActiveTypes={activeTypes}
+          titleA={meta.titleA || "Selected"}
+          titleB={meta.titleB || "Works"}
+        />
         <WorkFooter meta={meta} />
       </div>
     </div>

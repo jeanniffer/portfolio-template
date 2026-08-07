@@ -33,3 +33,13 @@ export function slugToTypes(slugParts: string[] | undefined): WorkType[] {
     slugParts.filter((s): s is WorkType => known.has(s as WorkType))
   );
 }
+
+/** Generic so it works on the client without importing WorkItem (which
+ * lives in lib/work.ts, an fs-importing server-only module). */
+export function filterWorkItems<T extends { types: WorkType[] }>(
+  items: T[],
+  activeTypes: WorkType[]
+): T[] {
+  if (!activeTypes.length) return items;
+  return items.filter((item) => activeTypes.every((t) => item.types.includes(t)));
+}

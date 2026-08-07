@@ -14,7 +14,7 @@ import { typesToSlug, type WorkType } from "./workTypes";
 const WORK_DIR = path.join(process.cwd(), "content", "jeanniffer", "work");
 
 export type { WorkType };
-export { WORK_TYPES, typesToSlug, slugToTypes } from "./workTypes";
+export { WORK_TYPES, typesToSlug, slugToTypes, filterWorkItems } from "./workTypes";
 
 export type WorkItem = {
   slug: string;
@@ -80,9 +80,4 @@ export function getOtherWorkItems(excludeSlug: string, limit = 3): WorkItem[] {
   return getWorkItems()
     .filter((item) => item.slug !== excludeSlug)
     .slice(0, limit);
-}
-
-export function filterWorkItems(items: WorkItem[], activeTypes: WorkType[]): WorkItem[] {
-  if (!activeTypes.length) return items;
-  return items.filter((item) => activeTypes.every((t) => item.types.includes(t)));
 }

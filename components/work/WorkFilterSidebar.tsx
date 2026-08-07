@@ -1,27 +1,19 @@
 "use client";
 
-import Link from "next/link";
 import { motion } from "framer-motion";
-import { WORK_TYPES, typesToSlug, type WorkType } from "@/lib/workTypes";
+import { WORK_TYPES, type WorkType } from "@/lib/workTypes";
 
 export default function WorkFilterSidebar({
   activeTypes,
+  onToggle,
   titleA,
   titleB,
 }: {
   activeTypes: WorkType[];
+  onToggle: (type: WorkType) => void;
   titleA: string;
   titleB: string;
 }) {
-  function hrefFor(type: WorkType) {
-    const isActive = activeTypes.includes(type);
-    const next = isActive
-      ? activeTypes.filter((t) => t !== type)
-      : [...activeTypes, type];
-    const slug = typesToSlug(next);
-    return slug.length ? `/work/${slug.join("/")}` : "/";
-  }
-
   return (
     <aside className="sticky top-0 flex h-fit shrink-0 flex-col items-start gap-6 self-start py-6">
       <motion.div
@@ -55,31 +47,32 @@ export default function WorkFilterSidebar({
           {WORK_TYPES.map(({ slug, label }) => {
             const active = activeTypes.includes(slug);
             return (
-              <Link key={slug} href={hrefFor(slug)}>
-                <motion.span
-                  layout
-                  whileHover={{ scale: 1.04 }}
-                  whileTap={{ scale: 0.97 }}
-                  transition={{ duration: 0.2, ease: "easeOut" }}
-                  className={`flex items-center justify-center gap-1 rounded-full border px-3 py-1 font-mono text-sm tracking-[-0.56px] ${
-                    active
-                      ? "border-[#1a1a1a] bg-[#1a1a1a] text-[#fdfbf5]"
-                      : "border-[#1a1a1a] text-[#1a1a1a]"
-                  }`}
-                >
-                  {label}
-                  {active && (
-                    <motion.span
-                      aria-hidden
-                      initial={{ opacity: 0, scale: 0.6 }}
-                      animate={{ opacity: 1, scale: 1 }}
-                      transition={{ duration: 0.15 }}
-                    >
-                      ✓
-                    </motion.span>
-                  )}
-                </motion.span>
-              </Link>
+              <motion.button
+                key={slug}
+                type="button"
+                onClick={() => onToggle(slug)}
+                layout
+                whileHover={{ scale: 1.04 }}
+                whileTap={{ scale: 0.97 }}
+                transition={{ duration: 0.2, ease: "easeOut" }}
+                className={`flex items-center justify-center gap-1 rounded-full border px-3 py-1 font-mono text-sm tracking-[-0.56px] ${
+                  active
+                    ? "border-[#1a1a1a] bg-[#1a1a1a] text-[#fdfbf5]"
+                    : "border-[#1a1a1a] text-[#1a1a1a]"
+                }`}
+              >
+                {label}
+                {active && (
+                  <motion.span
+                    aria-hidden
+                    initial={{ opacity: 0, scale: 0.6 }}
+                    animate={{ opacity: 1, scale: 1 }}
+                    transition={{ duration: 0.15 }}
+                  >
+                    ✓
+                  </motion.span>
+                )}
+              </motion.button>
             );
           })}
         </div>
