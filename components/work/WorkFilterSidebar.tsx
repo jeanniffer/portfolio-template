@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { WORK_TYPES, typesToSlug, type WorkType } from "@/lib/work";
+import { WORK_TYPES, typesToSlug, type WorkType } from "@/lib/workTypes";
 
 export default function WorkFilterSidebar({
   activeTypes,
