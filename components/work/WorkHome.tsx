@@ -17,16 +17,18 @@ export default function WorkHome({ activeTypes }: { activeTypes: WorkType[] }) {
 
   return (
     <div className="relative min-h-screen bg-[#fdfbf5] font-archivo">
-      {/* Subtle dotted-notebook texture, sits behind everything. */}
-      <div aria-hidden className="dot-grid pointer-events-none fixed inset-0 z-0" />
+      {/* Subtle dotted-notebook texture, spans the full scrollable page
+          (not the viewport) so it moves with the content like a texture
+          printed on the sheet itself. */}
+      <div aria-hidden className="dot-grid pointer-events-none absolute inset-0 z-0" />
 
-      {/* Decorative frame -- lives outside the content container, fixed
-          10px from every edge of the viewport, independent of content
-          height/scroll (matches the Figma reference: a free-floating
-          rectangle, not a border baked into the layout container). */}
+      {/* Decorative frame -- wraps the entire page like the edge of a
+          sheet of paper, 10px in from every side of the full scrollable
+          content (not the viewport), so it scrolls together with
+          everything else instead of staying pinned in place. */}
       <div
         aria-hidden
-        className="pointer-events-none fixed inset-[10px] z-50 border border-[#474746]"
+        className="pointer-events-none absolute inset-[10px] z-50 border border-[#474746]"
       />
 
       <div className="relative z-10 mx-auto flex max-w-[1800px] flex-col gap-6 px-6 py-6 md:px-[90px]">
