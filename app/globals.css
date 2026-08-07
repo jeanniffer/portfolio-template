@@ -4,6 +4,15 @@
 
 html {
   scroll-behavior: smooth;
+}
+
+/* Scoped (not global) on purpose: `scroll-snap-type` on an ancestor is a
+   known Safari/Chrome trigger for `position: fixed` children rendering
+   incorrectly (only "catching up" once you scroll past the snap point).
+   Only the long-scroll case-study variants opt into snapping; the new
+   jeanniffer homepage doesn't use snap-start at all and needs `fixed` to
+   behave normally for its frame border. */
+html.snap-page {
   scroll-snap-type: y mandatory;
 }
 
@@ -19,6 +28,15 @@ body {
 .snap-start {
   scroll-snap-align: start;
   scroll-snap-stop: always;
+}
+
+/* Subtle dotted-notebook texture for the new jeanniffer homepage --
+   pure CSS (no image asset), so it stays crisp at any zoom/DPI. */
+.dot-grid {
+  background-image: radial-gradient(#1a1a1a 1px, transparent 1px);
+  background-size: 22px 22px;
+  background-position: -11px -11px;
+  opacity: 0.05;
 }
 
 /* Hides the scrollbar on horizontally-scrollable galleries while keeping

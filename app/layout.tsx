@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import { Archivo, Fraunces, IBM_Plex_Mono, Manrope } from "next/font/google";
 import "./globals.css";
-import { getSiteMeta } from "@/lib/content";
+import { getSiteMeta, getVariant } from "@/lib/content";
 
 const fraunces = Fraunces({
   subsets: ["latin"],
@@ -42,8 +42,10 @@ export default function RootLayout({
 }: {
   children: React.ReactNode;
 }) {
+  const isLegacyLongScroll = getVariant() !== "jeanniffer";
+
   return (
-    <html lang="en">
+    <html lang="en" className={isLegacyLongScroll ? "snap-page" : undefined}>
       <body
         className={`${fraunces.variable} ${plexMono.variable} ${manrope.variable} ${archivo.variable} bg-ink font-body`}
       >
