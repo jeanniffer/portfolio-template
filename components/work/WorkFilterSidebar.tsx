@@ -22,37 +22,43 @@ export default function WorkFilterSidebar({
   }
 
   return (
-    <aside className="shrink-0 border-b border-ink/10 px-6 py-10 md:w-72 md:border-b-0 md:border-r md:px-10 md:py-16">
-      <h1 className="font-display text-5xl font-black leading-[0.95] text-ink md:text-6xl">
-        {titleA}
-        <br />
-        {titleB}
-      </h1>
-
-      <div className="mt-10">
-        <p className="mb-3 font-mono text-xs uppercase tracking-widest text-ink/50">
-          Type
+    <aside className="flex h-full shrink-0 flex-col items-start gap-6 py-6">
+      <div className="flex w-[300px] flex-col items-start">
+        <p className="font-archivo w-full text-[72px] font-medium leading-none tracking-[-1.44px] text-[#1a1a1a]">
+          {titleA}
+          <br />
+          {titleB}
         </p>
-        <ul className="flex flex-wrap gap-2 md:flex-col md:items-start">
+      </div>
+
+      <div className="flex w-full flex-col items-start gap-3">
+        <div className="flex items-center gap-1">
+          <p className="font-mono text-xs font-semibold uppercase tracking-[0.48px] text-[#818181]">
+            Type
+          </p>
+          <span aria-hidden className="text-[9px] text-[#818181]">
+            ▾
+          </span>
+        </div>
+        <div className="flex w-full flex-wrap items-start gap-3">
           {WORK_TYPES.map(({ slug, label }) => {
             const active = activeTypes.includes(slug);
             return (
-              <li key={slug}>
-                <Link
-                  href={hrefFor(slug)}
-                  className={`inline-flex items-center gap-1.5 rounded-full border px-4 py-2 text-sm transition ${
-                    active
-                      ? "border-ink bg-ink text-cream"
-                      : "border-ink/20 text-ink hover:border-ink/50"
-                  }`}
-                >
-                  {label}
-                  {active && <span aria-hidden>✓</span>}
-                </Link>
-              </li>
+              <Link
+                key={slug}
+                href={hrefFor(slug)}
+                className={`flex items-center justify-center gap-1 rounded-full border px-3 py-1 font-mono text-sm tracking-[-0.56px] transition ${
+                  active
+                    ? "border-[#1a1a1a] bg-[#1a1a1a] text-[#fdfbf5]"
+                    : "border-[#1a1a1a] text-[#1a1a1a] hover:bg-[#1a1a1a]/5"
+                }`}
+              >
+                {label}
+                {active && <span aria-hidden>✓</span>}
+              </Link>
             );
           })}
-        </ul>
+        </div>
       </div>
     </aside>
   );

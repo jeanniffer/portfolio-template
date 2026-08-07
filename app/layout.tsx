@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Fraunces, IBM_Plex_Mono, Manrope } from "next/font/google";
+import { Archivo, Fraunces, IBM_Plex_Mono, Manrope } from "next/font/google";
 import "./globals.css";
 import { getSiteMeta } from "@/lib/content";
 
@@ -12,6 +12,14 @@ const fraunces = Fraunces({
 const plexMono = IBM_Plex_Mono({
   subsets: ["latin"],
   variable: "--font-mono",
+  weight: ["300", "400", "500", "600"],
+});
+
+// Used only by the new "jeanniffer" homepage template (Figma: Personal
+// Brand 2026, node 266:359) -- headline/body sans there.
+const archivo = Archivo({
+  subsets: ["latin"],
+  variable: "--font-archivo",
   weight: ["500"],
 });
 
@@ -37,7 +45,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={`${fraunces.variable} ${plexMono.variable} ${manrope.variable} bg-ink font-body`}
+        className={`${fraunces.variable} ${plexMono.variable} ${manrope.variable} ${archivo.variable} bg-ink font-body`}
       >
         {children}
       </body>

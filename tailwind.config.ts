@@ -18,6 +18,7 @@ const config: Config = {
         display: ["var(--font-fraunces)", "serif"],
         mono: ["var(--font-mono)", "monospace"],
         body: ["var(--font-body)", "sans-serif"],
+        archivo: ["var(--font-archivo)", "sans-serif"],
       },
       borderRadius: {
         card: "32px",

@@ -16,17 +16,20 @@ export default function WorkHome({ activeTypes }: { activeTypes: WorkType[] }) {
   const items = filterWorkItems(getWorkItems(), activeTypes);
 
   return (
-    <div className="min-h-screen bg-cream text-ink">
-      <WorkHeader meta={meta} />
-      <main className="flex flex-col md:flex-row">
-        <WorkFilterSidebar
-          activeTypes={activeTypes}
-          titleA={meta.titleA || "Selected"}
-          titleB={meta.titleB || "Works"}
-        />
-        <WorkGrid items={items} />
-      </main>
-      <WorkFooter meta={meta} />
+    <div className="min-h-screen bg-[#fdfbf5] px-6 py-6 font-archivo md:px-[90px]">
+      <div className="mx-auto flex max-w-[1420px] flex-col gap-6">
+        <WorkHeader meta={meta} />
+        <main className="flex min-h-[70vh] flex-col gap-6 border-b border-[#1a1a1a] md:flex-row md:items-stretch">
+          <WorkFilterSidebar
+            activeTypes={activeTypes}
+            titleA={meta.titleA || "Selected"}
+            titleB={meta.titleB || "Works"}
+          />
+          <div className="hidden w-px shrink-0 bg-[#1a1a1a] md:block" />
+          <WorkGrid items={items} />
+        </main>
+        <WorkFooter meta={meta} />
+      </div>
     </div>
   );
 }
