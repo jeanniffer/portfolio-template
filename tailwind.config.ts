@@ -12,6 +12,7 @@ const config: Config = {
         "ink-deep": "#090a18",
         accent: "#dcef66",
         "accent-soft": "#deef66",
+        cream: "#f7f5ef",
       },
       fontFamily: {
         display: ["var(--font-fraunces)", "serif"],

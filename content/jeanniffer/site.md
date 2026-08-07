@@ -1,0 +1,20 @@
+---
+name: "Jeanniffer Pimentel"
+role: "Product & Brand Designer"
+heroTitleA: "Selected "
+heroTitleB: "Works"
+navWork: "Work"
+navAbout: "About"
+ctaLabel: "Let's Talk"
+contactEmail: "hola@jeanniffer.com"
+socials:
+  - label: "Upwork"
+    url: "https://www.upwork.com/freelancers/jeanniffer?viewMode=1"
+  - label: "Linkedin"
+    url: "https://www.linkedin.com/in/jeanniffer-pimentel-85956ba2/"
+  - label: "Pinterest"
+    url: "#"
+eyebrow: ""
+titleA: "Selected"
+titleB: "Works"
+---

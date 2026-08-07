@@ -5,6 +5,7 @@ import {
   getSneakPeekSection,
   getWhatICanBuildSection,
   getTestimonialsSection,
+  getVariant,
 } from "@/lib/content";
 import SideNav from "@/components/SideNav";
 import Hero from "@/components/Hero";
@@ -16,8 +17,17 @@ import WhatICanBuild from "@/components/WhatICanBuild";
 import Testimonials from "@/components/Testimonials";
 import ContactBand from "@/components/ContactBand";
 import FloatingCTA from "@/components/FloatingCTA";
+import WorkHome from "@/components/work/WorkHome";
 
 export default function Home() {
+  // New "30-second" homepage template (filterable work gallery) --
+  // opt-in per Vercel project via SITE_VARIANT=jeanniffer, will
+  // eventually become www.jeanniffer.com. Every other variant keeps
+  // the existing long-scroll layout untouched below.
+  if (getVariant() === "jeanniffer") {
+    return <WorkHome activeTypes={[]} />;
+  }
+
   const meta = getSiteMeta();
   const about = getSection("about");
   const byTheNumbers = getSection("by-the-numbers");
