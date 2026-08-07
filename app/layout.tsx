@@ -20,7 +20,7 @@ const plexMono = IBM_Plex_Mono({
 const archivo = Archivo({
   subsets: ["latin"],
   variable: "--font-archivo",
-  weight: ["500"],
+  weight: ["300", "500"],
 });
 
 const manrope = Manrope({
