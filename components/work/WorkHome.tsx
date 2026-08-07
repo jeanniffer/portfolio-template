@@ -16,8 +16,17 @@ export default function WorkHome({ activeTypes }: { activeTypes: WorkType[] }) {
   const items = filterWorkItems(getWorkItems(), activeTypes);
 
   return (
-    <div className="min-h-screen bg-[#fdfbf5] p-[10px] font-archivo">
-      <div className="mx-auto flex max-w-[1420px] flex-col gap-6 border border-[#474746] px-6 py-6 md:px-[90px]">
+    <div className="relative min-h-screen bg-[#fdfbf5] font-archivo">
+      {/* Decorative frame -- lives outside the content container, fixed
+          10px from every edge of the viewport, independent of content
+          height/scroll (matches the Figma reference: a free-floating
+          rectangle, not a border baked into the layout container). */}
+      <div
+        aria-hidden
+        className="pointer-events-none fixed inset-[10px] z-10 border border-[#474746]"
+      />
+
+      <div className="mx-auto flex max-w-[1420px] flex-col gap-6 px-6 py-6 md:px-[90px]">
         <WorkHeader meta={meta} />
         <main className="flex min-h-[70vh] flex-col gap-6 border-b border-[#1a1a1a] md:flex-row md:items-stretch">
           <WorkFilterSidebar
