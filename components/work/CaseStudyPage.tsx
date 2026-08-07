@@ -54,7 +54,7 @@ function CaseStudySection({
         <p className="font-archivo text-5xl font-medium tracking-[-0.72px] text-[#1a1a1a] md:text-6xl">
           {title}
         </p>
-        <p className="font-archivo max-w-sm text-sm font-light leading-relaxed tracking-[-0.24px] text-[#474746]">
+        <p className="font-archivo max-w-sm text-base font-light leading-relaxed tracking-[-0.24px] text-[#474746] md:text-lg">
           {description}
         </p>
       </div>
