@@ -28,7 +28,7 @@ export default function WorkHome({ activeTypes }: { activeTypes: WorkType[] }) {
 
       <div className="mx-auto flex max-w-[1800px] flex-col gap-6 px-6 py-6 md:px-[90px]">
         <WorkHeader meta={meta} />
-        <main className="flex min-h-[70vh] flex-col gap-6 border-b border-[#1a1a1a] md:flex-row md:items-stretch">
+        <main className="flex min-h-screen flex-col gap-6 border-b border-[#1a1a1a] md:flex-row md:items-stretch">
           <WorkFilterSidebar
             activeTypes={activeTypes}
             titleA={meta.titleA || "Selected"}

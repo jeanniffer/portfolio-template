@@ -19,7 +19,7 @@ export default function WorkGrid({ items }: { items: WorkItem[] }) {
   }
 
   return (
-    <div className="grid flex-1 grid-cols-1 gap-x-6 gap-y-6 overflow-y-auto py-6 sm:grid-cols-2">
+    <div className="grid flex-1 grid-cols-1 content-start gap-x-6 gap-y-6 py-6 sm:grid-cols-2">
       <AnimatePresence mode="popLayout">
         {items.map((item, i) => {
           const card = (
