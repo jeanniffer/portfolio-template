@@ -23,7 +23,7 @@ export default function WorkFilterSidebar({
   }
 
   return (
-    <aside className="flex h-full shrink-0 flex-col items-start gap-6 py-6">
+    <aside className="sticky top-0 flex h-fit shrink-0 flex-col items-start gap-6 self-start py-6">
       <motion.div
         initial={{ opacity: 0, y: 12 }}
         animate={{ opacity: 1, y: 0 }}
