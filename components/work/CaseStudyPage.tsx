@@ -82,7 +82,7 @@ export default function CaseStudyPage({ item }: { item: WorkItem }) {
             CaseStudySections can size itself to exactly fill the rest
             of the viewport below it (see StickyIntro). */}
         <StickyIntro>
-          <div className="flex w-full flex-col items-start gap-1 md:w-[700px]">
+          <div className="flex w-full flex-col items-start gap-1 md:w-[420px] md:shrink-0">
             <h1 className="font-archivo text-3xl font-medium tracking-[-1px] text-[#1a1a1a] md:text-[44px]">
               {item.client}
             </h1>
@@ -134,7 +134,7 @@ export default function CaseStudyPage({ item }: { item: WorkItem }) {
 
         {/* CTA */}
         <div className="flex w-full flex-col items-center gap-10 py-10 md:flex-row">
-          <h2 className="font-archivo w-full text-5xl font-medium leading-tight tracking-[-1.44px] text-[#1a1a1a] md:w-[911px] md:text-[72px]">
+          <h2 className="font-archivo w-full text-5xl font-medium leading-tight tracking-[-1.44px] text-[#1a1a1a] md:w-[420px] md:shrink-0 md:text-[56px]">
             Interested in
             <br />
             collaborating?
