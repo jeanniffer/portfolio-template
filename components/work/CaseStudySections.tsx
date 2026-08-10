@@ -112,13 +112,14 @@ export default function CaseStudySections({ sections }: { sections: Section[] })
       <div
         className="sticky w-full overflow-hidden"
         style={{
-          // StickyIntro itself now sticks at top-10 (40px) instead of
-          // top-0, so its pinned bottom edge sits at 40px + intro-h.
-          // Add the gap-10 (another 40px) on top of that to reach where
-          // this stage should start -- and mirror the same 80px at the
-          // bottom for symmetric spacing, so nothing needs to scroll.
+          // StickyIntro sticks at top-10 (40px) + its own height, then
+          // gap-10 (40px) before this stage starts -- top offset is
+          // intro-h + 80px. The *symmetric* gap we actually want to
+          // mirror at the bottom is just that last 40px (border line ->
+          // image), not the intro's own 40px top offset too -- so only
+          // subtract 40px extra at the bottom, not 80.
           top: "calc(var(--case-study-intro-h, 220px) + 80px)",
-          height: "calc(100vh - var(--case-study-intro-h, 220px) - 160px)",
+          height: "calc(100vh - var(--case-study-intro-h, 220px) - 120px)",
         }}
       >
         {sections.map((section, i) => (
