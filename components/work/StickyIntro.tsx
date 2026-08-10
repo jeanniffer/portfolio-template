@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useRef } from "react";
+import { useLayoutEffect, useRef } from "react";
 
 /**
  * Wraps the pinned title/description/meta block and measures its real
@@ -12,7 +12,11 @@ import { useEffect, useRef } from "react";
 export default function StickyIntro({ children }: { children: React.ReactNode }) {
   const ref = useRef<HTMLDivElement>(null);
 
-  useEffect(() => {
+  // useLayoutEffect (not useEffect) so the CSS var is set synchronously
+  // before the browser paints the first frame -- avoids a visible jump
+  // from the 220px fallback to the real measured height right after a
+  // page refresh.
+  useLayoutEffect(() => {
     const el = ref.current;
     if (!el) return;
 
