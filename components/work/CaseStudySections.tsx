@@ -19,34 +19,38 @@ function SectionLayer({
 }) {
   // Every section gets an evenly-spaced "peak" point across the full
   // 0..1 scroll range -- section 0 peaks at progress 0, the last one
-  // peaks at progress 1, everything else in between. Opacity ramps
-  // linearly toward/away from each peak with NO dead/held zones: the
-  // previous version held the last section at full opacity for most of
-  // its own segment, leaving a stretch of scroll where nothing visibly
-  // changed (the "weird empty spacing" while scrolling). This way the
-  // whole scroll range is actively used for a transition.
+  // peaks at progress 1, everything else in between. Each segment
+  // between two peaks is split hold:transition = 3:1 -- once a
+  // section's text/image reaches full opacity it *holds* there for 3x
+  // longer than the crossfade into the next one takes, instead of
+  // starting to fade immediately.
   const gap = total > 1 ? 1 / (total - 1) : 1;
   const point = index * gap;
+  const transitionWidth = gap / 4; // hold = gap - transitionWidth = 3x this
   const isFirst = index === 0;
   const isLast = index === total - 1;
 
+  const fadeInStart = point - transitionWidth;
+  const holdEnd = point + transitionWidth * 3;
+  const fadeOutEnd = point + gap;
+
   const inputRange = isFirst
-    ? [0, gap]
+    ? [point, holdEnd, fadeOutEnd]
     : isLast
-      ? [point - gap, 1]
-      : [point - gap, point, point + gap];
-  const outputRange = isFirst ? [1, 0] : isLast ? [0, 1] : [0, 1, 0];
+      ? [fadeInStart, point, 1]
+      : [fadeInStart, point, holdEnd, fadeOutEnd];
+  const outputRange = isFirst ? [1, 1, 0] : isLast ? [0, 1, 1] : [0, 1, 1, 0];
 
   const opacity = useTransform(scrollYProgress, inputRange, outputRange);
   const textY = useTransform(
     scrollYProgress,
     inputRange,
-    isFirst ? [0, -18] : isLast ? [18, 0] : [18, 0, -18]
+    isFirst ? [0, 0, -18] : isLast ? [18, 0, 0] : [18, 0, 0, -18]
   );
   const imageScale = useTransform(
     scrollYProgress,
     inputRange,
-    isFirst ? [1, 0.96] : isLast ? [0.96, 1] : [0.96, 1, 0.96]
+    isFirst ? [1, 1, 0.96] : isLast ? [0.96, 1, 1] : [0.96, 1, 1, 0.96]
   );
 
   return (
