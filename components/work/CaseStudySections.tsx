@@ -57,7 +57,7 @@ function SectionLayer({
       {/* Centered vertically within the available column height/width,
           not stretched to fill the full stage. */}
       <div className="flex h-full w-full flex-1 items-center justify-center self-stretch">
-        <div className="relative h-[320px] w-full max-w-[720px] overflow-hidden rounded-2xl bg-[#1a1a1a] md:h-[440px]">
+        <div className="relative h-[420px] w-full max-w-[960px] overflow-hidden rounded-2xl bg-[#1a1a1a] md:h-[640px]">
           <Image
             src={section.image}
             alt={section.title}
@@ -93,7 +93,7 @@ export default function CaseStudySections({ sections }: { sections: Section[] })
     >
       {/* top offset clears the pinned title/description/meta block above
           it (see CaseStudyPage) so the two sticky elements don't overlap. */}
-      <div className="sticky top-[220px] h-[420px] w-full overflow-hidden md:top-[260px] md:h-[560px]">
+      <div className="sticky top-[180px] h-[520px] w-full overflow-hidden md:top-[200px] md:h-[720px]">
         {sections.map((section, i) => (
           <SectionLayer
             key={i}
