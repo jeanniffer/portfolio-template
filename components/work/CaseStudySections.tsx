@@ -20,8 +20,12 @@ function SectionLayer({
   const step = 1 / total;
   const start = index * step;
   const end = start + step;
-  const fadeIn = start + step * 0.35;
-  const fadeOut = end - step * 0.35;
+  // Narrow overlap window (was 0.35/0.25) -- the previous version kept
+  // two sections simultaneously ~50% visible for a long stretch, which
+  // showed both texts/images ghosted on top of each other. This crosses
+  // over quickly instead of lingering half-and-half.
+  const fadeIn = start + step * 0.08;
+  const fadeOut = end - step * 0.08;
   const isFirst = index === 0;
   const isLast = index === total - 1;
 
@@ -30,10 +34,10 @@ function SectionLayer({
   // fade-out) -- only the sections *between* two others crossfade on
   // both edges.
   const inputRange = isFirst
-    ? [start, fadeOut, Math.min(1, end + step * 0.25)]
+    ? [start, fadeOut, Math.min(1, end + step * 0.06)]
     : isLast
-      ? [Math.max(0, start - step * 0.25), fadeIn, end]
-      : [Math.max(0, start - step * 0.25), fadeIn, fadeOut, Math.min(1, end + step * 0.25)];
+      ? [Math.max(0, start - step * 0.06), fadeIn, end]
+      : [Math.max(0, start - step * 0.06), fadeIn, fadeOut, Math.min(1, end + step * 0.06)];
 
   const outputRange = isFirst ? [1, 1, 0] : isLast ? [0, 1, 1] : [0, 1, 1, 0];
 
@@ -52,7 +56,7 @@ function SectionLayer({
   return (
     <motion.div
       style={{ opacity }}
-      className="absolute inset-0 flex h-full w-full flex-col items-center justify-center gap-10 md:flex-row"
+      className="absolute inset-0 flex h-full w-full flex-col items-center justify-center gap-10 bg-[#fdfbf5] md:flex-row"
     >
       <motion.div
         style={{ y: textY }}
@@ -86,13 +90,14 @@ function SectionLayer({
 }
 
 /**
- * Fixed-size stage (same footprint always -- 560px/680px, never
- * stretches or moves) that's pinned in place for a *short* scroll
- * range while its content crossfades from one section to the next.
- * Driven by scroll, but the scroll distance dedicated to it is kept
- * small (40vh per section) so it doesn't feel like a separate
- * scroll-jacked zone -- just a normal block that happens to animate as
- * you pass through it.
+ * Full-height stage (fills the rest of the viewport below the pinned
+ * title block) that's pinned in place for a *short* scroll range while
+ * its content crossfades from one section to the next. Driven by
+ * scroll, but the scroll distance dedicated to it is kept small so it
+ * doesn't feel like a separate scroll-jacked zone -- just a normal
+ * block that happens to animate as you pass through it. Each layer has
+ * an opaque background so the crossfade never shows two sections'
+ * text/image ghosted on top of each other.
  */
 export default function CaseStudySections({ sections }: { sections: Section[] }) {
   const ref = useRef<HTMLDivElement>(null);
@@ -107,7 +112,7 @@ export default function CaseStudySections({ sections }: { sections: Section[] })
       className="relative w-full"
       style={{ height: `${Math.max(sections.length, 1) * 45 + 55}vh` }}
     >
-      <div className="sticky top-[140px] h-[560px] w-full overflow-hidden md:top-[160px] md:h-[680px]">
+      <div className="sticky top-[140px] h-[calc(100vh-180px)] w-full overflow-hidden md:top-[160px] md:h-[calc(100vh-200px)]">
         {sections.map((section, i) => (
           <SectionLayer
             key={i}
