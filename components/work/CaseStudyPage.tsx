@@ -90,7 +90,7 @@ export default function CaseStudyPage({ item }: { item: WorkItem }) {
             CaseStudySections can size itself to exactly fill the rest
             of the viewport below it (see StickyIntro). */}
         <StickyIntro>
-          <div className="flex w-full flex-col items-start gap-1 md:w-[420px] md:shrink-0">
+          <div className="flex w-full flex-col items-start gap-1 md:flex-[7]">
             <h1 className="font-archivo text-3xl font-medium tracking-[-1px] text-[#1a1a1a] md:text-[44px]">
               {item.client}
             </h1>
@@ -101,7 +101,7 @@ export default function CaseStudyPage({ item }: { item: WorkItem }) {
             )}
           </div>
           <VDivider />
-          <div className="flex w-full flex-col items-start justify-center gap-3 md:flex-1">
+          <div className="flex w-full flex-col items-start justify-center gap-3 md:flex-[3]">
             <MetaRow label="Client" value={item.client} />
             <MetaRow label="Timeline" value={item.timeline} />
             <MetaRow label="Services" value={item.services} />

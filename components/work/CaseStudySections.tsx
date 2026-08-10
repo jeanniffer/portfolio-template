@@ -60,7 +60,7 @@ function SectionLayer({
     >
       <motion.div
         style={{ y: textY }}
-        className="flex w-full flex-col items-center justify-center gap-4 self-stretch md:w-[420px] md:shrink-0 md:items-start"
+        className="flex w-full flex-col items-center justify-center gap-4 self-stretch md:flex-[3] md:items-start"
       >
         <div className="size-16 rounded-full border border-[#1a1a1a]" />
         <p className="font-archivo text-5xl font-medium tracking-[-0.72px] text-[#1a1a1a] md:text-6xl">
@@ -71,7 +71,7 @@ function SectionLayer({
         </p>
       </motion.div>
       <div className="hidden w-px shrink-0 self-stretch bg-[#474746] md:block" />
-      <div className="flex h-full w-full flex-1 items-center justify-center self-stretch">
+      <div className="flex h-full w-full items-center justify-center self-stretch md:flex-[7]">
         <motion.div
           style={{ scale: imageScale }}
           className="relative h-full w-full max-w-[960px] overflow-hidden rounded-2xl bg-[#1a1a1a]"
