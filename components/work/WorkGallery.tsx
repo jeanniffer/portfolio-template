@@ -40,7 +40,7 @@ export default function WorkGallery({
   );
 
   return (
-    <main className="flex min-h-screen flex-col gap-6 border-b border-[#1a1a1a] md:flex-row md:items-stretch">
+    <main className="flex min-h-screen flex-col gap-10 border-b border-[#1a1a1a] md:flex-row md:items-stretch">
       <WorkFilterSidebar
         activeTypes={activeTypes}
         onToggle={toggleType}

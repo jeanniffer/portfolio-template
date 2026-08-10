@@ -30,7 +30,11 @@ export default function WorkHome({ activeTypes }: { activeTypes: WorkType[] }) {
         className="pointer-events-none absolute inset-[10px] z-50 border border-[#474746]"
       />
 
-      <div className="relative z-10 mx-auto flex max-w-[1800px] flex-col gap-6 px-6 py-6 md:px-[90px]">
+      {/* Opaque bar covering the gap above the sticky sidebar during
+          scroll, matching the same fix on the case study page. */}
+      <div aria-hidden className="pointer-events-none fixed inset-x-0 top-0 z-30 h-10 bg-[#fdfbf5]" />
+
+      <div className="relative z-10 mx-auto flex max-w-[1800px] flex-col gap-10 px-6 py-6 md:px-[90px]">
         <WorkHeader meta={meta} />
         <WorkGallery
           items={items}
