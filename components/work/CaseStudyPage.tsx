@@ -75,8 +75,9 @@ export default function CaseStudyPage({ item }: { item: WorkItem }) {
       <div className="relative z-10 mx-auto flex max-w-[1800px] flex-col gap-10 px-6 py-6 md:px-[90px]">
         <WorkHeader meta={meta} />
 
-        {/* Title + description + client/timeline/services */}
-        <div className="flex w-full flex-col items-start gap-10 border-b border-[#474746] py-10 md:flex-row">
+        {/* Title + description + client/timeline/services -- stays
+            pinned at the top while the sections below crossfade. */}
+        <div className="sticky top-0 z-20 flex w-full flex-col items-start gap-10 border-b border-[#474746] bg-[#fdfbf5] py-10 md:flex-row">
           <div className="flex w-full flex-col items-start gap-2 md:w-[911px]">
             <h1 className="font-archivo text-5xl font-medium tracking-[-1.44px] text-[#1a1a1a] md:text-[72px]">
               {item.client}

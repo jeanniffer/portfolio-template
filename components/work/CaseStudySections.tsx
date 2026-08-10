@@ -77,7 +77,9 @@ export default function CaseStudySections({ sections }: { sections: Section[] })
       className="relative w-full"
       style={{ height: `${sections.length * 70}vh` }}
     >
-      <div className="sticky top-24 h-[420px] w-full overflow-hidden md:h-[560px]">
+      {/* top offset clears the pinned title/description/meta block above
+          it (see CaseStudyPage) so the two sticky elements don't overlap. */}
+      <div className="sticky top-[220px] h-[420px] w-full overflow-hidden md:top-[260px] md:h-[560px]">
         {sections.map((section, i) => (
           <SectionLayer
             key={i}
