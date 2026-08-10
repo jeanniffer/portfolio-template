@@ -54,14 +54,18 @@ function SectionLayer({
         </p>
       </div>
       <div className="hidden w-px shrink-0 self-stretch bg-[#474746] md:block" />
-      <div className="relative flex h-full w-full flex-1 items-center justify-center self-stretch overflow-hidden rounded-2xl bg-[#1a1a1a]">
-        <Image
-          src={section.image}
-          alt={section.title}
-          fill
-          sizes="(min-width: 768px) 60vw, 90vw"
-          className="object-contain"
-        />
+      {/* Centered vertically within the available column height/width,
+          not stretched to fill the full stage. */}
+      <div className="flex h-full w-full flex-1 items-center justify-center self-stretch">
+        <div className="relative h-[320px] w-full max-w-[720px] overflow-hidden rounded-2xl bg-[#1a1a1a] md:h-[440px]">
+          <Image
+            src={section.image}
+            alt={section.title}
+            fill
+            sizes="(min-width: 768px) 60vw, 90vw"
+            className="object-contain"
+          />
+        </div>
       </div>
     </motion.div>
   );
