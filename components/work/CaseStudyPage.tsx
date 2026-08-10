@@ -133,7 +133,7 @@ export default function CaseStudyPage({ item }: { item: WorkItem }) {
         )}
 
         {/* CTA */}
-        <div className="flex w-full flex-col items-center gap-10 py-10 md:flex-row">
+        <div className="flex w-full flex-col items-center gap-10 py-8 md:flex-row">
           <h2 className="font-archivo w-full text-5xl font-medium leading-tight tracking-[-1.44px] text-[#1a1a1a] md:w-[420px] md:shrink-0 md:text-[56px]">
             Interested in
             <br />
