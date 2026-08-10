@@ -44,7 +44,7 @@ function SectionLayer({
         </p>
       </div>
       <div className="hidden w-px shrink-0 self-stretch bg-[#474746] md:block" />
-      <div className="relative h-[50vh] w-full flex-1 overflow-hidden rounded-2xl bg-[#1a1a1a] md:h-[80vh]">
+      <div className="relative h-[320px] w-full flex-1 overflow-hidden rounded-2xl bg-[#1a1a1a] md:h-[520px]">
         <Image
           src={section.image}
           alt={section.title}
@@ -58,10 +58,11 @@ function SectionLayer({
 }
 
 /**
- * A single pinned "stage" (one sticky h-screen block) that spans the
- * whole scroll range of all sections combined. Only each section's text
- * + image crossfade in/out as you scroll -- the layout itself (columns,
- * divider, image frame) never moves or gets covered by a new slide.
+ * A single pinned "stage" -- compact, not full-screen -- that spans the
+ * whole scroll range of all sections combined. The stage itself stays
+ * fixed in place (like a normal content block, not a full-viewport
+ * takeover); only each section's text + image crossfade in/out as you
+ * scroll through it.
  */
 export default function CaseStudySections({ sections }: { sections: Section[] }) {
   const ref = useRef<HTMLDivElement>(null);
@@ -74,9 +75,9 @@ export default function CaseStudySections({ sections }: { sections: Section[] })
     <div
       ref={ref}
       className="relative w-full"
-      style={{ height: `${sections.length * 100}vh` }}
+      style={{ height: `${sections.length * 70}vh` }}
     >
-      <div className="sticky top-0 h-screen w-full overflow-hidden bg-[#fdfbf5]">
+      <div className="sticky top-24 h-[420px] w-full overflow-hidden md:h-[560px]">
         {sections.map((section, i) => (
           <SectionLayer
             key={i}
