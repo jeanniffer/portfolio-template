@@ -17,40 +17,36 @@ function SectionLayer({
   total: number;
   scrollYProgress: MotionValue<number>;
 }) {
-  const step = 1 / total;
-  const start = index * step;
-  const end = start + step;
-  // Narrow overlap window (was 0.35/0.25) -- the previous version kept
-  // two sections simultaneously ~50% visible for a long stretch, which
-  // showed both texts/images ghosted on top of each other. This crosses
-  // over quickly instead of lingering half-and-half.
-  const fadeIn = start + step * 0.08;
-  const fadeOut = end - step * 0.08;
+  // Every section gets an evenly-spaced "peak" point across the full
+  // 0..1 scroll range -- section 0 peaks at progress 0, the last one
+  // peaks at progress 1, everything else in between. Opacity ramps
+  // linearly toward/away from each peak with NO dead/held zones: the
+  // previous version held the last section at full opacity for most of
+  // its own segment, leaving a stretch of scroll where nothing visibly
+  // changed (the "weird empty spacing" while scrolling). This way the
+  // whole scroll range is actively used for a transition.
+  const gap = total > 1 ? 1 / (total - 1) : 1;
+  const point = index * gap;
   const isFirst = index === 0;
   const isLast = index === total - 1;
 
-  // First section is fully visible from the very start (no fade-in from
-  // white) and the last one stays visible through the very end (no
-  // fade-out) -- only the sections *between* two others crossfade on
-  // both edges.
   const inputRange = isFirst
-    ? [start, fadeOut, Math.min(1, end + step * 0.06)]
+    ? [0, gap]
     : isLast
-      ? [Math.max(0, start - step * 0.06), fadeIn, end]
-      : [Math.max(0, start - step * 0.06), fadeIn, fadeOut, Math.min(1, end + step * 0.06)];
-
-  const outputRange = isFirst ? [1, 1, 0] : isLast ? [0, 1, 1] : [0, 1, 1, 0];
+      ? [point - gap, 1]
+      : [point - gap, point, point + gap];
+  const outputRange = isFirst ? [1, 0] : isLast ? [0, 1] : [0, 1, 0];
 
   const opacity = useTransform(scrollYProgress, inputRange, outputRange);
   const textY = useTransform(
     scrollYProgress,
     inputRange,
-    isFirst ? [0, 0, -18] : isLast ? [18, 0, 0] : [18, 0, 0, -18]
+    isFirst ? [0, -18] : isLast ? [18, 0] : [18, 0, -18]
   );
   const imageScale = useTransform(
     scrollYProgress,
     inputRange,
-    isFirst ? [1, 1, 0.96] : isLast ? [0.96, 1, 1] : [0.96, 1, 1, 0.96]
+    isFirst ? [1, 0.96] : isLast ? [0.96, 1] : [0.96, 1, 0.96]
   );
 
   return (
@@ -97,7 +93,8 @@ function SectionLayer({
  * doesn't feel like a separate scroll-jacked zone -- just a normal
  * block that happens to animate as you pass through it. Each layer has
  * an opaque background so the crossfade never shows two sections'
- * text/image ghosted on top of each other.
+ * text/image ghosted on top of each other, and every point along the
+ * scroll range is actively transitioning (no held/dead stretches).
  */
 export default function CaseStudySections({ sections }: { sections: Section[] }) {
   const ref = useRef<HTMLDivElement>(null);
@@ -110,7 +107,7 @@ export default function CaseStudySections({ sections }: { sections: Section[] })
     <div
       ref={ref}
       className="relative w-full"
-      style={{ height: `${Math.max(sections.length, 1) * 45 + 55}vh` }}
+      style={{ height: `${Math.max(sections.length - 1, 1) * 40 + 45}vh` }}
     >
       <div
         className="sticky w-full overflow-hidden"
