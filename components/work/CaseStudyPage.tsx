@@ -72,6 +72,14 @@ export default function CaseStudyPage({ item }: { item: WorkItem }) {
         aria-hidden
         className="pointer-events-none absolute inset-[10px] z-50 border border-[#474746]"
       />
+      {/* StickyIntro sticks at top-10 (leaving a 40px gap above it for
+          breathing room), but nothing was covering that strip once you
+          scroll -- content underneath could show through. Solid opaque
+          bar fills it at all scroll positions. */}
+      <div
+        aria-hidden
+        className="pointer-events-none fixed inset-x-0 top-0 z-30 h-10 bg-[#fdfbf5]"
+      />
 
       <div className="relative z-10 mx-auto flex max-w-[1800px] flex-col gap-10 px-6 py-6 md:px-[90px]">
         <WorkHeader meta={meta} />
