@@ -42,9 +42,9 @@ function SectionLayer({
   return (
     <motion.div
       style={{ opacity }}
-      className="absolute inset-0 flex flex-col items-center justify-center gap-10 md:flex-row"
+      className="absolute inset-0 flex h-full w-full flex-col items-center justify-center gap-10 md:flex-row"
     >
-      <div className="flex w-full flex-col items-start gap-4 md:w-[420px] md:shrink-0">
+      <div className="flex w-full flex-col items-center justify-center gap-4 self-stretch md:w-[420px] md:shrink-0 md:items-start">
         <div className="size-16 rounded-full border border-[#1a1a1a]" />
         <p className="font-archivo text-5xl font-medium tracking-[-0.72px] text-[#1a1a1a] md:text-6xl">
           {section.title}
@@ -54,13 +54,13 @@ function SectionLayer({
         </p>
       </div>
       <div className="hidden w-px shrink-0 self-stretch bg-[#474746] md:block" />
-      <div className="relative h-[320px] w-full flex-1 overflow-hidden rounded-2xl bg-[#1a1a1a] md:h-[520px]">
+      <div className="relative flex h-full w-full flex-1 items-center justify-center self-stretch overflow-hidden rounded-2xl bg-[#1a1a1a]">
         <Image
           src={section.image}
           alt={section.title}
           fill
           sizes="(min-width: 768px) 60vw, 90vw"
-          className="object-cover"
+          className="object-contain"
         />
       </div>
     </motion.div>
