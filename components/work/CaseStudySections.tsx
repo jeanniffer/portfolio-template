@@ -112,8 +112,13 @@ export default function CaseStudySections({ sections }: { sections: Section[] })
       <div
         className="sticky w-full overflow-hidden"
         style={{
-          top: "var(--case-study-intro-h, 220px)",
-          height: "calc(100vh - var(--case-study-intro-h, 220px))",
+          // +40px accounts for the parent's gap-10 between the intro
+          // block and this stage, so the visible gap above the image
+          // (border line -> image) matches the gap left below it
+          // (image -> viewport bottom) -- symmetric, and the stage
+          // fits entirely within the viewport with nothing to scroll.
+          top: "calc(var(--case-study-intro-h, 220px) + 40px)",
+          height: "calc(100vh - var(--case-study-intro-h, 220px) - 80px)",
         }}
       >
         {sections.map((section, i) => (
