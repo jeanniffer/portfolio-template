@@ -20,7 +20,7 @@ function MetaRow({ label, value }: { label: string; value?: string }) {
       <p className="font-mono text-xs font-semibold uppercase tracking-[0.48px] text-[#818181]">
         {label}
       </p>
-      <p className="font-archivo w-full text-lg font-light leading-[22px] tracking-[-0.36px] text-[#1a1a1a]">
+      <p className="font-archivo w-full text-base font-light leading-[20px] tracking-[-0.24px] text-[#1a1a1a]">
         {value}
       </p>
     </div>
@@ -82,18 +82,18 @@ export default function CaseStudyPage({ item }: { item: WorkItem }) {
             CaseStudySections can size itself to exactly fill the rest
             of the viewport below it (see StickyIntro). */}
         <StickyIntro>
-          <div className="flex w-full flex-col items-start gap-2 md:w-[911px]">
-            <h1 className="font-archivo text-5xl font-medium tracking-[-1.44px] text-[#1a1a1a] md:text-[72px]">
+          <div className="flex w-full flex-col items-start gap-1 md:w-[700px]">
+            <h1 className="font-archivo text-3xl font-medium tracking-[-1px] text-[#1a1a1a] md:text-[44px]">
               {item.client}
             </h1>
             {item.description && (
-              <p className="font-archivo text-lg font-light leading-[22px] tracking-[-0.36px] text-[#474746]">
+              <p className="font-archivo text-sm font-light leading-[20px] tracking-[-0.24px] text-[#474746] md:text-base">
                 {item.description}
               </p>
             )}
           </div>
           <VDivider />
-          <div className="flex w-full flex-col items-start justify-center gap-4 md:flex-1">
+          <div className="flex w-full flex-col items-start justify-center gap-3 md:flex-1">
             <MetaRow label="Client" value={item.client} />
             <MetaRow label="Timeline" value={item.timeline} />
             <MetaRow label="Services" value={item.services} />
