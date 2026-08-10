@@ -20,14 +20,24 @@ function SectionLayer({
   const step = 1 / total;
   const start = index * step;
   const end = start + step;
-  const fadeIn = start + step * 0.2;
-  const fadeOut = end - step * 0.2;
+  const fadeIn = start + step * 0.35;
+  const fadeOut = end - step * 0.35;
+  const isFirst = index === 0;
+  const isLast = index === total - 1;
 
-  const opacity = useTransform(
-    scrollYProgress,
-    [Math.max(0, start - step * 0.15), fadeIn, fadeOut, Math.min(1, end + step * 0.15)],
-    [0, 1, 1, 0]
-  );
+  // First section is fully visible from the very start (no fade-in from
+  // white) and the last one stays visible through the very end (no
+  // fade-out) -- only the sections *between* two others crossfade on
+  // both edges.
+  const inputRange = isFirst
+    ? [start, fadeOut, Math.min(1, end + step * 0.25)]
+    : isLast
+      ? [Math.max(0, start - step * 0.25), fadeIn, end]
+      : [Math.max(0, start - step * 0.25), fadeIn, fadeOut, Math.min(1, end + step * 0.25)];
+
+  const outputRange = isFirst ? [1, 1, 0] : isLast ? [0, 1, 1] : [0, 1, 1, 0];
+
+  const opacity = useTransform(scrollYProgress, inputRange, outputRange);
 
   return (
     <motion.div
@@ -75,7 +85,7 @@ export default function CaseStudySections({ sections }: { sections: Section[] })
     <div
       ref={ref}
       className="relative w-full"
-      style={{ height: `${sections.length * 70}vh` }}
+      style={{ height: `${sections.length * 130}vh` }}
     >
       {/* top offset clears the pinned title/description/meta block above
           it (see CaseStudyPage) so the two sticky elements don't overlap. */}
