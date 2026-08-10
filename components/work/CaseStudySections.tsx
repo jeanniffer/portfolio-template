@@ -38,13 +38,21 @@ function SectionLayer({
   const outputRange = isFirst ? [1, 1, 0] : isLast ? [0, 1, 1] : [0, 1, 1, 0];
 
   const opacity = useTransform(scrollYProgress, inputRange, outputRange);
+  // Text drifts up slightly as it settles in, and the image scales in
+  // from a touch smaller -- gives the crossfade some motion instead of
+  // a flat opacity dissolve.
+  const textY = useTransform(scrollYProgress, inputRange, isFirst ? [0, 0, -18] : isLast ? [18, 0, 0] : [18, 0, 0, -18]);
+  const imageScale = useTransform(scrollYProgress, inputRange, isFirst ? [1, 1, 0.96] : isLast ? [0.96, 1, 1] : [0.96, 1, 1, 0.96]);
 
   return (
     <motion.div
       style={{ opacity }}
       className="absolute inset-0 flex h-full w-full flex-col items-center justify-center gap-10 md:flex-row"
     >
-      <div className="flex w-full flex-col items-center justify-center gap-4 self-stretch md:w-[420px] md:shrink-0 md:items-start">
+      <motion.div
+        style={{ y: textY }}
+        className="flex w-full flex-col items-center justify-center gap-4 self-stretch md:w-[420px] md:shrink-0 md:items-start"
+      >
         <div className="size-16 rounded-full border border-[#1a1a1a]" />
         <p className="font-archivo text-5xl font-medium tracking-[-0.72px] text-[#1a1a1a] md:text-6xl">
           {section.title}
@@ -52,12 +60,15 @@ function SectionLayer({
         <p className="font-archivo max-w-sm text-base font-light leading-relaxed tracking-[-0.24px] text-[#474746] md:text-lg">
           {section.description}
         </p>
-      </div>
+      </motion.div>
       <div className="hidden w-px shrink-0 self-stretch bg-[#474746] md:block" />
       {/* Centered vertically within the available column height/width,
           not stretched to fill the full stage. */}
       <div className="flex h-full w-full flex-1 items-center justify-center self-stretch">
-        <div className="relative h-[420px] w-full max-w-[960px] overflow-hidden rounded-2xl bg-[#1a1a1a] md:h-[640px]">
+        <motion.div
+          style={{ scale: imageScale }}
+          className="relative h-full w-full max-w-[960px] overflow-hidden rounded-2xl bg-[#1a1a1a]"
+        >
           <Image
             src={section.image}
             alt={section.title}
@@ -65,7 +76,7 @@ function SectionLayer({
             sizes="(min-width: 768px) 60vw, 90vw"
             className="object-contain"
           />
-        </div>
+        </motion.div>
       </div>
     </motion.div>
   );
@@ -92,8 +103,10 @@ export default function CaseStudySections({ sections }: { sections: Section[] })
       style={{ height: `${sections.length * 130}vh` }}
     >
       {/* top offset clears the pinned title/description/meta block above
-          it (see CaseStudyPage) so the two sticky elements don't overlap. */}
-      <div className="sticky top-[180px] h-[520px] w-full overflow-hidden md:top-[200px] md:h-[720px]">
+          it (see CaseStudyPage); height fills the rest of the viewport
+          below that offset (minus a bit of breathing room) instead of a
+          fixed size -- no dead white space under the stage. */}
+      <div className="sticky top-[180px] h-[calc(100vh-220px)] w-full overflow-hidden md:top-[200px] md:h-[calc(100vh-260px)]">
         {sections.map((section, i) => (
           <SectionLayer
             key={i}
