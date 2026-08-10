@@ -1,0 +1,92 @@
+"use client";
+
+import { useRef } from "react";
+import Image from "next/image";
+import { motion, useScroll, useTransform, type MotionValue } from "framer-motion";
+
+type Section = { title: string; description: string; image: string };
+
+function SectionLayer({
+  section,
+  index,
+  total,
+  scrollYProgress,
+}: {
+  section: Section;
+  index: number;
+  total: number;
+  scrollYProgress: MotionValue<number>;
+}) {
+  const step = 1 / total;
+  const start = index * step;
+  const end = start + step;
+  const fadeIn = start + step * 0.2;
+  const fadeOut = end - step * 0.2;
+
+  const opacity = useTransform(
+    scrollYProgress,
+    [Math.max(0, start - step * 0.15), fadeIn, fadeOut, Math.min(1, end + step * 0.15)],
+    [0, 1, 1, 0]
+  );
+
+  return (
+    <motion.div
+      style={{ opacity }}
+      className="absolute inset-0 flex flex-col items-center justify-center gap-10 md:flex-row"
+    >
+      <div className="flex w-full flex-col items-start gap-4 md:w-[420px] md:shrink-0">
+        <div className="size-16 rounded-full border border-[#1a1a1a]" />
+        <p className="font-archivo text-5xl font-medium tracking-[-0.72px] text-[#1a1a1a] md:text-6xl">
+          {section.title}
+        </p>
+        <p className="font-archivo max-w-sm text-base font-light leading-relaxed tracking-[-0.24px] text-[#474746] md:text-lg">
+          {section.description}
+        </p>
+      </div>
+      <div className="hidden w-px shrink-0 self-stretch bg-[#474746] md:block" />
+      <div className="relative h-[50vh] w-full flex-1 overflow-hidden rounded-2xl bg-[#1a1a1a] md:h-[80vh]">
+        <Image
+          src={section.image}
+          alt={section.title}
+          fill
+          sizes="(min-width: 768px) 60vw, 90vw"
+          className="object-cover"
+        />
+      </div>
+    </motion.div>
+  );
+}
+
+/**
+ * A single pinned "stage" (one sticky h-screen block) that spans the
+ * whole scroll range of all sections combined. Only each section's text
+ * + image crossfade in/out as you scroll -- the layout itself (columns,
+ * divider, image frame) never moves or gets covered by a new slide.
+ */
+export default function CaseStudySections({ sections }: { sections: Section[] }) {
+  const ref = useRef<HTMLDivElement>(null);
+  const { scrollYProgress } = useScroll({
+    target: ref,
+    offset: ["start start", "end end"],
+  });
+
+  return (
+    <div
+      ref={ref}
+      className="relative w-full"
+      style={{ height: `${sections.length * 100}vh` }}
+    >
+      <div className="sticky top-0 h-screen w-full overflow-hidden bg-[#fdfbf5]">
+        {sections.map((section, i) => (
+          <SectionLayer
+            key={i}
+            section={section}
+            index={i}
+            total={sections.length}
+            scrollYProgress={scrollYProgress}
+          />
+        ))}
+      </div>
+    </div>
+  );
+}

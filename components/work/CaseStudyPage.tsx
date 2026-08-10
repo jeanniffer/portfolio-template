@@ -4,6 +4,7 @@ import { getSiteMeta } from "@/lib/content";
 import { getOtherWorkItems, type WorkItem } from "@/lib/work";
 import WorkHeader from "./WorkHeader";
 import WorkFooter from "./WorkFooter";
+import CaseStudySections from "./CaseStudySections";
 
 const HR = <div className="w-full border-t border-[#474746]" />;
 
@@ -25,58 +26,11 @@ function MetaRow({ label, value }: { label: string; value?: string }) {
   );
 }
 
-/**
- * One flexible highlight: a large image paired with a short label + a
- * couple sentences. Projects list as many of these as make sense for
- * them (a rebrand might get "Design System" + "Before & After"; a
- * feature project might just get "Challenge" + "Result") -- not a fixed
- * Challenge/Solution/Result structure.
- *
- * Pinned-scroll effect: each section is `sticky top-0` and full viewport
- * height. Scrolling past one doesn't move it up the page -- it stays put
- * (text + image together) until the next section (later in DOM order,
- * so it paints on top) scrolls up and fully covers it. No JS needed --
- * this is plain sticky-stacking, each section is its own scroll frame.
- */
-function CaseStudySection({
-  title,
-  description,
-  image,
-}: {
-  title: string;
-  description: string;
-  image: string;
-}) {
-  return (
-    <div className="sticky top-0 flex h-screen w-full flex-col items-center justify-center gap-10 bg-[#fdfbf5] md:flex-row">
-      <div className="flex w-full flex-col items-start gap-4 md:w-[420px] md:shrink-0">
-        <div className="size-16 rounded-full border border-[#1a1a1a]" />
-        <p className="font-archivo text-5xl font-medium tracking-[-0.72px] text-[#1a1a1a] md:text-6xl">
-          {title}
-        </p>
-        <p className="font-archivo max-w-sm text-base font-light leading-relaxed tracking-[-0.24px] text-[#474746] md:text-lg">
-          {description}
-        </p>
-      </div>
-      <VDivider />
-      <div className="relative h-[50vh] w-full flex-1 overflow-hidden rounded-2xl bg-[#1a1a1a] md:h-[80vh]">
-        <Image
-          src={image}
-          alt={title}
-          fill
-          sizes="(min-width: 768px) 60vw, 90vw"
-          className="object-cover"
-        />
-      </div>
-    </div>
-  );
-}
-
 function OtherProjectCard({ item }: { item: WorkItem }) {
   return (
     <Link
       href={item.href || "#"}
-      className="group flex flex-1 flex-col items-start gap-3 pb-6"
+      className="group flex flex-col items-start gap-3 pb-6"
     >
       <div className="relative h-[340px] w-full overflow-hidden rounded-2xl bg-[#d9d9d9]">
         <Image
@@ -142,18 +96,11 @@ export default function CaseStudyPage({ item }: { item: WorkItem }) {
         </div>
 
         {/* Flexible highlight sections -- each is one image + one short
-            description, as many as this specific project needs. Each one
-            pins full-screen while you scroll through it, then the next
-            section covers it entirely (see CaseStudySection). No gap
-            here on purpose -- the sticky stacking handles the transition
-            between sections itself. */}
-        {item.sections?.length ? (
-          <div className="w-full">
-            {item.sections.map((section, i) => (
-              <CaseStudySection key={i} {...section} />
-            ))}
-          </div>
-        ) : null}
+            description, as many as this specific project needs. Layout
+            stays pinned in one spot the whole time; only the text +
+            image crossfade from one section to the next as you scroll
+            (see CaseStudySections). */}
+        {item.sections?.length ? <CaseStudySections sections={item.sections} /> : null}
 
         {HR}
 
@@ -164,7 +111,7 @@ export default function CaseStudyPage({ item }: { item: WorkItem }) {
               <h2 className="font-archivo text-5xl font-medium tracking-[-1.44px] text-[#1a1a1a] md:text-[72px]">
                 Other projects
               </h2>
-              <div className="flex w-full flex-col items-start gap-10 md:flex-row">
+              <div className="grid w-full grid-cols-1 gap-x-10 gap-y-10 sm:grid-cols-2 lg:grid-cols-3">
                 {others.map((o) => (
                   <OtherProjectCard key={o.slug} item={o} />
                 ))}
