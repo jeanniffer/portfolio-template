@@ -112,7 +112,13 @@ export default function CaseStudySections({ sections }: { sections: Section[] })
       className="relative w-full"
       style={{ height: `${Math.max(sections.length, 1) * 45 + 55}vh` }}
     >
-      <div className="sticky top-[140px] h-[calc(100vh-180px)] w-full overflow-hidden md:top-[160px] md:h-[calc(100vh-200px)]">
+      <div
+        className="sticky w-full overflow-hidden"
+        style={{
+          top: "var(--case-study-intro-h, 220px)",
+          height: "calc(100vh - var(--case-study-intro-h, 220px))",
+        }}
+      >
         {sections.map((section, i) => (
           <SectionLayer
             key={i}

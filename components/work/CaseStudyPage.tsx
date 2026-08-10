@@ -5,6 +5,7 @@ import { getOtherWorkItems, type WorkItem } from "@/lib/work";
 import WorkHeader from "./WorkHeader";
 import WorkFooter from "./WorkFooter";
 import CaseStudySections from "./CaseStudySections";
+import StickyIntro from "./StickyIntro";
 
 const HR = <div className="w-full border-t border-[#474746]" />;
 
@@ -76,8 +77,11 @@ export default function CaseStudyPage({ item }: { item: WorkItem }) {
         <WorkHeader meta={meta} />
 
         {/* Title + description + client/timeline/services -- stays
-            pinned at the top while the sections below crossfade. */}
-        <div className="sticky top-0 z-20 flex w-full flex-col items-start gap-10 border-b border-[#474746] bg-[#fdfbf5] py-10 md:flex-row">
+            pinned at the top while the sections below crossfade. Its
+            real height is measured and exposed as a CSS var so
+            CaseStudySections can size itself to exactly fill the rest
+            of the viewport below it (see StickyIntro). */}
+        <StickyIntro>
           <div className="flex w-full flex-col items-start gap-2 md:w-[911px]">
             <h1 className="font-archivo text-5xl font-medium tracking-[-1.44px] text-[#1a1a1a] md:text-[72px]">
               {item.client}
@@ -94,7 +98,7 @@ export default function CaseStudyPage({ item }: { item: WorkItem }) {
             <MetaRow label="Timeline" value={item.timeline} />
             <MetaRow label="Services" value={item.services} />
           </div>
-        </div>
+        </StickyIntro>
 
         {/* Flexible highlight sections -- each is one image + one short
             description, as many as this specific project needs. Layout
