@@ -62,7 +62,6 @@ function SectionLayer({
         style={{ y: textY }}
         className="flex w-full flex-col items-center justify-center gap-4 self-stretch md:flex-[3] md:items-start"
       >
-        <div className="size-16 rounded-full border border-[#1a1a1a]" />
         <p className="font-archivo text-5xl font-medium tracking-[-0.72px] text-[#1a1a1a] md:text-6xl">
           {section.title}
         </p>
