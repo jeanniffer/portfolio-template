@@ -18,7 +18,7 @@ function SortToggle({
   return (
     <div className="flex w-full items-center justify-end gap-2 pt-10 pb-6">
       <p className="font-mono text-xs font-semibold uppercase tracking-[0.48px] text-[#818181]">
-        Sort [{count} {count === 1 ? "Project" : "Projects"}] by
+        Sort {count} {count === 1 ? "Project" : "Projects"} by
       </p>
       <div className="flex items-center gap-1 rounded-full border border-[#1a1a1a] p-0.5">
         {(
