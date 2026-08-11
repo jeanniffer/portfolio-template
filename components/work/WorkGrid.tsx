@@ -20,7 +20,7 @@ function SortToggle({
       <p className="font-mono text-xs font-semibold uppercase tracking-[0.48px] text-[#818181]">
         Sort {count} {count === 1 ? "Project" : "Projects"} by
       </p>
-      <div className="flex items-center gap-1 rounded-full border border-[#1a1a1a] p-0.5">
+      <div className="relative flex items-center gap-1 rounded-full border border-[#1a1a1a] p-0.5">
         {(
           [
             { mode: "curated" as SortMode, label: "Curated" },
@@ -31,12 +31,19 @@ function SortToggle({
             key={mode}
             type="button"
             onClick={() => onSortModeChange(mode)}
-            className={`rounded-full px-3 py-1 font-mono text-sm tracking-[-0.56px] transition-colors ${
+            className={`relative z-10 rounded-full px-3 py-1 font-mono text-sm tracking-[-0.56px] transition-colors duration-200 ${
               sortMode === mode
-                ? "bg-[#1a1a1a] text-[#fdfbf5]"
+                ? "text-[#fdfbf5]"
                 : "text-[#1a1a1a] hover:text-[#818181]"
             }`}
           >
+            {sortMode === mode && (
+              <motion.span
+                layoutId="sort-toggle-pill"
+                transition={{ type: "spring", stiffness: 500, damping: 35 }}
+                className="absolute inset-0 -z-10 rounded-full bg-[#1a1a1a]"
+              />
+            )}
             {label}
           </button>
         ))}
