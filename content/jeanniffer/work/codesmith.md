@@ -12,6 +12,7 @@ tags:
   - "Design System"
 href: "/case-studies/codesmith"
 order: 1
+comingSoon: true
 description: "Codesmith's website felt corporate and disconnected from its diverse community. After their brand refresh (fresh colors, custom illustrations, retro-futuristic vibe), I extended the system across decks, books, social, flyers, and their founder site. The goal: translate their new identity into materials that felt warm and authentic."
 timeline: "June 2024 - March 2025"
 services: "Brand & Web Design"

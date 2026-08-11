@@ -9,6 +9,7 @@ tags:
   - "Web Design"
 href: "/case-studies/digitalundivided"
 order: 2
+comingSoon: true
 description: "digitalundivided needed one consistent visual identity across 9 internal departments, 6 educational programs, research reports, virtual and in-person events, newsletters, and daily social content -- without a design system holding it all together."
 timeline: "Ongoing"
 services: "Brand & Visual Design"

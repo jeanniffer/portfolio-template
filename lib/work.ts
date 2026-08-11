@@ -25,6 +25,12 @@ export type WorkItem = {
   tags: string[];
   href?: string;
   order: number;
+  // When true, the /case-studies/[slug] page shows a "Coming soon"
+  // placeholder instead of the full case study -- lets Jean publish a
+  // project's thumbnail/grid card right away and fill in the real
+  // write-up later, without a broken or half-empty detail page in the
+  // meantime.
+  comingSoon?: boolean;
   // Fields used on the case-study detail page (/case-studies/[slug]) --
   // optional so a work item can exist in the grid without a detail page.
   description?: string;
@@ -49,6 +55,7 @@ function readWorkFile(f: string): WorkItem {
     tags: data.tags || [],
     href: data.href,
     order: data.order ?? 0,
+    comingSoon: data.comingSoon ?? false,
     description: data.description,
     timeline: data.timeline,
     services: data.services,
@@ -61,7 +68,9 @@ export function getWorkItems(): WorkItem[] {
 
   return fs
     .readdirSync(WORK_DIR)
-    .filter((f) => f.endsWith(".md"))
+    // Files starting with "_" (e.g. _template.md) are duplicate-me
+    // starting points for new projects, not real content -- skip them.
+    .filter((f) => f.endsWith(".md") && !f.startsWith("_"))
     .map(readWorkFile)
     .sort((a, b) => a.order - b.order);
 }
