@@ -4,6 +4,87 @@ import { useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import { WORK_TYPES, type WorkType } from "@/lib/workTypes";
 
+function PillGroup<T extends string>({
+  options,
+  active,
+  onToggle,
+}: {
+  options: { value: T; label: string }[];
+  active: T[];
+  onToggle: (value: T) => void;
+}) {
+  return (
+    <div className="flex w-[300px] flex-wrap items-start gap-3">
+      {options.map(({ value, label }) => {
+        const isActive = active.includes(value);
+        return (
+          <motion.button
+            key={value}
+            type="button"
+            onClick={() => onToggle(value)}
+            transition={{ duration: 0.2, ease: "easeOut" }}
+            className={`flex shrink-0 items-center justify-center gap-1 rounded-full border px-3 py-1 font-mono text-sm tracking-[-0.56px] transition-colors duration-200 ${
+              isActive
+                ? "border-[#1a1a1a] bg-[#1a1a1a] text-[#fdfbf5] hover:bg-[#333333]"
+                : "border-[#1a1a1a] text-[#1a1a1a] hover:border-[#6e6e6d] hover:text-[#6e6e6d]"
+            }`}
+          >
+            {label}
+            {/* Icon slot is always mounted (not conditionally rendered)
+                so the pill's width never changes when toggled -- only
+                which glyph shows animates. "+" invites adding this
+                filter, "✓" confirms it's applied. */}
+            <span className="relative inline-block h-[1em] w-[1em]">
+              <motion.span
+                aria-hidden
+                animate={{ opacity: isActive ? 0 : 1, scale: isActive ? 0.6 : 1 }}
+                transition={{ duration: 0.15 }}
+                className="absolute inset-0 flex items-center justify-center"
+              >
+                +
+              </motion.span>
+              <motion.span
+                aria-hidden
+                animate={{ opacity: isActive ? 1 : 0, scale: isActive ? 1 : 0.6 }}
+                transition={{ duration: 0.15 }}
+                className="absolute inset-0 flex items-center justify-center"
+              >
+                ✓
+              </motion.span>
+            </span>
+          </motion.button>
+        );
+      })}
+    </div>
+  );
+}
+
+function DropdownHeader({
+  label,
+  open,
+  onToggle,
+}: {
+  label: string;
+  open: boolean;
+  onToggle: () => void;
+}) {
+  return (
+    <button type="button" onClick={onToggle} className="flex items-center gap-1">
+      <p className="font-mono text-xs font-semibold uppercase tracking-[0.48px] text-[#818181]">
+        {label}
+      </p>
+      <motion.span
+        aria-hidden
+        animate={{ rotate: open ? 180 : 0 }}
+        transition={{ duration: 0.2 }}
+        className="text-[9px] text-[#818181]"
+      >
+        ▾
+      </motion.span>
+    </button>
+  );
+}
+
 export default function WorkFilterSidebar({
   activeTypes,
   onToggleType,
@@ -21,6 +102,7 @@ export default function WorkFilterSidebar({
   titleA: string;
   titleB: string;
 }) {
+  const [nicheOpen, setNicheOpen] = useState(true);
   const [tagsOpen, setTagsOpen] = useState(false);
 
   return (
@@ -44,44 +126,25 @@ export default function WorkFilterSidebar({
         transition={{ duration: 0.5, delay: 0.1, ease: [0.22, 1, 0.36, 1] }}
         className="flex w-[300px] flex-col items-start gap-3"
       >
-        <div className="flex items-center gap-1">
-          <p className="font-mono text-xs font-semibold uppercase tracking-[0.48px] text-[#818181]">
-            Type
-          </p>
-          <span aria-hidden className="text-[9px] text-[#818181]">
-            ▾
-          </span>
-        </div>
-        <div className="flex w-[300px] flex-wrap items-start gap-3">
-          {WORK_TYPES.map(({ slug, label }) => {
-            const active = activeTypes.includes(slug);
-            return (
-              <motion.button
-                key={slug}
-                type="button"
-                onClick={() => onToggleType(slug)}
-                transition={{ duration: 0.2, ease: "easeOut" }}
-                className={`flex shrink-0 items-center justify-center gap-1 rounded-full border px-3 py-1 font-mono text-sm tracking-[-0.56px] transition-colors duration-200 ${
-                  active
-                    ? "border-[#1a1a1a] bg-[#1a1a1a] text-[#fdfbf5] hover:bg-[#333333]"
-                    : "border-[#1a1a1a] text-[#1a1a1a] hover:border-[#6e6e6d] hover:text-[#6e6e6d]"
-                }`}
-              >
-                {label}
-                {/* Checkmark space is always reserved (not conditionally
-                    mounted) so the pill's width never changes on toggle --
-                    only its opacity/scale animate. */}
-                <motion.span
-                  aria-hidden
-                  animate={{ opacity: active ? 1 : 0, scale: active ? 1 : 0.6 }}
-                  transition={{ duration: 0.15 }}
-                >
-                  ✓
-                </motion.span>
-              </motion.button>
-            );
-          })}
-        </div>
+        <DropdownHeader label="Niche" open={nicheOpen} onToggle={() => setNicheOpen((v) => !v)} />
+        <AnimatePresence initial={false}>
+          {nicheOpen && (
+            <motion.div
+              key="niche-list"
+              initial={{ opacity: 0, height: 0 }}
+              animate={{ opacity: 1, height: "auto" }}
+              exit={{ opacity: 0, height: 0 }}
+              transition={{ duration: 0.25, ease: [0.22, 1, 0.36, 1] }}
+              className="w-[300px] overflow-hidden"
+            >
+              <PillGroup
+                options={WORK_TYPES.map((t) => ({ value: t.slug, label: t.label }))}
+                active={activeTypes}
+                onToggle={onToggleType}
+              />
+            </motion.div>
+          )}
+        </AnimatePresence>
       </motion.div>
 
       {allTags.length > 0 && (
@@ -91,23 +154,7 @@ export default function WorkFilterSidebar({
           transition={{ duration: 0.5, delay: 0.15, ease: [0.22, 1, 0.36, 1] }}
           className="flex w-[300px] flex-col items-start gap-3"
         >
-          <button
-            type="button"
-            onClick={() => setTagsOpen((v) => !v)}
-            className="flex items-center gap-1"
-          >
-            <p className="font-mono text-xs font-semibold uppercase tracking-[0.48px] text-[#818181]">
-              Tags
-            </p>
-            <motion.span
-              aria-hidden
-              animate={{ rotate: tagsOpen ? 45 : 0 }}
-              transition={{ duration: 0.2 }}
-              className="text-xs leading-none text-[#818181]"
-            >
-              +
-            </motion.span>
-          </button>
+          <DropdownHeader label="Tags" open={tagsOpen} onToggle={() => setTagsOpen((v) => !v)} />
           <AnimatePresence initial={false}>
             {tagsOpen && (
               <motion.div
@@ -118,33 +165,11 @@ export default function WorkFilterSidebar({
                 transition={{ duration: 0.25, ease: [0.22, 1, 0.36, 1] }}
                 className="w-[300px] overflow-hidden"
               >
-                <div className="flex w-[300px] flex-wrap items-start gap-3">
-                  {allTags.map((tag) => {
-                    const active = activeTags.includes(tag);
-                    return (
-                      <motion.button
-                        key={tag}
-                        type="button"
-                        onClick={() => onToggleTag(tag)}
-                        transition={{ duration: 0.2, ease: "easeOut" }}
-                        className={`flex shrink-0 items-center justify-center gap-1 rounded-full border px-3 py-1 font-mono text-sm tracking-[-0.56px] transition-colors duration-200 ${
-                          active
-                            ? "border-[#1a1a1a] bg-[#1a1a1a] text-[#fdfbf5] hover:bg-[#333333]"
-                            : "border-[#1a1a1a] text-[#1a1a1a] hover:border-[#6e6e6d] hover:text-[#6e6e6d]"
-                        }`}
-                      >
-                        {tag}
-                        <motion.span
-                          aria-hidden
-                          animate={{ opacity: active ? 1 : 0, scale: active ? 1 : 0.6 }}
-                          transition={{ duration: 0.15 }}
-                        >
-                          ✓
-                        </motion.span>
-                      </motion.button>
-                    );
-                  })}
-                </div>
+                <PillGroup
+                  options={allTags.map((t) => ({ value: t, label: t }))}
+                  active={activeTags}
+                  onToggle={onToggleTag}
+                />
               </motion.div>
             )}
           </AnimatePresence>
