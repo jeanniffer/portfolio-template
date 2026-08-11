@@ -4,22 +4,73 @@ import Image from "next/image";
 import Link from "next/link";
 import { AnimatePresence, motion } from "framer-motion";
 import type { WorkItem } from "@/lib/work";
+import type { SortMode } from "@/lib/workTypes";
 
-export default function WorkGrid({ items }: { items: WorkItem[] }) {
+function SortToggle({
+  sortMode,
+  onSortModeChange,
+}: {
+  sortMode: SortMode;
+  onSortModeChange: (mode: SortMode) => void;
+}) {
+  return (
+    <div className="flex w-full items-center justify-end gap-2 pt-10">
+      <p className="font-mono text-xs font-semibold uppercase tracking-[0.48px] text-[#818181]">
+        Sort
+      </p>
+      <div className="flex items-center gap-1 rounded-full border border-[#1a1a1a] p-0.5">
+        {(
+          [
+            { mode: "curated" as SortMode, label: "Curated" },
+            { mode: "date" as SortMode, label: "Date" },
+          ]
+        ).map(({ mode, label }) => (
+          <button
+            key={mode}
+            type="button"
+            onClick={() => onSortModeChange(mode)}
+            className={`rounded-full px-3 py-1 font-mono text-sm tracking-[-0.56px] transition-colors ${
+              sortMode === mode
+                ? "bg-[#1a1a1a] text-[#fdfbf5]"
+                : "text-[#1a1a1a] hover:text-[#818181]"
+            }`}
+          >
+            {label}
+          </button>
+        ))}
+      </div>
+    </div>
+  );
+}
+
+export default function WorkGrid({
+  items,
+  sortMode,
+  onSortModeChange,
+}: {
+  items: WorkItem[];
+  sortMode: SortMode;
+  onSortModeChange: (mode: SortMode) => void;
+}) {
   if (!items.length) {
     return (
-      <motion.div
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        className="flex flex-1 items-center justify-center py-16 text-[#818181]"
-      >
-        No projects match this filter yet.
-      </motion.div>
+      <div className="flex flex-1 flex-col">
+        <SortToggle sortMode={sortMode} onSortModeChange={onSortModeChange} />
+        <motion.div
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          className="flex flex-1 items-center justify-center py-16 text-[#818181]"
+        >
+          No projects match this filter yet.
+        </motion.div>
+      </div>
     );
   }
 
   return (
-    <div className="grid flex-1 grid-cols-1 content-start gap-x-6 gap-y-6 py-10 sm:grid-cols-2">
+    <div className="flex flex-1 flex-col">
+      <SortToggle sortMode={sortMode} onSortModeChange={onSortModeChange} />
+      <div className="grid flex-1 grid-cols-1 content-start gap-x-6 gap-y-6 pb-10 sm:grid-cols-2">
       <AnimatePresence mode="popLayout">
         {items.map((item, i) => {
           const card = (
@@ -76,6 +127,7 @@ export default function WorkGrid({ items }: { items: WorkItem[] }) {
           );
         })}
       </AnimatePresence>
+      </div>
     </div>
   );
 }

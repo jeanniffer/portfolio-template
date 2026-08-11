@@ -1,7 +1,15 @@
 "use client";
 
 import { useMemo, useState } from "react";
-import { filterWorkItems, typesToSlug, type WorkType } from "@/lib/workTypes";
+import {
+  collectTags,
+  filterByTags,
+  filterWorkItems,
+  sortWorkItems,
+  typesToSlug,
+  type SortMode,
+  type WorkType,
+} from "@/lib/workTypes";
 import type { WorkItem } from "@/lib/work";
 import WorkFilterSidebar from "./WorkFilterSidebar";
 import WorkGrid from "./WorkGrid";
@@ -18,6 +26,8 @@ export default function WorkGallery({
   titleB: string;
 }) {
   const [activeTypes, setActiveTypes] = useState<WorkType[]>(initialActiveTypes);
+  const [activeTags, setActiveTags] = useState<string[]>([]);
+  const [sortMode, setSortMode] = useState<SortMode>("curated");
 
   function toggleType(type: WorkType) {
     setActiveTypes((prev) => {
@@ -34,21 +44,33 @@ export default function WorkGallery({
     });
   }
 
-  const filtered = useMemo(
-    () => filterWorkItems(items, activeTypes),
-    [items, activeTypes]
-  );
+  function toggleTag(tag: string) {
+    setActiveTags((prev) =>
+      prev.includes(tag) ? prev.filter((t) => t !== tag) : [...prev, tag]
+    );
+  }
+
+  const allTags = useMemo(() => collectTags(items), [items]);
+
+  const filtered = useMemo(() => {
+    const byType = filterWorkItems(items, activeTypes);
+    const byTag = filterByTags(byType, activeTags);
+    return sortWorkItems(byTag, sortMode);
+  }, [items, activeTypes, activeTags, sortMode]);
 
   return (
     <main className="flex min-h-screen flex-col gap-10 border-b border-[#1a1a1a] md:flex-row md:items-stretch">
       <WorkFilterSidebar
         activeTypes={activeTypes}
-        onToggle={toggleType}
+        onToggleType={toggleType}
+        allTags={allTags}
+        activeTags={activeTags}
+        onToggleTag={toggleTag}
         titleA={titleA}
         titleB={titleB}
       />
       <div className="hidden w-px shrink-0 bg-[#1a1a1a] md:block" />
-      <WorkGrid items={filtered} />
+      <WorkGrid items={filtered} sortMode={sortMode} onSortModeChange={setSortMode} />
     </main>
   );
 }
