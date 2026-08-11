@@ -36,7 +36,7 @@ body {
   background-image: radial-gradient(#1a1a1a 1px, transparent 1px);
   background-size: 22px 22px;
   background-position: -11px -11px;
-  opacity: 0.05;
+  opacity: 0.09;
 }
 
 /* Hides the scrollbar on horizontally-scrollable galleries while keeping

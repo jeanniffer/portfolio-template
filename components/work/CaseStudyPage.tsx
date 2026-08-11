@@ -7,10 +7,10 @@ import WorkFooter from "./WorkFooter";
 import CaseStudySections from "./CaseStudySections";
 import StickyIntro from "./StickyIntro";
 
-const HR = <div className="w-full border-t border-[#474746]" />;
+const HR = <div className="w-full border-t border-[#6e6e6d]" />;
 
 function VDivider() {
-  return <div className="hidden w-px shrink-0 self-stretch bg-[#474746] md:block" />;
+  return <div className="hidden w-px shrink-0 self-stretch bg-[#6e6e6d] md:block" />;
 }
 
 function MetaRow({ label, value }: { label: string; value?: string }) {
@@ -70,7 +70,7 @@ export default function CaseStudyPage({ item }: { item: WorkItem }) {
       <div aria-hidden className="dot-grid pointer-events-none absolute inset-0 z-0" />
       <div
         aria-hidden
-        className="pointer-events-none absolute inset-[10px] z-50 border border-[#474746]"
+        className="pointer-events-none absolute inset-[10px] z-50 border border-[#6e6e6d]"
       />
       {/* StickyIntro sticks at top-10 (leaving a 40px gap above it for
           breathing room), but nothing was covering that strip once you
@@ -95,7 +95,7 @@ export default function CaseStudyPage({ item }: { item: WorkItem }) {
               {item.client}
             </h1>
             {item.description && (
-              <p className="font-archivo text-sm font-light leading-[20px] tracking-[-0.24px] text-[#474746] md:text-base">
+              <p className="font-archivo text-sm font-light leading-[20px] tracking-[-0.24px] text-[#6e6e6d] md:text-base">
                 {item.description}
               </p>
             )}
@@ -149,7 +149,7 @@ export default function CaseStudyPage({ item }: { item: WorkItem }) {
           </h2>
           <VDivider />
           <div className="flex w-full flex-1 flex-col items-start gap-10">
-            <p className="font-archivo text-lg font-light leading-[22px] tracking-[-0.36px] text-[#474746]">
+            <p className="font-archivo text-lg font-light leading-[22px] tracking-[-0.36px] text-[#6e6e6d]">
               Whether it's a specific project, a full-time role, or something
               experimental, let's explore it together.
             </p>

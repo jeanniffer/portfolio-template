@@ -9,7 +9,7 @@ export default function WorkFooter({ meta }: { meta: SiteMeta }) {
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       transition={{ duration: 0.6, delay: 0.2 }}
-      className="flex w-full items-center justify-between whitespace-nowrap py-6 font-mono text-sm tracking-[-0.56px] text-[#474746]"
+      className="flex w-full items-center justify-between whitespace-nowrap py-6 font-mono text-sm tracking-[-0.56px] text-[#6e6e6d]"
     >
       {meta.contactEmail ? (
         <a

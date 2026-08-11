@@ -27,7 +27,7 @@ export default function WorkHome({ activeTypes }: { activeTypes: WorkType[] }) {
           everything else instead of staying pinned in place. */}
       <div
         aria-hidden
-        className="pointer-events-none absolute inset-[10px] z-50 border border-[#474746]"
+        className="pointer-events-none absolute inset-[10px] z-50 border border-[#6e6e6d]"
       />
 
       {/* Opaque bar covering the gap above the sticky sidebar during

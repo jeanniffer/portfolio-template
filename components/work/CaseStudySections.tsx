@@ -66,11 +66,11 @@ function SectionLayer({
         <p className="font-archivo text-5xl font-medium tracking-[-0.72px] text-[#1a1a1a] md:text-6xl">
           {section.title}
         </p>
-        <p className="font-archivo max-w-sm text-base font-light leading-relaxed tracking-[-0.24px] text-[#474746] md:text-lg">
+        <p className="font-archivo max-w-sm text-base font-light leading-relaxed tracking-[-0.24px] text-[#6e6e6d] md:text-lg">
           {section.description}
         </p>
       </motion.div>
-      <div className="hidden w-px shrink-0 self-stretch bg-[#474746] md:block" />
+      <div className="hidden w-px shrink-0 self-stretch bg-[#6e6e6d] md:block" />
       <div className="flex h-full w-full items-center justify-center self-stretch md:flex-[7]">
         <motion.div
           style={{ scale: imageScale }}
