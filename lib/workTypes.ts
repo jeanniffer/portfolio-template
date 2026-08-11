@@ -40,24 +40,29 @@ export function slugToTypes(slugParts: string[] | undefined): WorkType[] {
 }
 
 /** Generic so it works on the client without importing WorkItem (which
- * lives in lib/work.ts, an fs-importing server-only module). */
+ * lives in lib/work.ts, an fs-importing server-only module). Multiple
+ * selected types are OR'd together (match if the project has *any* of
+ * the selected types), not AND'd -- selecting Mission-driven + Tech &
+ * Finance broadens the results to either category, it doesn't narrow to
+ * projects tagged with both. */
 export function filterWorkItems<T extends { types: WorkType[] }>(
   items: T[],
   activeTypes: WorkType[]
 ): T[] {
   if (!activeTypes.length) return items;
-  return items.filter((item) => activeTypes.every((t) => item.types.includes(t)));
+  return items.filter((item) => activeTypes.some((t) => item.types.includes(t)));
 }
 
 /** Free-form tags (e.g. "Web Design", "Design System") are per-project
  * content, not a fixed list like WORK_TYPES -- so filtering just checks
- * against whatever strings each item actually has. */
+ * against whatever strings each item actually has. Same OR logic as
+ * filterWorkItems: any selected tag matches, not all of them. */
 export function filterByTags<T extends { tags: string[] }>(
   items: T[],
   activeTags: string[]
 ): T[] {
   if (!activeTags.length) return items;
-  return items.filter((item) => activeTags.every((t) => item.tags.includes(t)));
+  return items.filter((item) => activeTags.some((t) => item.tags.includes(t)));
 }
 
 /** All distinct tags across a set of items, in first-seen order (so the
