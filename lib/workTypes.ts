@@ -5,13 +5,18 @@
  * into the browser bundle.
  */
 
-export type WorkType = "mission-driven" | "tech-finance" | "personal-experimental";
+export type WorkType =
+  | "mission-driven"
+  | "tech-finance"
+  | "edtech"
+  | "personal-experimental";
 
 // Fixed for now (per Jean, Aug 2026) -- order here is the order shown in
 // the TYPE filter sidebar.
 export const WORK_TYPES: { slug: WorkType; label: string }[] = [
   { slug: "mission-driven", label: "Mission-driven" },
   { slug: "tech-finance", label: "Tech & Finance" },
+  { slug: "edtech", label: "EdTech" },
   { slug: "personal-experimental", label: "Personal & Experimental" },
 ];
 

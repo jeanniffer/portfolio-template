@@ -4,6 +4,7 @@ cover: "/images/case-studies/academia-edu/Analytics Paywall -desktop.jpg"
 year: "2023 - 2024"
 types:
   - "tech-finance"
+  - "edtech"
 tags:
   - "Product Design"
 href: "/case-studies/academia-edu"

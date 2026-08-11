@@ -4,6 +4,7 @@ cover: "/images/case-studies/codesmith/Cover.png"
 year: "2024 - 2025"
 types:
   - "tech-finance"
+  - "edtech"
 tags:
   - "Product Design"
   - "Web Design"
