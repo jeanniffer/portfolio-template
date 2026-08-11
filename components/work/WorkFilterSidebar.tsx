@@ -60,13 +60,11 @@ export default function WorkFilterSidebar({
                 key={slug}
                 type="button"
                 onClick={() => onToggleType(slug)}
-                whileHover={{ scale: 1.04 }}
-                whileTap={{ scale: 0.97 }}
                 transition={{ duration: 0.2, ease: "easeOut" }}
-                className={`flex shrink-0 items-center justify-center gap-1 rounded-full border px-3 py-1 font-mono text-sm tracking-[-0.56px] ${
+                className={`flex shrink-0 items-center justify-center gap-1 rounded-full border px-3 py-1 font-mono text-sm tracking-[-0.56px] transition-colors duration-200 ${
                   active
-                    ? "border-[#1a1a1a] bg-[#1a1a1a] text-[#fdfbf5]"
-                    : "border-[#1a1a1a] text-[#1a1a1a]"
+                    ? "border-[#1a1a1a] bg-[#1a1a1a] text-[#fdfbf5] hover:bg-[#333333]"
+                    : "border-[#1a1a1a] text-[#1a1a1a] hover:border-[#6e6e6d] hover:text-[#6e6e6d]"
                 }`}
               >
                 {label}
@@ -128,13 +126,11 @@ export default function WorkFilterSidebar({
                         key={tag}
                         type="button"
                         onClick={() => onToggleTag(tag)}
-                        whileHover={{ scale: 1.04 }}
-                        whileTap={{ scale: 0.97 }}
                         transition={{ duration: 0.2, ease: "easeOut" }}
-                        className={`flex shrink-0 items-center justify-center gap-1 rounded-full border px-3 py-1 font-mono text-sm tracking-[-0.56px] ${
+                        className={`flex shrink-0 items-center justify-center gap-1 rounded-full border px-3 py-1 font-mono text-sm tracking-[-0.56px] transition-colors duration-200 ${
                           active
-                            ? "border-[#1a1a1a] bg-[#1a1a1a] text-[#fdfbf5]"
-                            : "border-[#1a1a1a] text-[#1a1a1a]"
+                            ? "border-[#1a1a1a] bg-[#1a1a1a] text-[#fdfbf5] hover:bg-[#333333]"
+                            : "border-[#1a1a1a] text-[#1a1a1a] hover:border-[#6e6e6d] hover:text-[#6e6e6d]"
                         }`}
                       >
                         {tag}
