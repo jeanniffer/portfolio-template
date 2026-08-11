@@ -71,7 +71,7 @@ export default function WorkGrid({
 
   return (
     <div className="flex flex-1 flex-col">
-      <SortToggle sortMode={sortMode} onSortModeChange={onSortModeChange} />
+      <SortToggle count={items.length} sortMode={sortMode} onSortModeChange={onSortModeChange} />
       <div className="grid flex-1 grid-cols-1 content-start gap-x-6 gap-y-6 pb-10 sm:grid-cols-2">
       <AnimatePresence mode="popLayout">
         {items.map((item, i) => {
