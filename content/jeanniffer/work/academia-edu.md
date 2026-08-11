@@ -1,7 +1,7 @@
 ---
 client: "Academia.edu"
-cover: "/images/case-studies/academia-edu/analytics-paywall.png"
-year: "2023 - 2024"
+cover: "/images/case-studies/academia-edu/cover-image-academia.png"
+year: "2026"
 types:
   - "tech-finance"
   - "edtech"
@@ -10,9 +10,9 @@ tags:
   - "Landing Page Design"
   - "Printed Assets"
 href: "/case-studies/academia-edu"
-order: 3
+order: 2
 description: "Working alongside the senior product designer, I contributed to both graphic production and feature design for one of the world's largest academic platforms. From email templates and certificates to conference flyers and journal materials."
-timeline: "3 months"
+timeline: "January 2026 - March 2026"
 services: "Product & Graphic Design"
 sections:
   - title: "PDF Pack Customization"
