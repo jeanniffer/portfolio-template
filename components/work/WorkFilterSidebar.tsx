@@ -101,11 +101,11 @@ export default function WorkFilterSidebar({
             </p>
             <motion.span
               aria-hidden
-              animate={{ rotate: tagsOpen ? 180 : 0 }}
+              animate={{ rotate: tagsOpen ? 45 : 0 }}
               transition={{ duration: 0.2 }}
-              className="text-[9px] text-[#818181]"
+              className="text-xs leading-none text-[#818181]"
             >
-              ▾
+              +
             </motion.span>
           </button>
           <AnimatePresence initial={false}>
