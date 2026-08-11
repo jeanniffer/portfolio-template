@@ -8,13 +8,13 @@
 #    entirely (or leave comingSoon: true) if you're only adding the
 #    grid thumbnail for now and haven't written the case study yet.
 # ---------------------------------------------------------------------
-client: "Client Name"
+client: "espacio, ¿límite?"
 cover: "/images/case-studies/client-slug/cover.png"
 year: "2026"
 types:
-  - "tech-finance" # mission-driven | tech-finance | edtech | personal-experimental (pick 1+)
+  - "Personal & Experimental" # mission-driven | tech-finance | edtech | personal-experimental (pick 1+)
 tags:
-  - "Product Design" # free-form, shows up in the Tags filter + on the grid card
+  - "Mobile Web Design" # free-form, shows up in the Tags filter + on the grid card
 href: "/case-studies/client-slug"
 order: 99 # controls position in "Curated" sort -- lower = earlier
 comingSoon: true # set to false once the write-up below is ready

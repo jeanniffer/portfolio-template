@@ -3,9 +3,9 @@ client: "Codesmith"
 cover: "/images/case-studies/codesmith/Cover.png"
 year: "2024 - 2025"
 types:
-  - "tech-finance"
-  - "edtech"
-  - "mission-driven"
+  - "Tech & Finance"
+  - "EdTech"
+  - "Mission-driven"
 tags:
   - "Product Design"
   - "Web Design"

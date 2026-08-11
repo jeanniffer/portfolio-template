@@ -1,4 +1,4 @@
-import { slugToTypes } from "@/lib/work";
+import { collectNiches, getWorkItems, slugToTypes } from "@/lib/work";
 import WorkHome from "@/components/work/WorkHome";
 
 export default function WorkPage({
@@ -6,6 +6,8 @@ export default function WorkPage({
 }: {
   params: { slug?: string[] };
 }) {
-  const activeTypes = slugToTypes(params.slug);
+  const items = getWorkItems();
+  const allNiches = collectNiches(items);
+  const activeTypes = slugToTypes(params.slug, allNiches);
   return <WorkHome activeTypes={activeTypes} />;
 }

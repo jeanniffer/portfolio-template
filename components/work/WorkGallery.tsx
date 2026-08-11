@@ -2,6 +2,7 @@
 
 import { useMemo, useState } from "react";
 import {
+  collectNiches,
   collectTags,
   filterByTags,
   filterWorkItems,
@@ -51,6 +52,7 @@ export default function WorkGallery({
   }
 
   const allTags = useMemo(() => collectTags(items), [items]);
+  const allNiches = useMemo(() => collectNiches(items), [items]);
 
   const filtered = useMemo(() => {
     const byType = filterWorkItems(items, activeTypes);
@@ -61,6 +63,7 @@ export default function WorkGallery({
   return (
     <main className="flex min-h-screen flex-col gap-10 border-b border-[#1a1a1a] md:flex-row md:items-stretch">
       <WorkFilterSidebar
+        allNiches={allNiches}
         activeTypes={activeTypes}
         onToggleType={toggleType}
         allTags={allTags}

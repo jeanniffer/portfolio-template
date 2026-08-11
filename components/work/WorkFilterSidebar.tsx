@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
-import { WORK_TYPES, type WorkType } from "@/lib/workTypes";
+import type { WorkType } from "@/lib/workTypes";
 
 function PillGroup<T extends string>({
   options,
@@ -86,6 +86,7 @@ function DropdownHeader({
 }
 
 export default function WorkFilterSidebar({
+  allNiches,
   activeTypes,
   onToggleType,
   allTags,
@@ -94,6 +95,7 @@ export default function WorkFilterSidebar({
   titleA,
   titleB,
 }: {
+  allNiches: WorkType[];
   activeTypes: WorkType[];
   onToggleType: (type: WorkType) => void;
   allTags: string[];
@@ -138,7 +140,7 @@ export default function WorkFilterSidebar({
               className="w-[300px] overflow-hidden"
             >
               <PillGroup
-                options={WORK_TYPES.map((t) => ({ value: t.slug, label: t.label }))}
+                options={allNiches.map((n) => ({ value: n, label: n }))}
                 active={activeTypes}
                 onToggle={onToggleType}
               />

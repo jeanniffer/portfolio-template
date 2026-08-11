@@ -12,7 +12,7 @@ client: "Client Name"
 cover: "/images/case-studies/client-slug/cover.png"
 year: "2026"
 types:
-  - "tech-finance" # mission-driven | tech-finance | edtech | personal-experimental (pick 1+)
+  - "Tech & Finance" # mission-driven | tech-finance | edtech | personal-experimental (pick 1+)
 tags:
   - "Product Design" # free-form, shows up in the Tags filter + on the grid card
 href: "/case-studies/client-slug"

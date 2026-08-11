@@ -3,8 +3,8 @@ client: "Academia.edu"
 cover: "/images/case-studies/academia-edu/cover-image-academia.png"
 year: "2026"
 types:
-  - "tech-finance"
-  - "edtech"
+  - "Tech & Finance"
+  - "EdTech"
 tags:
   - "Product Design"
   - "Landing Page Design"

@@ -14,7 +14,15 @@ import { typesToSlug, type WorkType } from "./workTypes";
 const WORK_DIR = path.join(process.cwd(), "content", "jeanniffer", "work");
 
 export type { WorkType };
-export { WORK_TYPES, typesToSlug, slugToTypes, filterWorkItems } from "./workTypes";
+export {
+  typesToSlug,
+  slugToTypes,
+  filterWorkItems,
+  filterByTags,
+  collectNiches,
+  collectTags,
+  sortWorkItems,
+} from "./workTypes";
 
 export type WorkItem = {
   slug: string;

@@ -16,7 +16,7 @@ function SortToggle({
   onSortModeChange: (mode: SortMode) => void;
 }) {
   return (
-    <div className="flex w-full items-center justify-end gap-2 pt-10 pb-6">
+    <div className="flex w-full items-center justify-end gap-2 py-10">
       <p className="font-mono text-xs font-semibold uppercase tracking-[0.48px] text-[#818181]">
         Sort {count} {count === 1 ? "Project" : "Projects"} by
       </p>

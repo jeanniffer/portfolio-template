@@ -8,14 +8,15 @@
 #    entirely (or leave comingSoon: true) if you're only adding the
 #    grid thumbnail for now and haven't written the case study yet.
 # ---------------------------------------------------------------------
-client: "Rainforest Foundation US"
+client: "Lauren Neal"
 cover: "/images/case-studies/client-slug/cover.png"
-year: "2025 - 2026"
+year: "2026"
 types:
-  - "Mission-driven"
-  - "Non-profit" # mission-driven | tech-finance | edtech | personal-experimental (pick 1+)
+  - "Mission-driven" # mission-driven | tech-finance | edtech | personal-experimental (pick 1+)
 tags:
-  - "Editorial Design" # free-form, shows up in the Tags filter + on the grid card
+  - "Rebranding"
+  - "Website Design"
+  - "Portfolio" # free-form, shows up in the Tags filter + on the grid card
 href: "/case-studies/client-slug"
 order: 99 # controls position in "Curated" sort -- lower = earlier
 comingSoon: true # set to false once the write-up below is ready
