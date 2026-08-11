@@ -7,16 +7,18 @@ import type { WorkItem } from "@/lib/work";
 import type { SortMode } from "@/lib/workTypes";
 
 function SortToggle({
+  count,
   sortMode,
   onSortModeChange,
 }: {
+  count: number;
   sortMode: SortMode;
   onSortModeChange: (mode: SortMode) => void;
 }) {
   return (
     <div className="flex w-full items-center justify-end gap-2 pt-10 pb-6">
       <p className="font-mono text-xs font-semibold uppercase tracking-[0.48px] text-[#818181]">
-        Sort
+        Sort [{count} {count === 1 ? "Project" : "Projects"}] by
       </p>
       <div className="flex items-center gap-1 rounded-full border border-[#1a1a1a] p-0.5">
         {(
@@ -55,7 +57,7 @@ export default function WorkGrid({
   if (!items.length) {
     return (
       <div className="flex flex-1 flex-col">
-        <SortToggle sortMode={sortMode} onSortModeChange={onSortModeChange} />
+        <SortToggle count={items.length} sortMode={sortMode} onSortModeChange={onSortModeChange} />
         <motion.div
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
