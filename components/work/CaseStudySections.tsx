@@ -2,7 +2,7 @@
 
 import { useRef } from "react";
 import Image from "next/image";
-import { motion, useScroll, useTransform, type MotionValue } from "framer-motion";
+import { motion, useScroll, useSpring, useTransform, type MotionValue } from "framer-motion";
 
 type Section = { title: string; description: string; image: string };
 
@@ -20,18 +20,18 @@ function SectionLayer({
   // Every section gets an evenly-spaced "peak" point across the full
   // 0..1 scroll range -- section 0 peaks at progress 0, the last one
   // peaks at progress 1, everything else in between. Each segment
-  // between two peaks is split hold:transition = 3:1 -- once a
-  // section's text/image reaches full opacity it *holds* there for 3x
+  // between two peaks is split hold:transition = 5:1 -- once a
+  // section's text/image reaches full opacity it *holds* there for 5x
   // longer than the crossfade into the next one takes, instead of
   // starting to fade immediately.
   const gap = total > 1 ? 1 / (total - 1) : 1;
   const point = index * gap;
-  const transitionWidth = gap / 4; // hold = gap - transitionWidth = 3x this
+  const transitionWidth = gap / 6; // hold = gap - transitionWidth = 5x this
   const isFirst = index === 0;
   const isLast = index === total - 1;
 
   const fadeInStart = point - transitionWidth;
-  const holdEnd = point + transitionWidth * 3;
+  const holdEnd = point + transitionWidth * 5;
   const fadeOutEnd = point + gap;
 
   const inputRange = isFirst
@@ -74,7 +74,7 @@ function SectionLayer({
       <div className="flex h-full w-full items-center justify-center self-stretch md:flex-[7]">
         <motion.div
           style={{ scale: imageScale }}
-          className="relative h-full w-full max-w-[960px] overflow-hidden rounded-2xl bg-[#1a1a1a]"
+          className="relative h-full w-full max-w-[960px] overflow-hidden rounded-2xl"
         >
           <Image
             src={section.image}
@@ -106,6 +106,14 @@ export default function CaseStudySections({ sections }: { sections: Section[] })
     target: ref,
     offset: ["start start", "end end"],
   });
+  // Smooths the raw scroll progress with a spring so the crossfade
+  // eases rather than tracking the scroll wheel 1:1 -- makes fast
+  // scrolls feel gentler instead of snapping between sections.
+  const smoothProgress = useSpring(scrollYProgress, {
+    stiffness: 90,
+    damping: 24,
+    mass: 0.6,
+  });
 
   return (
     <div
@@ -132,7 +140,7 @@ export default function CaseStudySections({ sections }: { sections: Section[] })
             section={section}
             index={i}
             total={sections.length}
-            scrollYProgress={scrollYProgress}
+            scrollYProgress={smoothProgress}
           />
         ))}
       </div>
