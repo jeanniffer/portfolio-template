@@ -16,6 +16,7 @@ types:
 tags:
   - "Mobile Web Design" # free-form, shows up in the Tags filter + on the grid card
 href: "/case-studies/client-slug"
+kind: "case-study"
 order: 99 # controls position in "Curated" sort -- lower = earlier
 comingSoon: true # set to false once the write-up below is ready
 description: "One or two sentences summarizing the project for the case-study intro."

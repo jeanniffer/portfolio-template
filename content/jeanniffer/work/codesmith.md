@@ -3,30 +3,25 @@ client: "Codesmith"
 cover: "/images/case-studies/codesmith/Cover.png"
 year: "2024 - 2025"
 types:
-  - "Tech & Finance"
-  - "EdTech"
-  - "Mission-driven"
+  - "edtech"
+  - "mission-driven"
 tags:
   - "Product Design"
   - "Web Design"
-  - "Design System"
+  - "Design Systems"
 href: "/case-studies/codesmith"
+kind: "case-study"
 order: 1
-comingSoon: true
 description: "Codesmith's website felt corporate and disconnected from its diverse community. After their brand refresh (fresh colors, custom illustrations, retro-futuristic vibe), I extended the system across decks, books, social, flyers, and their founder site. The goal: translate their new identity into materials that felt warm and authentic."
 timeline: "June 2024 - March 2025"
 services: "Brand & Web Design"
 sections:
-  - title: "Before"
-    description: "Before the redesign, the site did its job, but it didn't feel like Codesmith. Corporate, static, and forgettable. Students struggled to find essentials like free resources, events, and clear program information, and the navigation left them more frustrated than curious."
+  - title: "Starting point"
+    description: "Before the redesign, the site did its job, but it didn't feel like Codesmith. Corporate, static, and forgettable. Students struggled to find essentials like free resources, events, and clear program information, and the navigation left them more frustrated than curious"
     image: "/images/case-studies/codesmith/Cover.png"
   - title: "Community"
     description: "I was once asked to describe this project in three words. My answer: Community, Diversity, Trust. Community shows up across the whole site, but it's clearest in one small detail: how upcoming events went from a buried dropdown to a clear, well-designed calendar anyone could browse."
     image: "/images/case-studies/codesmith/13.png"
-    # TODO: replace with a screenshot of the OLD events dropdown so the
-    # slider has a real before/after -- currently reusing 13.png as a
-    # placeholder "before" until that asset is uploaded.
-    beforeImage: "/images/case-studies/codesmith/13.png"
   - title: "Diversity"
     description: "Custom illustrations and imagery designed to reflect the actual range of students and instructors in the program, instead of generic stock photography."
     image: "/images/case-studies/codesmith/5.png"

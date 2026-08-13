@@ -3,13 +3,14 @@ client: "Academia.edu"
 cover: "/images/case-studies/academia-edu/cover-image-academia.png"
 year: "2026"
 types:
-  - "Tech & Finance"
+  - "Mission-driven"
   - "EdTech"
 tags:
   - "Product Design"
   - "Landing Page Design"
   - "Printed Assets"
 href: "/case-studies/academia-edu"
+kind: "case-study"
 order: 2
 description: "Working alongside the senior product designer, I contributed to both graphic production and feature design for one of the world's largest academic platforms. From email templates and certificates to conference flyers and journal materials."
 timeline: "January 2026 - March 2026"
