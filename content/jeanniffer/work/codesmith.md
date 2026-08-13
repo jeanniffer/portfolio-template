@@ -22,6 +22,7 @@ sections:
   - title: "Community"
     description: "I was once asked to describe this project in three words. My answer: Community, Diversity, Trust. Community shows up across the whole site, but it's clearest in one small detail: how upcoming events went from a buried dropdown to a clear, well-designed calendar anyone could browse."
     image: "/images/case-studies/codesmith/13.png"
+    beforeImage: "/images/case-studies/codesmith/Codesmith-Before.png"
   - title: "Diversity"
     description: "Custom illustrations and imagery designed to reflect the actual range of students and instructors in the program, instead of generic stock photography."
     image: "/images/case-studies/codesmith/5.png"
