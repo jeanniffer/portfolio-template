@@ -24,6 +24,19 @@ export {
   sortWorkItems,
 } from "./workTypes";
 
+/**
+ * How a grid card behaves when clicked:
+ * - "case-study" (default): navigates to /case-studies/[slug], the full
+ *   internal detail page built with StickyIntro + CaseStudySections.
+ * - "external": `href` is a full external URL (e.g. a net art project
+ *   living outside the portfolio) -- opens in a new tab, card shows a
+ *   small ↗ indicator.
+ * - "deliverable": a small standalone piece with no case study to
+ *   write up -- clicking opens the cover image full-size in a
+ *   lightbox instead of navigating anywhere.
+ */
+export type WorkKind = "case-study" | "external" | "deliverable";
+
 export type WorkItem = {
   slug: string;
   client: string;
@@ -32,6 +45,7 @@ export type WorkItem = {
   types: WorkType[];
   tags: string[];
   href?: string;
+  kind: WorkKind;
   order: number;
   // When true, the /case-studies/[slug] page shows a "Coming soon"
   // placeholder instead of the full case study -- lets Jean publish a
@@ -70,6 +84,7 @@ function readWorkFile(f: string): WorkItem {
     types: data.types || [],
     tags: data.tags || [],
     href: data.href,
+    kind: (data.kind as WorkKind) || "case-study",
     order: data.order ?? 0,
     comingSoon: data.comingSoon ?? false,
     description: data.description,

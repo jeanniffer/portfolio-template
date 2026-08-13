@@ -1,10 +1,12 @@
 "use client";
 
+import { useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { AnimatePresence, motion } from "framer-motion";
 import type { WorkItem } from "@/lib/work";
 import type { SortMode } from "@/lib/workTypes";
+import Lightbox from "./Lightbox";
 
 function SortToggle({
   count,
@@ -61,6 +63,8 @@ export default function WorkGrid({
   sortMode: SortMode;
   onSortModeChange: (mode: SortMode) => void;
 }) {
+  const [lightboxItem, setLightboxItem] = useState<WorkItem | null>(null);
+
   if (!items.length) {
     return (
       <div className="flex flex-1 flex-col">
@@ -92,6 +96,13 @@ export default function WorkGrid({
                   sizes="(min-width: 640px) 40vw, 90vw"
                   className="object-cover object-bottom transition duration-500 ease-out group-hover:scale-[1.03]"
                 />
+                {/* External projects (net art, etc.) link off-site --
+                    flag that before the click, not after. */}
+                {item.kind === "external" && (
+                  <div className="pointer-events-none absolute right-3 top-3 flex h-7 w-7 items-center justify-center rounded-full bg-[#1a1a1a]/80 font-mono text-sm text-[#fdfbf5]">
+                    ↗
+                  </div>
+                )}
               </div>
               <div className="mt-3 flex w-full items-center justify-between whitespace-nowrap font-mono text-xs font-light tracking-[0.72px] text-[#1a1a1a]">
                 <div className="flex items-start gap-2">
@@ -119,6 +130,39 @@ export default function WorkGrid({
             },
           };
 
+          // "deliverable" -- no page to go to, opens the cover in a
+          // lightbox instead of navigating.
+          if (item.kind === "deliverable") {
+            return (
+              <motion.div key={item.slug} {...motionProps}>
+                <button
+                  type="button"
+                  onClick={() => setLightboxItem(item)}
+                  className="group flex w-full flex-col items-start pb-4 text-left"
+                >
+                  {card}
+                </button>
+              </motion.div>
+            );
+          }
+
+          // "external" -- leaves the site entirely, opens in a new tab.
+          if (item.kind === "external" && item.href) {
+            return (
+              <motion.div key={item.slug} {...motionProps}>
+                <a
+                  href={item.href}
+                  target="_blank"
+                  rel="noreferrer"
+                  className="group flex flex-col items-start pb-4"
+                >
+                  {card}
+                </a>
+              </motion.div>
+            );
+          }
+
+          // "case-study" (default) -- internal /case-studies/[slug] page.
           return item.href ? (
             <motion.div key={item.slug} {...motionProps}>
               <Link href={item.href} className="group flex flex-col items-start pb-4">
@@ -137,6 +181,12 @@ export default function WorkGrid({
         })}
       </AnimatePresence>
       </div>
+
+      <Lightbox
+        src={lightboxItem?.cover ?? null}
+        alt={lightboxItem?.client ?? ""}
+        onClose={() => setLightboxItem(null)}
+      />
     </div>
   );
 }

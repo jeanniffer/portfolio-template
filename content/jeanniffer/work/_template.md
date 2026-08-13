@@ -16,6 +16,7 @@ types:
 tags:
   - "Product Design" # free-form, shows up in the Tags filter + on the grid card
 href: "/case-studies/client-slug"
+kind: "case-study" # case-study (full internal page) | external (href is an outside URL, opens in new tab) | deliverable (no page -- click opens the cover image in a lightbox)
 order: 99 # controls position in "Curated" sort -- lower = earlier
 comingSoon: true # set to false once the write-up below is ready
 description: "One or two sentences summarizing the project for the case-study intro."
