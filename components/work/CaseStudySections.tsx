@@ -3,8 +3,9 @@
 import { useRef } from "react";
 import Image from "next/image";
 import { motion, useScroll, useSpring, useTransform, type MotionValue } from "framer-motion";
+import BeforeAfterSlider from "./BeforeAfterSlider";
 
-type Section = { title: string; description: string; image: string };
+type Section = { title: string; description: string; image: string; beforeImage?: string };
 
 function SectionLayer({
   section,
@@ -75,13 +76,17 @@ function SectionLayer({
           style={{ scale: imageScale }}
           className="relative h-full w-full max-w-[960px] overflow-hidden rounded-2xl"
         >
-          <Image
-            src={section.image}
-            alt={section.title}
-            fill
-            sizes="(min-width: 768px) 60vw, 90vw"
-            className="rounded-2xl object-contain"
-          />
+          {section.beforeImage ? (
+            <BeforeAfterSlider before={section.beforeImage} after={section.image} alt={section.title} />
+          ) : (
+            <Image
+              src={section.image}
+              alt={section.title}
+              fill
+              sizes="(min-width: 768px) 60vw, 90vw"
+              className="rounded-2xl object-contain"
+            />
+          )}
         </motion.div>
       </div>
     </motion.div>

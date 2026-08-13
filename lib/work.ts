@@ -48,7 +48,15 @@ export type WorkItem = {
   // short highlight (Design System, Before & After, whatever's relevant
   // to that specific project). Not a fixed Challenge/Solution/Result
   // structure -- projects can have as many or as few as make sense.
-  sections?: { title: string; description: string; image: string }[];
+  // `beforeImage` is optional: when set, the section renders as a
+  // draggable before/after slider (before/after) instead of a single
+  // static image.
+  sections?: {
+    title: string;
+    description: string;
+    image: string;
+    beforeImage?: string;
+  }[];
 };
 
 function readWorkFile(f: string): WorkItem {
@@ -67,7 +75,14 @@ function readWorkFile(f: string): WorkItem {
     description: data.description,
     timeline: data.timeline,
     services: data.services,
-    sections: data.sections,
+    sections: data.sections?.map(
+      (s: { title: string; description: string; image: string; beforeImage?: string }) => ({
+        title: s.title,
+        description: s.description,
+        image: s.image,
+        beforeImage: s.beforeImage,
+      })
+    ),
   };
 }
 
@@ -80,6 +95,12 @@ export function getWorkItems(): WorkItem[] {
     // starting points for new projects, not real content -- skip them.
     .filter((f) => f.endsWith(".md") && !f.startsWith("_"))
     .map(readWorkFile)
+    // comingSoon projects stay unpublished -- not in the grid, not in
+    // filters, not in "Other projects" -- until the write-up is ready
+    // and the flag is flipped off. The /case-studies/[slug] page still
+    // works if someone has the direct link (shows the coming-soon
+    // placeholder), it just isn't surfaced anywhere on the site.
+    .filter((item) => !item.comingSoon)
     .sort((a, b) => a.order - b.order);
 }
 

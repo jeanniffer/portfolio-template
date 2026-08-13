@@ -17,19 +17,23 @@ description: "Codesmith's website felt corporate and disconnected from its diver
 timeline: "June 2024 - March 2025"
 services: "Brand & Web Design"
 sections:
-  - title: "Challenge"
-    description: "Placeholder: Codesmith's website felt corporate and disconnected from its diverse community. I joined as a contractor with no brief, right after their brand refresh introduced fresh colors, custom illustrations, and a retro-futuristic vibe."
+  - title: "Before"
+    description: "Before the redesign, the site did its job, but it didn't feel like Codesmith. Corporate, static, and forgettable. Students struggled to find essentials like free resources, events, and clear program information, and the navigation left them more frustrated than curious."
     image: "/images/case-studies/codesmith/Cover.png"
   - title: "Community"
-    description: "Placeholder: In an interview I was once asked to describe this project in three words. I said Community, Diversity, Trust. This is where Community shows up: a homepage built around real voices and stories, not just outcomes."
+    description: "I was once asked to describe this project in three words. My answer: Community, Diversity, Trust. Community shows up across the whole site, but it's clearest in one small detail: how upcoming events went from a buried dropdown to a clear, well-designed calendar anyone could browse."
     image: "/images/case-studies/codesmith/13.png"
+    # TODO: replace with a screenshot of the OLD events dropdown so the
+    # slider has a real before/after -- currently reusing 13.png as a
+    # placeholder "before" until that asset is uploaded.
+    beforeImage: "/images/case-studies/codesmith/13.png"
   - title: "Diversity"
-    description: "Placeholder: Custom illustrations and imagery designed to reflect the actual range of students and instructors in the program, instead of generic stock photography."
+    description: "Custom illustrations and imagery designed to reflect the actual range of students and instructors in the program, instead of generic stock photography."
     image: "/images/case-studies/codesmith/5.png"
   - title: "Trust"
-    description: "Placeholder: A documented design system -- Auto Layout, spacing tokens, type and color -- so every new page felt consistent and credible, not improvised."
+    description: "Trust runs through the Codesmith Method framework itself (timeless pedagogy, frontier tech, curated community) and through the social proof woven across the site: alumni outcomes, testimonials, and a documented design system that keeps every page feeling credible, not improvised."
     image: "/images/case-studies/codesmith/11.png"
   - title: "Extending the System"
-    description: "Placeholder: The same visual language carried across decks, social templates, print, and the founder's personal site, so the team could keep building on-brand without a designer in every loop."
+    description: "The same visual language carried across decks, social templates, print, and the founder's personal site, so the team could keep building on-brand without a designer in every loop."
     image: "/images/case-studies/codesmith/6.png"
 ---
