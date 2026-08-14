@@ -13,16 +13,27 @@ function VDivider() {
   return <div className="hidden w-px shrink-0 self-stretch bg-[#6e6e6d] md:block" />;
 }
 
-function MetaRow({ label, value }: { label: string; value?: string }) {
+function MetaRow({ label, value, href }: { label: string; value?: string; href?: string }) {
   if (!value) return null;
   return (
     <div className="flex w-full flex-col items-start gap-2">
       <p className="font-mono text-xs font-semibold uppercase tracking-[0.48px] text-[#818181]">
         {label}
       </p>
-      <p className="font-archivo w-full text-base font-light leading-[20px] tracking-[-0.24px] text-[#1a1a1a]">
-        {value}
-      </p>
+      {href ? (
+        <a
+          href={href}
+          target="_blank"
+          rel="noreferrer"
+          className="font-archivo w-full text-base font-light leading-[20px] tracking-[-0.24px] text-[#1a1a1a] underline decoration-[#6e6e6d] underline-offset-4 transition-colors hover:text-[#6e6e6d]"
+        >
+          {value} ↗
+        </a>
+      ) : (
+        <p className="font-archivo w-full text-base font-light leading-[20px] tracking-[-0.24px] text-[#1a1a1a]">
+          {value}
+        </p>
+      )}
     </div>
   );
 }
@@ -105,6 +116,11 @@ export default function CaseStudyPage({ item }: { item: WorkItem }) {
             <MetaRow label="Client" value={item.client} />
             <MetaRow label="Timeline" value={item.timeline} />
             <MetaRow label="Services" value={item.services} />
+            <MetaRow
+              label="Website"
+              value={item.liveUrl ? new URL(item.liveUrl).hostname.replace(/^www\./, "") : undefined}
+              href={item.liveUrl}
+            />
           </div>
         </StickyIntro>
 
