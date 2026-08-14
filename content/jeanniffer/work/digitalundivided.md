@@ -1,19 +1,21 @@
 ---
 client: "digitalundivided"
 cover: "/images/case-studies/digitalundivided/01.jpg"
-year: "2024 - 2025"
+year: "2021 - 2023"
 types:
   - "Mission-driven"
+  - "Non-profit"
+  - "Women-led Organization"
 tags:
-  - "Product Design"
   - "Web Design"
+  - "Lead Designer"
 href: "/case-studies/digitalundivided"
 kind: "case-study"
-order: 2
+order: 3
 comingSoon: true
-description: "digitalundivided needed one consistent visual identity across 9 internal departments, 6 educational programs, research reports, virtual and in-person events, newsletters, and daily social content -- without a design system holding it all together."
-timeline: "Ongoing"
-services: "Brand & Visual Design"
+description: "digitalundivided needed one consistent visual identity across 9 internal departments, 6 educational programs, research reports, virtual and in-person events, newsletters, and daily social content without a design system holding it all together."
+timeline: "July 2021 - March 2023"
+services: "Lead Graphic Designer"
 sections:
   - title: "Challenge"
     description: "Every department and program was producing its own materials independently, so the brand looked different depending on who made it."
