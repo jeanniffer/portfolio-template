@@ -1,6 +1,6 @@
 ---
 client: "Codesmith"
-cover: "/images/case-studies/codesmith/Cover.png"
+cover: "/images/case-studies/codesmith/codesmith_cover-image_website-redesign.png"
 year: "2024 - 2025"
 types:
   - "EdTech"
@@ -24,11 +24,11 @@ sections:
     beforeImage: "/images/case-studies/codesmith/codesmith_events-community-calendar_ux-ui-design.png"
   - title: "Data Storytelling"
     description: "Custom illustrations by Ciaran Murphy, woven into data-driven sections like this one, turning a raw stat (55% of alumni use non-JS languages after graduating) into something visual and memorable instead of a plain chart."
-    image: "/images/case-studies/codesmith/codesmith_illustration.png"
+    image: "/images/case-studies/codesmith/codesmith_data-visualization.png"
   - title: "Trust"
     description: "Trust runs through the Codesmith Method framework itself (timeless pedagogy, frontier tech, curated community) and through the social proof woven across the site: alumni outcomes, testimonials, and a documented design system that keeps every page feeling credible, not improvised."
-    image: "/images/case-studies/codesmith/11.png"
+    image: "/images/case-studies/codesmith/codesmith_meet-the-team.png"
   - title: "Extending the System"
     description: "The same visual language carried across decks, social templates, print, and the founder's personal site, so the team could keep building on-brand without a designer in every loop."
-    image: "/images/case-studies/codesmith/6.png"
+    image: "/images/case-studies/codesmith/codesmith_other-media.png"
 ---

@@ -14,6 +14,8 @@ socials:
     url: "https://www.linkedin.com/in/jeanniffer-pimentel-85956ba2/"
   - label: "Pinterest"
     url: "#"
+  - label: "GitHub"
+    url: "https://github.com/jeanniffer"
 eyebrow: ""
 titleA: "Selected"
 titleB: "Works"

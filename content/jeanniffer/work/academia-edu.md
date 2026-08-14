@@ -3,7 +3,7 @@ client: "Academia.edu"
 cover: "/images/case-studies/academia-edu/academia-edu_case-study-cover_design-services-illustrations.png"
 year: "2026"
 types:
-  - "Mission-driven"
+  - "Mission-Driven"
   - "EdTech"
 tags:
   - "Product Design"
