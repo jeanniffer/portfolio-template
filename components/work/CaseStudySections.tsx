@@ -225,11 +225,11 @@ export default function CaseStudySections({ sections }: { sections: Section[] })
               <p className="font-archivo text-4xl font-medium tracking-[-0.72px] text-[#1a1a1a]">
                 {section.title}
               </p>
-              <p className="font-archivo max-w-sm text-base font-light leading-relaxed tracking-[-0.24px] text-[#6e6e6d]">
+              <p className="font-archivo w-full text-base font-light leading-relaxed tracking-[-0.24px] text-[#6e6e6d]">
                 {section.description}
               </p>
             </div>
-            <div className="relative h-[280px] w-full overflow-hidden rounded-2xl">
+            <div className="relative h-[380px] w-full overflow-hidden rounded-2xl sm:h-[440px] md:h-[520px]">
               {section.beforeImage ? (
                 <BeforeAfterSlider before={section.beforeImage} after={section.image} alt={section.title} />
               ) : (
