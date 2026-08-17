@@ -13,7 +13,7 @@ socials:
   - label: "Linkedin"
     url: "https://www.linkedin.com/in/jeanniffer-pimentel-85956ba2/"
   - label: "Pinterest"
-    url: "#"
+    url: "https://co.pinterest.com/jeanniffer/"
   - label: "GitHub"
     url: "https://github.com/jeanniffer"
 eyebrow: ""
