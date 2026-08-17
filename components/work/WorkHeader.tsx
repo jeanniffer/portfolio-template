@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 import { AnimatePresence, motion } from "framer-motion";
 import type { SiteMeta } from "@/lib/content";
 
@@ -11,6 +12,8 @@ export default function WorkHeader({
   meta: SiteMeta & { navWork?: string; navAbout?: string; ctaLabel?: string };
 }) {
   const [menuOpen, setMenuOpen] = useState(false);
+  const pathname = usePathname();
+  const isAbout = pathname?.startsWith("/about");
 
   return (
     <motion.header
@@ -30,13 +33,21 @@ export default function WorkHeader({
       <nav className="hidden items-center gap-6 min-[425px]:flex">
         <Link
           href="/"
-          className="border-b border-[#1a1a1a] px-0.5 font-mono text-sm font-medium uppercase tracking-[-0.56px] text-[#1a1a1a]"
+          className={`font-mono text-sm font-medium uppercase tracking-[-0.56px] transition-colors duration-200 ${
+            isAbout
+              ? "text-[#818181] hover:text-[#1a1a1a]"
+              : "border-b border-[#1a1a1a] px-0.5 text-[#1a1a1a]"
+          }`}
         >
           {meta.navWork || "Work"}
         </Link>
         <Link
           href="/about"
-          className="font-mono text-sm font-medium uppercase tracking-[-0.56px] text-[#818181] transition-colors duration-200 hover:text-[#1a1a1a]"
+          className={`font-mono text-sm font-medium uppercase tracking-[-0.56px] transition-colors duration-200 ${
+            isAbout
+              ? "border-b border-[#1a1a1a] px-0.5 text-[#1a1a1a]"
+              : "text-[#818181] hover:text-[#1a1a1a]"
+          }`}
         >
           {meta.navAbout || "About"}
         </Link>
@@ -90,14 +101,22 @@ export default function WorkHeader({
             <Link
               href="/"
               onClick={() => setMenuOpen(false)}
-              className="border-b border-[#1a1a1a] px-0.5 font-mono text-sm font-medium uppercase tracking-[-0.56px] text-[#1a1a1a]"
+              className={`font-mono text-sm font-medium uppercase tracking-[-0.56px] transition-colors duration-200 ${
+                isAbout
+                  ? "text-[#818181] hover:text-[#1a1a1a]"
+                  : "border-b border-[#1a1a1a] px-0.5 text-[#1a1a1a]"
+              }`}
             >
               {meta.navWork || "Work"}
             </Link>
             <Link
               href="/about"
               onClick={() => setMenuOpen(false)}
-              className="font-mono text-sm font-medium uppercase tracking-[-0.56px] text-[#818181] transition-colors duration-200 hover:text-[#1a1a1a]"
+              className={`font-mono text-sm font-medium uppercase tracking-[-0.56px] transition-colors duration-200 ${
+                isAbout
+                  ? "border-b border-[#1a1a1a] px-0.5 text-[#1a1a1a]"
+                  : "text-[#818181] hover:text-[#1a1a1a]"
+              }`}
             >
               {meta.navAbout || "About"}
             </Link>
