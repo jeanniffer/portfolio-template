@@ -34,7 +34,7 @@ export default function WorkHome({ activeTypes }: { activeTypes: WorkType[] }) {
           scroll, matching the same fix on the case study page. */}
       <div aria-hidden className="pointer-events-none fixed inset-x-0 top-0 z-30 h-10 bg-[#fdfbf5]" />
 
-      <div className="relative z-10 mx-auto flex max-w-[1800px] flex-col gap-10 px-6 py-10 md:px-[90px]">
+      <div className="relative z-10 mx-auto flex max-w-[1800px] flex-col gap-10 px-6 pb-10 pt-4 sm:pt-6 md:px-[90px] md:pt-10">
         <WorkHeader meta={meta} />
         <WorkGallery
           items={items}
