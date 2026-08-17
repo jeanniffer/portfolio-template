@@ -113,16 +113,16 @@ export default function WorkFilterSidebar({
         initial={{ opacity: 0, y: 12 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
-        className="flex w-full max-w-[300px] flex-col items-start"
+        className="flex w-full flex-col items-start xl:max-w-[300px]"
       >
-        <p className="font-archivo w-full text-[44px] font-medium leading-none tracking-[-1.44px] text-[#1a1a1a] sm:text-[56px] md:text-[60px] lg:text-[64px] xl:text-[72px]">
-          {titleA}
-          <br />
+        <p className="font-archivo w-full whitespace-normal text-[44px] font-medium leading-none tracking-[-1.44px] text-[#1a1a1a] sm:text-[56px] md:text-[60px] lg:whitespace-nowrap lg:text-[64px] xl:whitespace-normal xl:text-[72px]">
+          {titleA}{" "}
+          <br className="lg:hidden xl:block" />
           {titleB}
         </p>
       </motion.div>
 
-      <div className="flex w-full flex-row flex-wrap items-start gap-x-10 gap-y-6 xl:max-w-[300px] xl:flex-col xl:gap-6">
+      <div className="flex w-full flex-row flex-wrap items-start gap-x-10 gap-y-6 lg:w-1/2 xl:w-auto xl:max-w-[300px] xl:flex-col xl:gap-6">
         <motion.div
           initial={{ opacity: 0, y: 12 }}
           animate={{ opacity: 1, y: 0 }}
