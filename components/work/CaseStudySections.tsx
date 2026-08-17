@@ -12,7 +12,13 @@ import {
 } from "framer-motion";
 import BeforeAfterSlider from "./BeforeAfterSlider";
 
-type Section = { title: string; description: string; image: string; beforeImage?: string };
+type Section = {
+  title: string;
+  description: string;
+  image: string;
+  beforeImage?: string;
+  alt?: string;
+};
 
 function SectionLayer({
   section,
@@ -85,11 +91,15 @@ function SectionLayer({
           className="relative h-full w-full max-w-[960px] overflow-hidden rounded-2xl"
         >
           {section.beforeImage ? (
-            <BeforeAfterSlider before={section.beforeImage} after={section.image} alt={section.title} />
+            <BeforeAfterSlider
+              before={section.beforeImage}
+              after={section.image}
+              alt={section.alt || section.description}
+            />
           ) : (
             <Image
               src={section.image}
-              alt={section.title}
+              alt={section.alt || section.description}
               fill
               sizes="(min-width: 768px) 60vw, 90vw"
               className="rounded-2xl object-contain"
@@ -231,11 +241,15 @@ export default function CaseStudySections({ sections }: { sections: Section[] })
             </div>
             <div className="relative h-[380px] w-full overflow-hidden rounded-2xl sm:h-[440px] md:h-[520px]">
               {section.beforeImage ? (
-                <BeforeAfterSlider before={section.beforeImage} after={section.image} alt={section.title} />
+                <BeforeAfterSlider
+                  before={section.beforeImage}
+                  after={section.image}
+                  alt={section.alt || section.description}
+                />
               ) : (
                 <Image
                   src={section.image}
-                  alt={section.title}
+                  alt={section.alt || section.description}
                   fill
                   sizes="90vw"
                   className="rounded-2xl object-contain"

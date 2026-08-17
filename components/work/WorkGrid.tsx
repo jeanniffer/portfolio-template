@@ -91,7 +91,7 @@ export default function WorkGrid({
               <div className="relative h-[340px] w-full shrink-0 overflow-hidden rounded-2xl bg-[#d9d9d9]">
                 <Image
                   src={item.cover}
-                  alt={item.client}
+                  alt={`${item.client} — ${item.tags[0] || "project"} cover`}
                   fill
                   sizes="(min-width: 640px) 40vw, 90vw"
                   className="object-cover object-bottom transition duration-500 ease-out group-hover:scale-[1.03]"
@@ -182,7 +182,7 @@ export default function WorkGrid({
 
       <Lightbox
         src={lightboxItem?.cover ?? null}
-        alt={lightboxItem?.client ?? ""}
+        alt={lightboxItem ? `${lightboxItem.client} — ${lightboxItem.tags[0] || "project"}` : ""}
         onClose={() => setLightboxItem(null)}
       />
     </div>

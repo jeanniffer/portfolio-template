@@ -73,6 +73,10 @@ export type WorkItem = {
     description: string;
     image: string;
     beforeImage?: string;
+    // Specific, image-only alt text (distinct from the section's title/
+    // body copy) -- falls back to `description` when not set, so old
+    // content keeps working without every file needing an update.
+    alt?: string;
   }[];
 };
 
@@ -95,11 +99,12 @@ function readWorkFile(f: string): WorkItem {
     services: data.services,
     liveUrl: data.liveUrl,
     sections: data.sections?.map(
-      (s: { title: string; description: string; image: string; beforeImage?: string }) => ({
+      (s: { title: string; description: string; image: string; beforeImage?: string; alt?: string }) => ({
         title: s.title,
         description: s.description,
         image: s.image,
         beforeImage: s.beforeImage,
+        alt: s.alt,
       })
     ),
   };

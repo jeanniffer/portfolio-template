@@ -47,7 +47,7 @@ function OtherProjectCard({ item }: { item: WorkItem }) {
       <div className="relative h-[340px] w-full overflow-hidden rounded-2xl bg-[#d9d9d9]">
         <Image
           src={item.cover}
-          alt={item.client}
+          alt={`${item.client} — ${item.tags[0] || "project"} cover`}
           fill
           sizes="(min-width: 768px) 30vw, 90vw"
           className="object-cover object-bottom transition duration-500 group-hover:scale-[1.03]"
