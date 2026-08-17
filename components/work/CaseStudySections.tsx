@@ -1,8 +1,15 @@
 "use client";
 
-import { useRef } from "react";
+import { useRef, useState } from "react";
 import Image from "next/image";
-import { motion, useScroll, useSpring, useTransform, type MotionValue } from "framer-motion";
+import {
+  motion,
+  useMotionValueEvent,
+  useScroll,
+  useSpring,
+  useTransform,
+  type MotionValue,
+} from "framer-motion";
 import BeforeAfterSlider from "./BeforeAfterSlider";
 
 type Section = { title: string; description: string; image: string; beforeImage?: string };
@@ -95,6 +102,54 @@ function SectionLayer({
 }
 
 /**
+ * Right-side, vertically-centered dots -- one per section -- so the
+ * pinned crossfade reads as "you're in a sequence, N of total" instead
+ * of an ambiguous scroll state. The active dot fills in as its section
+ * peaks, and every dot is clickable to jump straight to that section.
+ */
+function NavDots({
+  total,
+  progress,
+  onJump,
+}: {
+  total: number;
+  progress: MotionValue<number>;
+  onJump: (index: number) => void;
+}) {
+  const [active, setActive] = useState(0);
+
+  useMotionValueEvent(progress, "change", (v) => {
+    const gap = total > 1 ? 1 / (total - 1) : 1;
+    setActive(Math.min(total - 1, Math.max(0, Math.round(v / gap))));
+  });
+
+  if (total <= 1) return null;
+
+  return (
+    <div className="pointer-events-auto absolute right-3 top-1/2 z-20 hidden -translate-y-1/2 flex-col items-center gap-4 md:flex">
+      {Array.from({ length: total }).map((_, i) => (
+        <button
+          key={i}
+          type="button"
+          aria-label={`Go to section ${i + 1} of ${total}`}
+          onClick={() => onJump(i)}
+          className="flex h-4 w-4 items-center justify-center"
+        >
+          <motion.span
+            animate={{
+              scale: active === i ? 1 : 0.6,
+              backgroundColor: active === i ? "#1a1a1a" : "#6e6e6d",
+            }}
+            transition={{ duration: 0.2 }}
+            className="h-2 w-2 rounded-full"
+          />
+        </button>
+      ))}
+    </div>
+  );
+}
+
+/**
  * Full-height stage (fills the rest of the viewport below the pinned
  * title block) that's pinned in place for a *short* scroll range while
  * its content crossfades from one section to the next. Driven by
@@ -119,6 +174,23 @@ export default function CaseStudySections({ sections }: { sections: Section[] })
     damping: 24,
     mass: 0.6,
   });
+
+  const total = sections.length;
+
+  /** Scrolls the window so the container's scroll-linked progress lands
+   * exactly at section `index`'s peak point, using the same fraction
+   * math the crossfade itself uses. */
+  function jumpToSection(index: number) {
+    const el = ref.current;
+    if (!el) return;
+    const gap = total > 1 ? 1 / (total - 1) : 1;
+    const point = index * gap;
+    const rect = el.getBoundingClientRect();
+    const scrollableDistance = rect.height - window.innerHeight;
+    const containerTop = window.scrollY + rect.top;
+    const targetY = containerTop + point * scrollableDistance;
+    window.scrollTo({ top: targetY, behavior: "smooth" });
+  }
 
   return (
     <div
@@ -148,6 +220,7 @@ export default function CaseStudySections({ sections }: { sections: Section[] })
             scrollYProgress={smoothProgress}
           />
         ))}
+        <NavDots total={total} progress={smoothProgress} onJump={jumpToSection} />
       </div>
     </div>
   );
