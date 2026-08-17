@@ -1,6 +1,6 @@
 ---
 client: "digitalundivided"
-cover: "/images/case-studies/digitalundivided/01.jpg"
+cover: "/images/case-studies/digitalundivided/digitalundivided_cover_social-carousel-maggie-walker-legacy.jpg"
 year: "2021 - 2023"
 types:
   - "Mission-driven"
@@ -26,11 +26,11 @@ sections:
     # section -- e.g. beforeImage: "/images/case-studies/digitalundivided/old-website.jpg"
   - title: "Research Reports"
     description: "A consistent editorial system for 7 research reports -- covers, data visualization, and layout templates the research team could reuse without needing design support each time."
-    image: "/images/case-studies/digitalundivided/02.jpg"
+    image: "/images/case-studies/digitalundivided/digitalundivided_research-report_project-diane.jpg"
   - title: "Events"
     description: "Visual identity for 15+ virtual events and 8 in-person gatherings, from step-and-repeats to on-screen graphics -- built to be assembled quickly under real event-week deadlines."
-    image: "/images/case-studies/digitalundivided/03.jpg"
+    image: "/images/case-studies/digitalundivided/digitalundivided_social-content_national-black-business-month.jpg"
   - title: "Everyday Content"
     description: "Templates for weekly newsletters and daily social media, so the team could produce consistent, on-brand content without a designer in the loop every time."
-    image: "/images/case-studies/digitalundivided/04.jpg"
+    image: "/images/case-studies/digitalundivided/digitalundivided_report-cover_industry-insights-2022.jpg"
 ---
