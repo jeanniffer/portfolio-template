@@ -14,7 +14,7 @@ function PillGroup<T extends string>({
   onToggle: (value: T) => void;
 }) {
   return (
-    <div className="flex w-[300px] flex-wrap items-start gap-3">
+    <div className="flex w-full max-w-[300px] flex-wrap items-start gap-3">
       {options.map(({ value, label }) => {
         const isActive = active.includes(value);
         return (
@@ -108,14 +108,14 @@ export default function WorkFilterSidebar({
   const [tagsOpen, setTagsOpen] = useState(false);
 
   return (
-    <aside className="sticky top-10 flex h-fit shrink-0 flex-col items-start gap-6 self-start py-10">
+    <aside className="flex w-full shrink-0 flex-col items-start gap-6 self-start py-10 md:sticky md:top-10 md:h-fit md:w-[300px]">
       <motion.div
         initial={{ opacity: 0, y: 12 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
-        className="flex w-[300px] flex-col items-start"
+        className="flex w-full max-w-[300px] flex-col items-start"
       >
-        <p className="font-archivo w-full text-[72px] font-medium leading-none tracking-[-1.44px] text-[#1a1a1a]">
+        <p className="font-archivo w-full text-[44px] font-medium leading-none tracking-[-1.44px] text-[#1a1a1a] sm:text-[56px] md:text-[72px]">
           {titleA}
           <br />
           {titleB}
@@ -126,7 +126,7 @@ export default function WorkFilterSidebar({
         initial={{ opacity: 0, y: 12 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.5, delay: 0.1, ease: [0.22, 1, 0.36, 1] }}
-        className="flex w-[300px] flex-col items-start gap-3"
+        className="flex w-full max-w-[300px] flex-col items-start gap-3"
       >
         <DropdownHeader label="Niche" open={nicheOpen} onToggle={() => setNicheOpen((v) => !v)} />
         <AnimatePresence initial={false}>
@@ -137,7 +137,7 @@ export default function WorkFilterSidebar({
               animate={{ opacity: 1, height: "auto" }}
               exit={{ opacity: 0, height: 0 }}
               transition={{ duration: 0.25, ease: [0.22, 1, 0.36, 1] }}
-              className="w-[300px] overflow-hidden"
+              className="w-full max-w-[300px] overflow-hidden"
             >
               <PillGroup
                 options={allNiches.map((n) => ({ value: n, label: n }))}
@@ -154,7 +154,7 @@ export default function WorkFilterSidebar({
           initial={{ opacity: 0, y: 12 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5, delay: 0.15, ease: [0.22, 1, 0.36, 1] }}
-          className="flex w-[300px] flex-col items-start gap-3"
+          className="flex w-full max-w-[300px] flex-col items-start gap-3"
         >
           <DropdownHeader label="Tags" open={tagsOpen} onToggle={() => setTagsOpen((v) => !v)} />
           <AnimatePresence initial={false}>
@@ -165,7 +165,7 @@ export default function WorkFilterSidebar({
                 animate={{ opacity: 1, height: "auto" }}
                 exit={{ opacity: 0, height: 0 }}
                 transition={{ duration: 0.25, ease: [0.22, 1, 0.36, 1] }}
-                className="w-[300px] overflow-hidden"
+                className="w-full max-w-[300px] overflow-hidden"
               >
                 <PillGroup
                   options={allTags.map((t) => ({ value: t, label: t }))}
