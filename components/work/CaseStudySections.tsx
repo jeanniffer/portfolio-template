@@ -43,10 +43,14 @@ function SectionLayer({
   const outputRange = isFirst ? [1, 1, 0] : isLast ? [0, 1, 1] : [0, 1, 1, 0];
 
   const opacity = useTransform(scrollYProgress, inputRange, outputRange);
-  const textY = useTransform(
+  // Whole layer (text + image together) rides up out of view and the
+  // next one rides up into place from below -- a real "scroll" of 20%
+  // of the stage's own height, not just a small nudge, so it reads as
+  // content passing through rather than a plain crossfade.
+  const layerY = useTransform(
     scrollYProgress,
     inputRange,
-    isFirst ? [0, 0, -18] : isLast ? [18, 0, 0] : [18, 0, 0, -18]
+    isFirst ? ["0%", "0%", "-20%"] : isLast ? ["20%", "0%", "0%"] : ["20%", "0%", "0%", "-20%"]
   );
   const imageScale = useTransform(
     scrollYProgress,
@@ -56,20 +60,17 @@ function SectionLayer({
 
   return (
     <motion.div
-      style={{ opacity }}
+      style={{ opacity, y: layerY }}
       className="absolute inset-0 flex h-full w-full flex-col items-center justify-center gap-10 bg-[#fdfbf5] md:flex-row"
     >
-      <motion.div
-        style={{ y: textY }}
-        className="flex w-full flex-col items-center justify-center gap-4 self-stretch md:flex-[3] md:items-start"
-      >
+      <div className="flex w-full flex-col items-center justify-center gap-4 self-stretch md:flex-[3] md:items-start">
         <p className="font-archivo text-5xl font-medium tracking-[-0.72px] text-[#1a1a1a] md:text-6xl">
           {section.title}
         </p>
         <p className="font-archivo max-w-sm text-base font-light leading-relaxed tracking-[-0.24px] text-[#6e6e6d] md:text-lg">
           {section.description}
         </p>
-      </motion.div>
+      </div>
       <div className="hidden w-px shrink-0 self-stretch bg-[#6e6e6d] md:block" />
       <div className="flex h-full w-full items-center justify-center self-stretch md:flex-[7]">
         <motion.div
