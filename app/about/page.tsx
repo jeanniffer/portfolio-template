@@ -28,7 +28,7 @@ export default function AboutPage() {
               alt={meta.name}
               fill
               sizes="(min-width: 768px) 320px, 220px"
-              className="object-cover"
+              className="object-cover grayscale"
             />
           </div>
           <div className="flex max-w-md flex-col items-center gap-4 md:items-start">

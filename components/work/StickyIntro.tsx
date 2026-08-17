@@ -36,7 +36,7 @@ export default function StickyIntro({ children }: { children: React.ReactNode })
   return (
     <div
       ref={ref}
-      className="sticky top-10 z-20 flex w-full flex-col items-start gap-10 border-b border-[#6e6e6d] bg-[#fdfbf5] pb-10 md:flex-row md:items-center"
+      className="top-10 z-20 flex w-full flex-col items-start gap-10 border-b border-[#6e6e6d] bg-[#fdfbf5] pb-10 md:sticky md:flex-row md:items-center"
     >
       {children}
     </div>

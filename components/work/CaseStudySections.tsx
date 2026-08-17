@@ -215,35 +215,68 @@ export default function CaseStudySections({ sections }: { sections: Section[] })
   }, [total]);
 
   return (
-    <div
-      ref={ref}
-      className="relative w-full"
-      style={{ height: `${Math.max(sections.length - 1, 1) * 40 + 45}vh` }}
-    >
-      <div
-        className="sticky w-full overflow-hidden"
-        style={{
-          // StickyIntro sticks at top-10 (40px) + its own height, then
-          // gap-10 (40px) before this stage starts -- top offset is
-          // intro-h + 80px. The *symmetric* gap we actually want to
-          // mirror at the bottom is just that last 40px (border line ->
-          // image), not the intro's own 40px top offset too -- so only
-          // subtract 40px extra at the bottom, not 80.
-          top: "calc(var(--case-study-intro-h, 220px) + 80px)",
-          height: "calc(100vh - var(--case-study-intro-h, 220px) - 120px)",
-        }}
-      >
+    <>
+      {/* Below md: plain, normally-scrolling stack -- title/description
+          above each image, no pinning or scroll-jacked crossfade. */}
+      <div className="flex w-full flex-col gap-16 md:hidden">
         {sections.map((section, i) => (
-          <SectionLayer
-            key={i}
-            section={section}
-            index={i}
-            total={sections.length}
-            scrollYProgress={smoothProgress}
-          />
+          <div key={i} className="flex w-full flex-col items-start gap-4">
+            <div className="flex w-full flex-col items-start gap-3">
+              <p className="font-archivo text-4xl font-medium tracking-[-0.72px] text-[#1a1a1a]">
+                {section.title}
+              </p>
+              <p className="font-archivo max-w-sm text-base font-light leading-relaxed tracking-[-0.24px] text-[#6e6e6d]">
+                {section.description}
+              </p>
+            </div>
+            <div className="relative h-[280px] w-full overflow-hidden rounded-2xl">
+              {section.beforeImage ? (
+                <BeforeAfterSlider before={section.beforeImage} after={section.image} alt={section.title} />
+              ) : (
+                <Image
+                  src={section.image}
+                  alt={section.title}
+                  fill
+                  sizes="90vw"
+                  className="rounded-2xl object-contain"
+                />
+              )}
+            </div>
+          </div>
         ))}
-        <NavDots total={total} active={active} onJump={jumpToSection} />
       </div>
-    </div>
+
+      {/* md and up: pinned scroll-driven crossfade. */}
+      <div
+        ref={ref}
+        className="relative hidden w-full md:block"
+        style={{ height: `${Math.max(sections.length - 1, 1) * 40 + 45}vh` }}
+      >
+        <div
+          className="sticky w-full overflow-hidden"
+          style={{
+            // StickyIntro sticks at top-10 (40px) + its own height, then
+            // gap-10 (40px) before this stage starts -- top offset is
+            // intro-h + 80px. The *symmetric* gap we actually want to
+            // mirror at the bottom is just that last 40px (border line ->
+            // image), not the intro's own 40px top offset too -- so only
+            // subtract 40px extra at the bottom, not 80.
+            top: "calc(var(--case-study-intro-h, 220px) + 80px)",
+            height: "calc(100vh - var(--case-study-intro-h, 220px) - 120px)",
+          }}
+        >
+          {sections.map((section, i) => (
+            <SectionLayer
+              key={i}
+              section={section}
+              index={i}
+              total={sections.length}
+              scrollYProgress={smoothProgress}
+            />
+          ))}
+          <NavDots total={total} active={active} onJump={jumpToSection} />
+        </div>
+      </div>
+    </>
   );
 }
