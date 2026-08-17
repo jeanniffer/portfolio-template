@@ -14,7 +14,7 @@ function PillGroup<T extends string>({
   onToggle: (value: T) => void;
 }) {
   return (
-    <div className="flex w-full max-w-[300px] flex-wrap items-start gap-3">
+    <div className="flex w-max max-w-[300px] flex-wrap items-start gap-3">
       {options.map(({ value, label }) => {
         const isActive = active.includes(value);
         return (
@@ -122,61 +122,63 @@ export default function WorkFilterSidebar({
         </p>
       </motion.div>
 
-      <motion.div
-        initial={{ opacity: 0, y: 12 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.5, delay: 0.1, ease: [0.22, 1, 0.36, 1] }}
-        className="flex w-full max-w-[300px] flex-col items-start gap-3"
-      >
-        <DropdownHeader label="Niche" open={nicheOpen} onToggle={() => setNicheOpen((v) => !v)} />
-        <AnimatePresence initial={false}>
-          {nicheOpen && (
-            <motion.div
-              key="niche-list"
-              initial={{ opacity: 0, height: 0 }}
-              animate={{ opacity: 1, height: "auto" }}
-              exit={{ opacity: 0, height: 0 }}
-              transition={{ duration: 0.25, ease: [0.22, 1, 0.36, 1] }}
-              className="w-full max-w-[300px] overflow-hidden"
-            >
-              <PillGroup
-                options={allNiches.map((n) => ({ value: n, label: n }))}
-                active={activeTypes}
-                onToggle={onToggleType}
-              />
-            </motion.div>
-          )}
-        </AnimatePresence>
-      </motion.div>
-
-      {allTags.length > 0 && (
+      <div className="flex w-full max-w-[300px] flex-row flex-wrap items-start gap-x-10 gap-y-6 xl:max-w-none xl:flex-col xl:gap-6">
         <motion.div
           initial={{ opacity: 0, y: 12 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5, delay: 0.15, ease: [0.22, 1, 0.36, 1] }}
-          className="flex w-full max-w-[300px] flex-col items-start gap-3"
+          transition={{ duration: 0.5, delay: 0.1, ease: [0.22, 1, 0.36, 1] }}
+          className="flex w-full max-w-[300px] flex-col items-start gap-3 xl:w-auto"
         >
-          <DropdownHeader label="Tags" open={tagsOpen} onToggle={() => setTagsOpen((v) => !v)} />
+          <DropdownHeader label="Niche" open={nicheOpen} onToggle={() => setNicheOpen((v) => !v)} />
           <AnimatePresence initial={false}>
-            {tagsOpen && (
+            {nicheOpen && (
               <motion.div
-                key="tags-list"
+                key="niche-list"
                 initial={{ opacity: 0, height: 0 }}
                 animate={{ opacity: 1, height: "auto" }}
                 exit={{ opacity: 0, height: 0 }}
                 transition={{ duration: 0.25, ease: [0.22, 1, 0.36, 1] }}
-                className="w-full max-w-[300px] overflow-hidden"
+                className="w-full max-w-[300px] overflow-hidden xl:w-auto"
               >
                 <PillGroup
-                  options={allTags.map((t) => ({ value: t, label: t }))}
-                  active={activeTags}
-                  onToggle={onToggleTag}
+                  options={allNiches.map((n) => ({ value: n, label: n }))}
+                  active={activeTypes}
+                  onToggle={onToggleType}
                 />
               </motion.div>
             )}
           </AnimatePresence>
         </motion.div>
-      )}
+
+        {allTags.length > 0 && (
+          <motion.div
+            initial={{ opacity: 0, y: 12 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5, delay: 0.15, ease: [0.22, 1, 0.36, 1] }}
+            className="flex w-full max-w-[300px] flex-col items-start gap-3 xl:w-auto"
+          >
+            <DropdownHeader label="Tags" open={tagsOpen} onToggle={() => setTagsOpen((v) => !v)} />
+            <AnimatePresence initial={false}>
+              {tagsOpen && (
+                <motion.div
+                  key="tags-list"
+                  initial={{ opacity: 0, height: 0 }}
+                  animate={{ opacity: 1, height: "auto" }}
+                  exit={{ opacity: 0, height: 0 }}
+                  transition={{ duration: 0.25, ease: [0.22, 1, 0.36, 1] }}
+                  className="w-full max-w-[300px] overflow-hidden xl:w-auto"
+                >
+                  <PillGroup
+                    options={allTags.map((t) => ({ value: t, label: t }))}
+                    active={activeTags}
+                    onToggle={onToggleTag}
+                  />
+                </motion.div>
+              )}
+            </AnimatePresence>
+          </motion.div>
+        )}
+      </div>
     </aside>
   );
 }
