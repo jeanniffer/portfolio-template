@@ -119,7 +119,7 @@ function NavDots({
   if (total <= 1) return null;
 
   return (
-    <div className="pointer-events-auto absolute right-3 top-1/2 z-20 hidden -translate-y-1/2 flex-col items-center gap-4 md:flex">
+    <div className="pointer-events-auto absolute right-3 top-1/2 z-20 hidden -translate-y-1/2 flex-col items-center gap-2 md:flex">
       {Array.from({ length: total }).map((_, i) => (
         <button
           key={i}
