@@ -122,12 +122,12 @@ export default function WorkFilterSidebar({
         </p>
       </motion.div>
 
-      <div className="flex w-full max-w-[300px] flex-row flex-wrap items-start gap-x-10 gap-y-6 xl:max-w-none xl:flex-col xl:gap-6">
+      <div className="flex w-full flex-row flex-wrap items-start gap-x-10 gap-y-6 xl:max-w-[300px] xl:flex-col xl:gap-6">
         <motion.div
           initial={{ opacity: 0, y: 12 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5, delay: 0.1, ease: [0.22, 1, 0.36, 1] }}
-          className="flex w-full max-w-[300px] flex-col items-start gap-3 xl:w-auto"
+          className="flex w-auto flex-col items-start gap-3"
         >
           <DropdownHeader label="Niche" open={nicheOpen} onToggle={() => setNicheOpen((v) => !v)} />
           <AnimatePresence initial={false}>
@@ -138,7 +138,7 @@ export default function WorkFilterSidebar({
                 animate={{ opacity: 1, height: "auto" }}
                 exit={{ opacity: 0, height: 0 }}
                 transition={{ duration: 0.25, ease: [0.22, 1, 0.36, 1] }}
-                className="w-full max-w-[300px] overflow-hidden xl:w-auto"
+                className="w-max overflow-hidden"
               >
                 <PillGroup
                   options={allNiches.map((n) => ({ value: n, label: n }))}
@@ -155,7 +155,7 @@ export default function WorkFilterSidebar({
             initial={{ opacity: 0, y: 12 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5, delay: 0.15, ease: [0.22, 1, 0.36, 1] }}
-            className="flex w-full max-w-[300px] flex-col items-start gap-3 xl:w-auto"
+            className="flex w-auto flex-col items-start gap-3"
           >
             <DropdownHeader label="Tags" open={tagsOpen} onToggle={() => setTagsOpen((v) => !v)} />
             <AnimatePresence initial={false}>
@@ -166,7 +166,7 @@ export default function WorkFilterSidebar({
                   animate={{ opacity: 1, height: "auto" }}
                   exit={{ opacity: 0, height: 0 }}
                   transition={{ duration: 0.25, ease: [0.22, 1, 0.36, 1] }}
-                  className="w-full max-w-[300px] overflow-hidden xl:w-auto"
+                  className="w-max overflow-hidden"
                 >
                   <PillGroup
                     options={allTags.map((t) => ({ value: t, label: t }))}
@@ -179,6 +179,11 @@ export default function WorkFilterSidebar({
           </motion.div>
         )}
       </div>
+
+      {/* Only needed in the stacked layout (<xl) -- separates the
+          filters from the sort/grid area below, since the vertical
+          divider between sidebar and grid only exists at xl+. */}
+      <div className="w-full border-t border-[#6e6e6d] xl:hidden" />
     </aside>
   );
 }
