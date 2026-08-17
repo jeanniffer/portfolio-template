@@ -108,7 +108,7 @@ export default function WorkGrid({
                 {item.tags.map((t) => (
                   <p key={t} className="whitespace-nowrap">[{t.toUpperCase()}]</p>
                 ))}
-                <p className="ml-auto whitespace-nowrap">[{item.year}]</p>
+                <p className="whitespace-nowrap">[{item.year}]</p>
               </div>
               <p className="font-archivo mt-0 w-full text-[32px] font-medium tracking-[-1.28px] text-[#1a1a1a] transition-opacity duration-300 group-hover:opacity-70">
                 {item.client}
