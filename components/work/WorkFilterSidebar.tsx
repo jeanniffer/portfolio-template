@@ -122,12 +122,12 @@ export default function WorkFilterSidebar({
         </p>
       </motion.div>
 
-      <div className="flex w-full flex-row flex-wrap items-start gap-x-10 gap-y-6 lg:w-1/2 xl:w-auto xl:max-w-[300px] xl:flex-col xl:gap-6">
+      <div className="flex w-full flex-row flex-wrap items-start gap-x-10 gap-y-6 lg:grid lg:w-full lg:grid-cols-2 lg:gap-x-6 xl:flex xl:w-auto xl:max-w-[300px] xl:flex-col xl:gap-6">
         <motion.div
           initial={{ opacity: 0, y: 12 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5, delay: 0.1, ease: [0.22, 1, 0.36, 1] }}
-          className="flex w-auto flex-col items-start gap-3"
+          className="flex w-auto flex-col items-start gap-3 lg:w-full xl:w-auto"
         >
           <DropdownHeader label="Niche" open={nicheOpen} onToggle={() => setNicheOpen((v) => !v)} />
           <AnimatePresence initial={false}>
@@ -155,7 +155,7 @@ export default function WorkFilterSidebar({
             initial={{ opacity: 0, y: 12 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5, delay: 0.15, ease: [0.22, 1, 0.36, 1] }}
-            className="flex w-auto flex-col items-start gap-3"
+            className="flex w-auto flex-col items-start gap-3 lg:w-full xl:w-auto"
           >
             <DropdownHeader label="Tags" open={tagsOpen} onToggle={() => setTagsOpen((v) => !v)} />
             <AnimatePresence initial={false}>
