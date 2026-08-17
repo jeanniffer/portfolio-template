@@ -31,10 +31,27 @@ const manrope = Manrope({
 
 export function generateMetadata(): Metadata {
   const meta = getSiteMeta();
+  const title = `${meta.name} — ${meta.role}`;
+  const description = `${meta.heroTitleA}${meta.heroTitleB}`;
+
   return {
     metadataBase: new URL("https://www.jeanniffer.com"),
-    title: `${meta.name} — ${meta.role}`,
-    description: `${meta.heroTitleA}${meta.heroTitleB}`,
+    title,
+    description,
+    // Site-wide fallback -- individual pages (case studies, About) set
+    // their own openGraph/twitter images and override this.
+    openGraph: {
+      title,
+      description,
+      images: [{ url: "/images/profile-photo.png" }],
+      type: "website",
+    },
+    twitter: {
+      card: "summary_large_image",
+      title,
+      description,
+      images: ["/images/profile-photo.png"],
+    },
   };
 }
 
