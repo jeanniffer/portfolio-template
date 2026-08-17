@@ -19,4 +19,5 @@ socials:
 eyebrow: ""
 titleA: "Selected"
 titleB: "Works"
+aboutBio: "This page is coming soon. Check back for more about who I am and how I work."
 ---

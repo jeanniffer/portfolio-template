@@ -8,6 +8,7 @@ export default function AboutPage() {
     navWork?: string;
     navAbout?: string;
     ctaLabel?: string;
+    aboutBio?: string;
   };
 
   return (
@@ -36,11 +37,12 @@ export default function AboutPage() {
               About
             </h1>
             <p className="font-archivo text-base font-light leading-relaxed tracking-[-0.24px] text-[#6e6e6d] md:text-lg">
-              This page is coming soon. Check back for more about who I am and how I work.
+              {meta.aboutBio || "This page is coming soon. Check back for more about who I am and how I work."}
             </p>
           </div>
         </main>
 
+        <div className="w-full border-t border-[#1a1a1a]" />
         <WorkFooter meta={meta} />
       </div>
     </div>
