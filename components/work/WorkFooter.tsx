@@ -22,7 +22,7 @@ export default function WorkFooter({ meta }: { meta: SiteMeta }) {
         <span />
       )}
       {meta.socials?.length ? (
-        <div className="flex items-center gap-6">
+        <div className="flex max-w-[200px] flex-wrap items-center gap-x-6 gap-y-2 min-[375px]:max-w-none min-[375px]:flex-nowrap">
           {meta.socials
             .filter((s) => s.url && s.url !== "#")
             .map((s) => (
