@@ -108,7 +108,7 @@ export default function WorkFilterSidebar({
   const [tagsOpen, setTagsOpen] = useState(false);
 
   return (
-    <aside className="flex w-full shrink-0 flex-col items-start gap-6 self-start py-10 md:sticky md:top-10 md:h-fit md:w-[300px]">
+    <aside className="flex w-full shrink-0 flex-col items-start gap-6 self-start py-10 xl:sticky xl:top-10 xl:h-fit xl:w-[300px]">
       <motion.div
         initial={{ opacity: 0, y: 12 }}
         animate={{ opacity: 1, y: 0 }}

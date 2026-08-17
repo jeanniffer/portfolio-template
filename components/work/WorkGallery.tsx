@@ -61,7 +61,7 @@ export default function WorkGallery({
   }, [items, activeTypes, activeTags, sortMode]);
 
   return (
-    <main className="flex min-h-screen flex-col gap-10 border-b border-[#1a1a1a] pb-10 md:flex-row md:items-stretch md:gap-6 lg:gap-10">
+    <main className="flex min-h-screen flex-col gap-10 border-b border-[#1a1a1a] pb-10 xl:flex-row xl:items-stretch xl:gap-10">
       <WorkFilterSidebar
         allNiches={allNiches}
         activeTypes={activeTypes}
@@ -72,7 +72,7 @@ export default function WorkGallery({
         titleA={titleA}
         titleB={titleB}
       />
-      <div className="hidden w-px shrink-0 bg-[#1a1a1a] md:block" />
+      <div className="hidden w-px shrink-0 bg-[#1a1a1a] xl:block" />
       <WorkGrid items={filtered} sortMode={sortMode} onSortModeChange={setSortMode} />
     </main>
   );
