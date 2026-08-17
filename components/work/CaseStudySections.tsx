@@ -1,6 +1,6 @@
 "use client";
 
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import Image from "next/image";
 import {
   motion,
@@ -109,20 +109,13 @@ function SectionLayer({
  */
 function NavDots({
   total,
-  progress,
+  active,
   onJump,
 }: {
   total: number;
-  progress: MotionValue<number>;
+  active: number;
   onJump: (index: number) => void;
 }) {
-  const [active, setActive] = useState(0);
-
-  useMotionValueEvent(progress, "change", (v) => {
-    const gap = total > 1 ? 1 / (total - 1) : 1;
-    setActive(Math.min(total - 1, Math.max(0, Math.round(v / gap))));
-  });
-
   if (total <= 1) return null;
 
   return (
@@ -176,6 +169,15 @@ export default function CaseStudySections({ sections }: { sections: Section[] })
   });
 
   const total = sections.length;
+  const [active, setActive] = useState(0);
+  const activeRef = useRef(0);
+
+  useMotionValueEvent(smoothProgress, "change", (v) => {
+    const gap = total > 1 ? 1 / (total - 1) : 1;
+    const next = Math.min(total - 1, Math.max(0, Math.round(v / gap)));
+    activeRef.current = next;
+    setActive(next);
+  });
 
   /** Scrolls the window so the container's scroll-linked progress lands
    * exactly at section `index`'s peak point, using the same fraction
@@ -183,14 +185,34 @@ export default function CaseStudySections({ sections }: { sections: Section[] })
   function jumpToSection(index: number) {
     const el = ref.current;
     if (!el) return;
+    const clamped = Math.min(total - 1, Math.max(0, index));
     const gap = total > 1 ? 1 / (total - 1) : 1;
-    const point = index * gap;
+    const point = clamped * gap;
     const rect = el.getBoundingClientRect();
     const scrollableDistance = rect.height - window.innerHeight;
     const containerTop = window.scrollY + rect.top;
     const targetY = containerTop + point * scrollableDistance;
     window.scrollTo({ top: targetY, behavior: "smooth" });
   }
+
+  // Arrow-key navigation -- only active while the stage is roughly in
+  // view, so it doesn't hijack arrow keys used elsewhere on the page
+  // (e.g. scrolling before the case study sections are reached).
+  useEffect(() => {
+    function onKeyDown(e: KeyboardEvent) {
+      if (e.key !== "ArrowDown" && e.key !== "ArrowUp") return;
+      const el = ref.current;
+      if (!el) return;
+      const rect = el.getBoundingClientRect();
+      const inView = rect.top < window.innerHeight && rect.bottom > 0;
+      if (!inView) return;
+      e.preventDefault();
+      jumpToSection(activeRef.current + (e.key === "ArrowDown" ? 1 : -1));
+    }
+    window.addEventListener("keydown", onKeyDown);
+    return () => window.removeEventListener("keydown", onKeyDown);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [total]);
 
   return (
     <div
@@ -220,7 +242,7 @@ export default function CaseStudySections({ sections }: { sections: Section[] })
             scrollYProgress={smoothProgress}
           />
         ))}
-        <NavDots total={total} progress={smoothProgress} onJump={jumpToSection} />
+        <NavDots total={total} active={active} onJump={jumpToSection} />
       </div>
     </div>
   );
