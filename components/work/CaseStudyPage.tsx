@@ -10,7 +10,7 @@ import StickyIntro from "./StickyIntro";
 const HR = <div className="w-full border-t border-[#6e6e6d]" />;
 
 function VDivider() {
-  return <div className="hidden w-px shrink-0 self-stretch bg-[#6e6e6d] md:block" />;
+  return <div className="hidden w-px shrink-0 self-stretch bg-[#6e6e6d] lg:block" />;
 }
 
 function MetaRow({ label, value, href }: { label: string; value?: string; href?: string }) {
@@ -155,8 +155,8 @@ export default function CaseStudyPage({ item }: { item: WorkItem }) {
         )}
 
         {/* CTA */}
-        <div className="flex w-full flex-col items-center gap-10 py-10 md:flex-row">
-          <h2 className="font-archivo w-full text-5xl font-medium leading-tight tracking-[-1.44px] text-[#1a1a1a] md:w-[420px] md:shrink-0 md:text-[44px] lg:text-[48px] xl:text-[56px]">
+        <div className="flex w-full flex-col items-center gap-10 py-10 lg:flex-row">
+          <h2 className="font-archivo w-full text-5xl font-medium leading-tight tracking-[-1.44px] text-[#1a1a1a] lg:w-[420px] lg:shrink-0 lg:text-[48px] xl:text-[56px]">
             Interested in
             <br />
             collaborating?
