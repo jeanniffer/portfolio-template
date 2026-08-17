@@ -104,13 +104,11 @@ export default function WorkGrid({
                   </div>
                 )}
               </div>
-              <div className="mt-3 flex w-full flex-wrap items-center justify-between gap-x-4 gap-y-1 font-mono text-xs font-light tracking-[0.72px] text-[#1a1a1a]">
-                <div className="flex flex-wrap items-start gap-x-2 gap-y-1">
-                  {item.tags.map((t) => (
-                    <p key={t} className="whitespace-nowrap">[{t.toUpperCase()}]</p>
-                  ))}
-                </div>
-                <p className="whitespace-nowrap">[{item.year}]</p>
+              <div className="mt-3 flex w-full flex-wrap items-center gap-x-2 gap-y-1 font-mono text-xs font-light tracking-[0.72px] text-[#1a1a1a]">
+                {item.tags.map((t) => (
+                  <p key={t} className="whitespace-nowrap">[{t.toUpperCase()}]</p>
+                ))}
+                <p className="ml-auto whitespace-nowrap">[{item.year}]</p>
               </div>
               <p className="font-archivo mt-0 w-full text-[32px] font-medium tracking-[-1.28px] text-[#1a1a1a] transition-opacity duration-300 group-hover:opacity-70">
                 {item.client}
