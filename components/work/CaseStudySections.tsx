@@ -218,7 +218,7 @@ export default function CaseStudySections({ sections }: { sections: Section[] })
     <>
       {/* Below md: plain, normally-scrolling stack -- title/description
           above each image, no pinning or scroll-jacked crossfade. */}
-      <div className="flex w-full flex-col gap-16 md:hidden">
+      <div className="flex w-full flex-col gap-16 lg:hidden">
         {sections.map((section, i) => (
           <div key={i} className="flex w-full flex-col items-start gap-4">
             <div className="flex w-full flex-col items-start gap-3">
@@ -249,7 +249,7 @@ export default function CaseStudySections({ sections }: { sections: Section[] })
       {/* md and up: pinned scroll-driven crossfade. */}
       <div
         ref={ref}
-        className="relative hidden w-full md:block"
+        className="relative hidden w-full lg:block"
         style={{ height: `${Math.max(sections.length - 1, 1) * 40 + 45}vh` }}
       >
         <div
