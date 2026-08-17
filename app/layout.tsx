@@ -32,6 +32,7 @@ const manrope = Manrope({
 export function generateMetadata(): Metadata {
   const meta = getSiteMeta();
   return {
+    metadataBase: new URL("https://www.jeanniffer.com"),
     title: `${meta.name} — ${meta.role}`,
     description: `${meta.heroTitleA}${meta.heroTitleB}`,
   };

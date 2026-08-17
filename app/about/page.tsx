@@ -1,7 +1,31 @@
+import type { Metadata } from "next";
 import Image from "next/image";
 import { getSiteMeta } from "@/lib/content";
 import WorkHeader from "@/components/work/WorkHeader";
 import WorkFooter from "@/components/work/WorkFooter";
+
+export function generateMetadata(): Metadata {
+  const meta = getSiteMeta() as ReturnType<typeof getSiteMeta> & { aboutBio?: string };
+  const title = `About — ${meta.name}`;
+  const description = meta.aboutBio || `About ${meta.name}, ${meta.role}.`;
+
+  return {
+    title,
+    description,
+    openGraph: {
+      title,
+      description,
+      images: [{ url: "/images/profile-photo.png" }],
+      type: "profile",
+    },
+    twitter: {
+      card: "summary_large_image",
+      title,
+      description,
+      images: ["/images/profile-photo.png"],
+    },
+  };
+}
 
 export default function AboutPage() {
   const meta = getSiteMeta() as ReturnType<typeof getSiteMeta> & {
@@ -26,7 +50,7 @@ export default function AboutPage() {
           <div className="relative h-[220px] w-[220px] shrink-0 overflow-hidden rounded-2xl bg-[#d9d9d9] md:h-[320px] md:w-[320px]">
             <Image
               src="/images/profile-photo.png"
-              alt={meta.name}
+              alt={`Portrait of ${meta.name}`}
               fill
               sizes="(min-width: 768px) 320px, 220px"
               className="object-cover grayscale"

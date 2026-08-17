@@ -19,5 +19,7 @@ socials:
 eyebrow: ""
 titleA: "Selected"
 titleB: "Works"
-aboutBio: "This page is coming soon. Check back for more about who I am and how I work."
+aboutBio: "I'm a designer working with teams quietly changing things: nonprofits, EdTech, artists, women-led initiatives.
+
+I love where design meets purpose. Let's build something neither of us imagined alone."
 ---
