@@ -53,13 +53,13 @@ function OtherProjectCard({ item }: { item: WorkItem }) {
           className="object-cover object-bottom transition duration-500 group-hover:scale-[1.03]"
         />
       </div>
-      <div className="flex w-full items-center justify-between whitespace-nowrap font-mono text-xs font-light tracking-[0.72px] text-[#1a1a1a]">
-        <div className="flex items-start gap-2">
+      <div className="flex w-full flex-wrap items-center justify-between gap-x-4 gap-y-1 font-mono text-xs font-light tracking-[0.72px] text-[#1a1a1a]">
+        <div className="flex flex-wrap items-start gap-x-2 gap-y-1">
           {item.tags.map((t) => (
-            <p key={t}>[{t.toUpperCase()}]</p>
+            <p key={t} className="whitespace-nowrap">[{t.toUpperCase()}]</p>
           ))}
         </div>
-        <p>[{item.year}]</p>
+        <p className="whitespace-nowrap">[{item.year}]</p>
       </div>
       <p className="font-archivo w-full text-[32px] font-medium tracking-[-1.28px] text-[#1a1a1a] md:text-[48px]">
         {item.client}
