@@ -61,7 +61,7 @@ export default function WorkGallery({
   }, [items, activeTypes, activeTags, sortMode]);
 
   return (
-    <main className="flex min-h-screen flex-col gap-10 border-b border-[#1a1a1a] pb-10 xl:flex-row xl:items-stretch xl:gap-10">
+    <main className="flex min-h-screen flex-col gap-0 border-b border-[#1a1a1a] pb-10 xl:flex-row xl:items-stretch xl:gap-10">
       <WorkFilterSidebar
         allNiches={allNiches}
         activeTypes={activeTypes}
