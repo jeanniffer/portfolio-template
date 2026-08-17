@@ -115,7 +115,7 @@ export default function WorkFilterSidebar({
         transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
         className="flex w-full max-w-[300px] flex-col items-start"
       >
-        <p className="font-archivo w-full text-[44px] font-medium leading-none tracking-[-1.44px] text-[#1a1a1a] sm:text-[56px] md:text-[72px]">
+        <p className="font-archivo w-full text-[44px] font-medium leading-none tracking-[-1.44px] text-[#1a1a1a] sm:text-[56px] md:text-[60px] lg:text-[64px] xl:text-[72px]">
           {titleA}
           <br />
           {titleB}

@@ -59,7 +59,7 @@ function OtherProjectCard({ item }: { item: WorkItem }) {
         ))}
         <p className="whitespace-nowrap">[{item.year}]</p>
       </div>
-      <p className="font-archivo w-full text-[32px] font-medium tracking-[-1.28px] text-[#1a1a1a] md:text-[48px]">
+      <p className="font-archivo w-full text-[32px] font-medium tracking-[-1.28px] text-[#1a1a1a] md:text-[40px] lg:text-[44px] xl:text-[48px]">
         {item.client}
       </p>
     </Link>
@@ -100,7 +100,7 @@ export default function CaseStudyPage({ item }: { item: WorkItem }) {
             of the viewport below it (see StickyIntro). */}
         <StickyIntro>
           <div className="flex w-full flex-col items-start gap-3 md:flex-[7]">
-            <h1 className="font-archivo text-3xl font-medium tracking-[-1px] text-[#1a1a1a] md:text-[44px]">
+            <h1 className="font-archivo text-3xl font-medium tracking-[-1px] text-[#1a1a1a] md:text-[36px] lg:text-[40px] xl:text-[44px]">
               {item.client}
             </h1>
             {item.description && (
@@ -135,7 +135,7 @@ export default function CaseStudyPage({ item }: { item: WorkItem }) {
         {others.length > 0 && (
           <>
             <div className="flex w-full flex-col items-center gap-6">
-              <h2 className="font-archivo text-5xl font-medium tracking-[-1.44px] text-[#1a1a1a] md:text-[72px]">
+              <h2 className="font-archivo text-5xl font-medium tracking-[-1.44px] text-[#1a1a1a] md:text-[56px] lg:text-[64px] xl:text-[72px]">
                 Other projects
               </h2>
               <div className="grid w-full grid-cols-1 gap-x-10 gap-y-10 sm:grid-cols-2 lg:grid-cols-3">
@@ -156,7 +156,7 @@ export default function CaseStudyPage({ item }: { item: WorkItem }) {
 
         {/* CTA */}
         <div className="flex w-full flex-col items-center gap-10 py-10 md:flex-row">
-          <h2 className="font-archivo w-full text-5xl font-medium leading-tight tracking-[-1.44px] text-[#1a1a1a] md:w-[420px] md:shrink-0 md:text-[56px]">
+          <h2 className="font-archivo w-full text-5xl font-medium leading-tight tracking-[-1.44px] text-[#1a1a1a] md:w-[420px] md:shrink-0 md:text-[44px] lg:text-[48px] xl:text-[56px]">
             Interested in
             <br />
             collaborating?

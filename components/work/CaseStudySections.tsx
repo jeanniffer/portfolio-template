@@ -71,7 +71,7 @@ function SectionLayer({
       className="absolute inset-0 flex h-full w-full flex-col items-center justify-center gap-10 bg-[#fdfbf5] md:flex-row"
     >
       <div className="flex w-full flex-col items-center justify-center gap-4 self-stretch md:flex-[3] md:items-start">
-        <p className="font-archivo text-5xl font-medium tracking-[-0.72px] text-[#1a1a1a] md:text-6xl">
+        <p className="font-archivo text-5xl font-medium tracking-[-0.72px] text-[#1a1a1a] md:text-[42px] lg:text-5xl xl:text-6xl">
           {section.title}
         </p>
         <p className="font-archivo max-w-sm text-base font-light leading-relaxed tracking-[-0.24px] text-[#6e6e6d] md:text-lg">

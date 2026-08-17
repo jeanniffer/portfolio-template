@@ -14,7 +14,7 @@ export default function ComingSoonContent({ client }: { client: string }) {
       <p className="font-mono text-xs font-semibold uppercase tracking-[0.48px] text-[#818181]">
         {client}
       </p>
-      <h1 className="font-archivo text-5xl font-medium tracking-[-1.44px] text-[#1a1a1a] md:text-[72px]">
+      <h1 className="font-archivo text-5xl font-medium tracking-[-1.44px] text-[#1a1a1a] md:text-[56px] lg:text-[64px] xl:text-[72px]">
         Case study
         <br />
         coming soon.
