@@ -119,6 +119,11 @@ export default function CaseStudyPage({ item }: { item: WorkItem }) {
               value={item.liveUrl ? new URL(item.liveUrl).hostname.replace(/^www\./, "") : undefined}
               href={item.liveUrl}
             />
+            <MetaRow
+              label="GitHub"
+              value={item.githubUrl ? new URL(item.githubUrl).pathname.replace(/^\//, "") : undefined}
+              href={item.githubUrl}
+            />
           </div>
         </StickyIntro>
 

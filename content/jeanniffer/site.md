@@ -20,6 +20,6 @@ eyebrow: ""
 titleA: "Selected"
 titleB: "Works"
 aboutBio: "I'm a designer working with teams quietly changing things: nonprofits, EdTech, artists, women-led initiatives.
-
+</br>
 I love where design meets purpose. Let's build something neither of us imagined alone."
 ---

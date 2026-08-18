@@ -61,6 +61,9 @@ export type WorkItem = {
   // Optional live link to the actual shipped site -- shown as an
   // extra row next to Client/Timeline/Services when present.
   liveUrl?: string;
+  // Optional link to the project's open-source repo -- shown as its
+  // own row alongside Website when present.
+  githubUrl?: string;
   // Flexible, per-project scroll sections -- each is one image + one
   // short highlight (Design System, Before & After, whatever's relevant
   // to that specific project). Not a fixed Challenge/Solution/Result
@@ -98,6 +101,7 @@ function readWorkFile(f: string): WorkItem {
     timeline: data.timeline,
     services: data.services,
     liveUrl: data.liveUrl,
+    githubUrl: data.githubUrl,
     sections: data.sections?.map(
       (s: { title: string; description: string; image: string; beforeImage?: string; alt?: string }) => ({
         title: s.title,

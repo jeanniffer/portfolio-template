@@ -1,32 +1,26 @@
 ---
-# ---------------------------------------------------------------------
-# TEMPLATE -- duplicate this file to add a new project.
-# 1. Copy it and rename to something like "client-name.md" (no leading
-#    underscore -- files starting with "_" are ignored and won't show
-#    up on the site).
-# 2. Fill in the fields below. `sections` is optional -- leave it out
-#    entirely (or leave comingSoon: true) if you're only adding the
-#    grid thumbnail for now and haven't written the case study yet.
-# ---------------------------------------------------------------------
 client: "espacio, ¿límite?"
-cover: "/images/case-studies/client-slug/cover.png"
-year: "2026"
+cover: "/images/case-studies/espacio-limite/espacio-limite-cover-mobile-website.png"
+year: "2020"
 types:
-  - "Personal & Experimental" # mission-driven | tech-finance | edtech | personal-experimental (pick 1+)
+  - "Personal & Experimental"
 tags:
-  - "Mobile Web Design" # free-form, shows up in the Tags filter + on the grid card
-href: "/case-studies/client-slug"
+  - "Mobile Web Design"
+  - "Creative Development"
+href: "/case-studies/espacio-limite"
 kind: "case-study"
-order: 99 # controls position in "Curated" sort -- lower = earlier
-comingSoon: true # set to false once the write-up below is ready
-description: "One or two sentences summarizing the project for the case-study intro."
-timeline: "3 months"
-services: "Product & Web Design"
+order: 10
+comingSoon: true # flip to false once section images are added
+description: "espacio, ¿límite? is a virtual-physical travel through the places I can no longer inhabit — some because they're miles away, most because they're from a country that no longer exists."
+timeline: "2020"
+services: "Creative & Mobile Web Design"
+liveUrl: "" # the live mobile experience -- add the URL here
+githubUrl: "" # the open-source repo -- add the URL here
 sections:
   - title: "Challenge"
-    description: "Short, specific description of what this section's image shows."
-    image: "/images/case-studies/client-slug/01.png"
-  - title: "Second Highlight"
-    description: "Short, specific description of what this section's image shows."
-    image: "/images/case-studies/client-slug/02.png"
+    description: "Built during the pandemic, when our relationship to our devices — and the impossibility of inhabiting physical space — felt especially close. The question: how do you let someone walk through a place that no longer exists, using only the phone already in their hand?"
+    image: "/images/case-studies/espacio-limite/01.png"
+  - title: "The Experience"
+    description: "A mobile web app, made with professor Juan Camilo González for the Art & Mobile Devices lab, that uses your phone's gyroscope and pedometer to explore a virtual space. As you walk through physical space, images and poems from a country that no longer exists surface around you."
+    image: "/images/case-studies/espacio-limite/02.png"
 ---
