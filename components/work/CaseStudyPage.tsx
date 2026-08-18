@@ -121,7 +121,11 @@ export default function CaseStudyPage({ item }: { item: WorkItem }) {
             />
             <MetaRow
               label="GitHub"
-              value={item.githubUrl ? new URL(item.githubUrl).pathname.replace(/^\//, "") : undefined}
+              value={
+                item.githubUrl
+                  ? new URL(item.githubUrl).pathname.split("/").filter(Boolean).slice(0, 2).join("/")
+                  : undefined
+              }
               href={item.githubUrl}
             />
           </div>

@@ -14,8 +14,8 @@ comingSoon: true # flip to false once section images are added
 description: "espacio, ¿límite? is a virtual-physical travel through the places I can no longer inhabit — some because they're miles away, most because they're from a country that no longer exists."
 timeline: "2020"
 services: "Creative & Mobile Web Design"
-liveUrl: "" # the live mobile experience -- add the URL here
-githubUrl: "" # the open-source repo -- add the URL here
+liveUrl: "https://1cgonza.github.io/lab-moviles/espacio-limite/"
+githubUrl: "https://github.com/jeanniffer/lab-moviles/tree/main/proyectos/espacio-limite"
 sections:
   - title: "Challenge"
     description: "Built during the pandemic, when our relationship to our devices — and the impossibility of inhabiting physical space — felt especially close. The question: how do you let someone walk through a place that no longer exists, using only the phone already in their hand?"
