@@ -8,7 +8,6 @@ types:
 tags:
   - "Product Design"
   - "Landing Page Design"
-  - "Printed Assets"
 href: "/case-studies/academia-edu"
 kind: "case-study"
 order: 2
