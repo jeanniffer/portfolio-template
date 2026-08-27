@@ -18,6 +18,7 @@ import Testimonials from "@/components/Testimonials";
 import ContactBand from "@/components/ContactBand";
 import FloatingCTA from "@/components/FloatingCTA";
 import WorkHome from "@/components/work/WorkHome";
+import UXUIHome from "@/components/uxui/UXUIHome";
 
 export default function Home() {
   // New "30-second" homepage template (filterable work gallery) --
@@ -26,6 +27,14 @@ export default function Home() {
   // the existing long-scroll layout untouched below.
   if (getVariant() === "jeanniffer") {
     return <WorkHome activeTypes={[]} />;
+  }
+
+  // New cream/mono "uxui" landing template -- same long-scroll sections
+  // as the legacy variants below, restyled to match the jeanniffer.com
+  // design system (Archivo + IBM Plex Mono, cream background, dot-grid
+  // texture). Opt-in via SITE_VARIANT=uxui.
+  if (getVariant() === "uxui") {
+    return <UXUIHome />;
   }
 
   const meta = getSiteMeta();

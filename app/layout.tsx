@@ -60,12 +60,18 @@ export default function RootLayout({
 }: {
   children: React.ReactNode;
 }) {
-  const isLegacyLongScroll = getVariant() !== "jeanniffer";
+  // Only the legacy dark long-scroll variants (nonprofits/osf/social-impact)
+  // use scroll-snap slides. "jeanniffer" (gallery homepage) never did, and
+  // "uxui" opted out too -- normal scrolling instead of full-screen slides.
+  const variant = getVariant();
+  const isLegacyLongScroll = variant !== "jeanniffer" && variant !== "uxui";
 
   return (
     <html lang="en" className={isLegacyLongScroll ? "snap-page" : undefined}>
       <body
-        className={`${fraunces.variable} ${plexMono.variable} ${manrope.variable} ${archivo.variable} bg-ink font-body`}
+        className={`${fraunces.variable} ${plexMono.variable} ${manrope.variable} ${archivo.variable} bg-ink font-body ${
+          variant === "uxui" ? "cream-bg" : ""
+        }`}
       >
         {children}
       </body>

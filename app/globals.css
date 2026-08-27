@@ -48,3 +48,10 @@ body {
 .no-scrollbar::-webkit-scrollbar {
   display: none;
 }
+
+/* uxui variant: light cream ground behind the snap-scroll slides --
+   same seam-avoidance trick as the dark "ink" rule above, but for the
+   light long-scroll variant. */
+body.cream-bg {
+  background-color: #fdfbf5;
+}

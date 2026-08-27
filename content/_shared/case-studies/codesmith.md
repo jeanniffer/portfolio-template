@@ -8,8 +8,8 @@ links:
     url: "https://www.jeanniffer.com/case-studies/codesmith-website"
   - label: "Annual Report"
     url: "https://drive.google.com/file/d/1Fzf7WyWtYW0rtwIsb2VVULk51sWLwWsg/view?usp=sharing"
-  - label: "Social Media Templates"
-    url: "#"
+  - label: "Full website"
+    url: "https://web.archive.org/web/20250709011244/https://www.codesmith.io/"
 imagesFolder: "codesmith"
 ---
 Codesmith is a community-driven software engineering bootcamp focused on diversity, trust, and belonging. I led the full website redesign from strategy to final handoff, building a complete design system with reusable components, Auto Layout, and developer-ready files. The new site reflects the three words that define Codesmith's community: Community, Diversity, Trust.
