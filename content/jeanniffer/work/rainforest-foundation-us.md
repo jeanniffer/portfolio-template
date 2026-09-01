@@ -12,11 +12,12 @@ client: "Rainforest Foundation US"
 cover: "/images/case-studies/client-slug/cover.png"
 year: "2025 - 2026"
 types:
-  - "Mission-driven"
-  - "Non-profit" # mission-driven | tech-finance | edtech | personal-experimental (pick 1+)
+  - "Mission-Driven"
+  - "Women-led Organization"
 tags:
-  - "Editorial Design" # free-form, shows up in the Tags filter + on the grid card
-href: "/case-studies/client-slug"
+  - "Editorial Design"
+  - "Annual Report"
+href: "/case-studies/rainforest-foundation-us"
 kind: "case-study"
 order: 99 # controls position in "Curated" sort -- lower = earlier
 comingSoon: true # set to false once the write-up below is ready
