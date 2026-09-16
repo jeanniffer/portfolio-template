@@ -18,7 +18,46 @@ type Section = {
   image: string;
   beforeImage?: string;
   alt?: string;
+  video?: string;
 };
+
+/** Accepts a full YouTube URL (watch, youtu.be, shorts, embed) or a
+ * bare video ID and returns a privacy-friendly embed URL, or null if
+ * nothing recognizable was found. */
+function toYouTubeEmbedUrl(video: string): string | null {
+  const trimmed = video.trim();
+  const patterns = [
+    /youtu\.be\/([\w-]{11})/,
+    /youtube(?:-nocookie)?\.com\/watch\?v=([\w-]{11})/,
+    /youtube(?:-nocookie)?\.com\/embed\/([\w-]{11})/,
+    /youtube(?:-nocookie)?\.com\/shorts\/([\w-]{11})/,
+  ];
+  for (const re of patterns) {
+    const match = trimmed.match(re);
+    if (match) return `https://www.youtube-nocookie.com/embed/${match[1]}`;
+  }
+  // Bare 11-character video ID.
+  if (/^[\w-]{11}$/.test(trimmed)) {
+    return `https://www.youtube-nocookie.com/embed/${trimmed}`;
+  }
+  return null;
+}
+
+function SectionVideo({ video, title }: { video: string; title: string }) {
+  const embedUrl = toYouTubeEmbedUrl(video);
+  if (!embedUrl) return null;
+  return (
+    <div className="relative h-full w-full max-w-[960px] overflow-hidden rounded-2xl bg-black">
+      <iframe
+        src={embedUrl}
+        title={`${title} — video`}
+        className="absolute inset-0 h-full w-full rounded-2xl"
+        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+        allowFullScreen
+      />
+    </div>
+  );
+}
 
 function SectionLayer({
   section,
@@ -90,7 +129,9 @@ function SectionLayer({
           style={{ scale: imageScale }}
           className="relative h-full w-full max-w-[960px] overflow-hidden rounded-2xl"
         >
-          {section.beforeImage ? (
+          {section.video ? (
+            <SectionVideo video={section.video} title={section.title} />
+          ) : section.beforeImage ? (
             <BeforeAfterSlider
               before={section.beforeImage}
               after={section.image}
@@ -240,7 +281,9 @@ export default function CaseStudySections({ sections }: { sections: Section[] })
               </p>
             </div>
             <div className="relative h-[380px] w-full overflow-hidden rounded-2xl sm:h-[440px] md:h-[520px]">
-              {section.beforeImage ? (
+              {section.video ? (
+                <SectionVideo video={section.video} title={section.title} />
+              ) : section.beforeImage ? (
                 <BeforeAfterSlider
                   before={section.beforeImage}
                   after={section.image}

@@ -20,6 +20,12 @@ import FloatingCTA from "@/components/FloatingCTA";
 import WorkHome from "@/components/work/WorkHome";
 import UXUIHome from "@/components/uxui/UXUIHome";
 
+// Revalidate hourly so scheduled projects (publishAt in the
+// future) go live on their own without a redeploy once their
+// date passes -- otherwise Next would keep serving the
+// build-time snapshot on a statically generated page.
+export const revalidate = 3600;
+
 export default function Home() {
   // New "30-second" homepage template (filterable work gallery) --
   // opt-in per Vercel project via SITE_VARIANT=jeanniffer, will

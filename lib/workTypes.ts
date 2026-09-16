@@ -23,24 +23,39 @@ function slugify(label: string): string {
     .replace(/(^-+|-+$)/g, "");
 }
 
-/** All distinct niche labels across a set of items, in first-seen
- * order (so the filter list order tracks the order projects are
- * curated in). */
-export function collectNiches<T extends { types: WorkType[] }>(items: T[]): WorkType[] {
-  const seen = new Set<string>();
-  for (const item of items) {
-    for (const t of item.types) seen.add(t);
+/** Counts how many items carry each label, in first-seen order (used
+ * as the tiebreak when two labels have the same count, so the order
+ * stays stable rather than jumping around as content changes). */
+function countLabels(lists: string[][]): [string, number][] {
+  const counts = new Map<string, number>();
+  for (const labels of lists) {
+    for (const label of labels) {
+      counts.set(label, (counts.get(label) ?? 0) + 1);
+    }
   }
-  return [...seen];
+  return [...counts.entries()];
 }
 
-/** All distinct tags across a set of items, same first-seen ordering. */
+/** Most-populated label first -- filter pills for niches/tags with more
+ * projects behind them surface before ones with only one or two, so the
+ * list reads as "here's most of what I do" instead of a random order.
+ * Ties keep first-seen order (stable sort). */
+function sortByCountDesc(counted: [string, number][]): string[] {
+  return counted
+    .map(([label, count], index) => ({ label, count, index }))
+    .sort((a, b) => b.count - a.count || a.index - b.index)
+    .map((entry) => entry.label);
+}
+
+/** All distinct niche labels across a set of items, most-populated
+ * first. */
+export function collectNiches<T extends { types: WorkType[] }>(items: T[]): WorkType[] {
+  return sortByCountDesc(countLabels(items.map((item) => item.types)));
+}
+
+/** All distinct tags across a set of items, most-populated first. */
 export function collectTags<T extends { tags: string[] }>(items: T[]): string[] {
-  const seen = new Set<string>();
-  for (const item of items) {
-    for (const t of item.tags) seen.add(t);
-  }
-  return [...seen];
+  return sortByCountDesc(countLabels(items.map((item) => item.tags)));
 }
 
 /**

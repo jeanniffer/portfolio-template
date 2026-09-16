@@ -138,6 +138,27 @@ export default function CaseStudyPage({ item }: { item: WorkItem }) {
             (see CaseStudySections). */}
         {item.sections?.length ? <CaseStudySections sections={item.sections} /> : null}
 
+        {/* Mid-page nudge -- the crossfade sections above only show
+            highlights, so this offers the real depth (process, more
+            visuals, the parts that don't fit a grid) as a call instead
+            of a wall of extra text. Separate from the closing
+            "Interested in collaborating?" CTA, which is about new work. */}
+        {item.sections?.length ? (
+          <div className="flex w-full flex-col items-center gap-3 py-6 text-center">
+            <p className="font-archivo text-lg font-light tracking-[-0.36px] text-[#6e6e6d]">
+              Want the full walkthrough of this project?
+            </p>
+            <a
+              href={meta.contactEmail ? `mailto:${meta.contactEmail}?subject=${encodeURIComponent(
+                `Walkthrough call — ${item.client}`
+              )}` : "#"}
+              className="rounded-lg border border-[#1a1a1a] px-4 py-2 font-mono text-sm uppercase tracking-[-0.56px] text-[#1a1a1a] transition hover:bg-[#1a1a1a] hover:text-[#fdfbf5]"
+            >
+              Let's hop on a call →
+            </a>
+          </div>
+        ) : null}
+
         {HR}
 
         {/* Other projects */}

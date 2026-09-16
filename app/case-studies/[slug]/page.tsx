@@ -5,6 +5,12 @@ import { getWorkItem } from "@/lib/work";
 import CaseStudyPage from "@/components/work/CaseStudyPage";
 import ComingSoonPage from "@/components/work/ComingSoonPage";
 
+// Revalidate hourly so scheduled projects (publishAt in the
+// future) go live on their own without a redeploy once their
+// date passes -- otherwise Next would keep serving the
+// build-time snapshot on a statically generated page.
+export const revalidate = 3600;
+
 export function generateMetadata({ params }: { params: { slug: string } }): Metadata {
   const item = getWorkItem(params.slug);
   const meta = getSiteMeta();

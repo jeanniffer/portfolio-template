@@ -47,6 +47,13 @@ export type WorkItem = {
   href?: string;
   kind: WorkKind;
   order: number;
+  // Publish-ahead scheduling: set to a future ISO date ("2026-11-01")
+  // to have a project stay hidden (not in the grid, not in filters,
+  // not in "Other projects") until that date arrives -- lets Jean
+  // finish and commit a project's markdown/images ahead of time and
+  // have it go live on its own. Leave unset (or in the past) to
+  // publish immediately, same as today.
+  publishAt?: string;
   // When true, the /case-studies/[slug] page shows a "Coming soon"
   // placeholder instead of the full case study -- lets Jean publish a
   // project's thumbnail/grid card right away and fill in the real
@@ -80,6 +87,11 @@ export type WorkItem = {
     // body copy) -- falls back to `description` when not set, so old
     // content keeps working without every file needing an update.
     alt?: string;
+    // Optional YouTube video for this section -- either a full URL
+    // (watch, youtu.be, or embed) or a bare video ID. When set, the
+    // section renders the video (looping ambient playback, not a
+    // slider or static image) instead of `image`/`beforeImage`.
+    video?: string;
   }[];
 };
 
@@ -97,21 +109,30 @@ function readWorkFile(f: string): WorkItem {
     kind: (data.kind as WorkKind) || "case-study",
     order: data.order ?? 0,
     comingSoon: data.comingSoon ?? false,
+    publishAt: data.publishAt,
     description: data.description,
     timeline: data.timeline,
     services: data.services,
     liveUrl: data.liveUrl,
     githubUrl: data.githubUrl,
     sections: data.sections?.map(
-      (s: { title: string; description: string; image: string; beforeImage?: string; alt?: string }) => ({
+      (s: { title: string; description: string; image: string; beforeImage?: string; alt?: string; video?: string }) => ({
         title: s.title,
         description: s.description,
         image: s.image,
         beforeImage: s.beforeImage,
         alt: s.alt,
+        video: s.video,
       })
     ),
   };
+}
+
+function isScheduledForFuture(item: WorkItem): boolean {
+  if (!item.publishAt) return false;
+  const publishDate = new Date(item.publishAt);
+  if (Number.isNaN(publishDate.getTime())) return false;
+  return publishDate.getTime() > Date.now();
 }
 
 export function getWorkItems(): WorkItem[] {
@@ -129,6 +150,10 @@ export function getWorkItems(): WorkItem[] {
     // works if someone has the direct link (shows the coming-soon
     // placeholder), it just isn't surfaced anywhere on the site.
     .filter((item) => !item.comingSoon)
+    // Scheduled projects (publishAt in the future) stay just as hidden
+    // as comingSoon ones until their date arrives -- write and commit
+    // the project whenever it's ready, it appears on its own later.
+    .filter((item) => !isScheduledForFuture(item))
     .sort((a, b) => a.order - b.order);
 }
 

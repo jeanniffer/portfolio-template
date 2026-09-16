@@ -180,6 +180,15 @@ export default function WorkGrid({
       </AnimatePresence>
       </div>
 
+      {/* Archive note -- centered under the grid columns specifically
+          (not the sidebar rail beside it), so it reads as the caption
+          for the cards you're actually looking at. Earliest project
+          year is hardcoded since it barely changes; bump it manually
+          if an older project ever gets added. */}
+      <p className="w-full pt-10 text-center font-mono text-xs uppercase tracking-[0.48px] text-[#818181]">
+        Selected projects from 2020 — Present. Constantly updating.
+      </p>
+
       <Lightbox
         src={lightboxItem?.cover ?? null}
         alt={lightboxItem ? `${lightboxItem.client} — ${lightboxItem.tags[0] || "project"}` : ""}
