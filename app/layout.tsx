@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { Archivo, Fraunces, IBM_Plex_Mono, Manrope } from "next/font/google";
+import { Analytics } from "@vercel/analytics/next";
 import "./globals.css";
 import { getSiteMeta, getVariant } from "@/lib/content";
 
@@ -74,6 +75,7 @@ export default function RootLayout({
         }`}
       >
         {children}
+        <Analytics />
       </body>
     </html>
   );
