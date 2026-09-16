@@ -14,12 +14,13 @@ year: "2023"
 types:
   - "Mission-driven"
   - "Healthcare"
+  - "Women-led Organization"
 tags:
   - "Editorial & Publishing"
   - "Art Direction"
 href: "/case-studies/remember-when-i-had-cancer"
 kind: "case-study"
-order: 99
+order: 5
 description: "How a manuscript written in Word became a guidebook cancer patients actually want to hold. Rated 4.9/5 by readers navigating one of the hardest chapters of their lives."
 timeline: "3 months"
 liveUrl: "https://www.amazon.com/-/es/Amanda-Butler-ebook/dp/B0CBTQ1Q1J/ref=sr_1_1?__mk_es_US=%C3%85M%C3%85%C5%BD%C3%95%C3%91&crid=32QEUK58EHQUK&dib=eyJ2IjoiMSJ9.rZYxGPOh2hXBcm7XrVn0UZdXyQI9ZszpIm6O9BLBKAR5YiJsTErKht2t7k-LRqsbqU1ir2t4F8GYU4ti_xGcXFhtEQLxvKS3p6xTUNFpxZtjwSdK1f_o75lJgSiO5AIfz2W3N2wC_An_xxN7hytIJNc_VFn4ifQX3Shh5skh5EJrkATdWtCPV0vL4sOfwY2d0RoNgwEy9FPYhkQdrYMNiUzqEfcyEYfAcwqYGZHi8UY.PUhc82VDC_JG1Aa6TrfAdO1dOie4900_GwxPAG2qBbs&dib_tag=se&keywords=remember+when+i+had+cancer&qid=1788303451&s=music&sprefix=remember+when+i+had+cance%2Cmusic-intl-ship%2C191&sr=1-1"

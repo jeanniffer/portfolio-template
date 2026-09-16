@@ -4,7 +4,7 @@ cover: "/images/case-studies/codesmith/codesmith_cover-image_website-redesign.pn
 year: "2024 - 2025"
 types:
   - "EdTech"
-  - "Mission-Driven"
+  - "Mission-driven"
 tags:
   - "Product Design"
   - "Web Design"

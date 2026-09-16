@@ -3,7 +3,7 @@ client: "digitalundivided"
 cover: "/images/case-studies/digitalundivided/digitalundivided_every-day-content.png"
 year: "2021 - 2023"
 types:
-  - "Mission-Driven"
+  - "Mission-driven"
   - "Women-led Organization"
 tags:
   - "Web Design"

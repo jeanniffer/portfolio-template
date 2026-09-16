@@ -4,8 +4,8 @@ client: "iUSCAN"
 cover: "/images/case-studies/iuscan/iuscan-cover-image.png"
 year: "2024"
 types:
-  - "Mission-Driven"
-  # - "Healthcare" # mission-driven | tech-finance | edtech | personal-experimental (pick 1+)
+  - "Mission-driven"
+  - "Healthcare"
 tags:
   - "Web Design"
   - "Rebranding" # free-form, shows up in the Tags filter + on the grid card
