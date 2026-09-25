@@ -1,7 +1,7 @@
 "use client";
 
 import type { SiteMeta } from "@/lib/content";
-import { SHOW_QUICK_CONTACT_CTAS } from "@/lib/content";
+import { SHOW_QUICK_CONTACT_CTAS } from "@/lib/siteFlags";
 
 /**
  * Persistent "Hire me" button -- stays fixed on screen the whole time you
@@ -12,7 +12,7 @@ import { SHOW_QUICK_CONTACT_CTAS } from "@/lib/content";
  * than through Upwork), it becomes a mailto: link instead.
  */
 export default function FloatingCTA({ meta }: { meta: SiteMeta }) {
-  // Hidden while SHOW_QUICK_CONTACT_CTAS is false -- see lib/content.ts.
+  // Hidden while SHOW_QUICK_CONTACT_CTAS is false -- see lib/siteFlags.ts.
   if (!SHOW_QUICK_CONTACT_CTAS) return null;
 
   if (meta.contactEmail) {

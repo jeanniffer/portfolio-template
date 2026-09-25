@@ -5,7 +5,7 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { AnimatePresence, motion } from "framer-motion";
 import type { SiteMeta } from "@/lib/content";
-import { SHOW_QUICK_CONTACT_CTAS } from "@/lib/content";
+import { SHOW_QUICK_CONTACT_CTAS } from "@/lib/siteFlags";
 
 export default function WorkHeader({
   meta,

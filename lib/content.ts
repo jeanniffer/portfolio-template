@@ -89,12 +89,6 @@ function variantDir(variant: string) {
   return path.join(CONTENT_ROOT, variant);
 }
 
-// Toggle: hides the Let's Talk / quick-contact CTAs (side nav pill,
-// floating Upwork button, case-study header + footer email/button) across
-// the whole site without deleting any of that code. Flip back to true to
-// bring them all back at once.
-export const SHOW_QUICK_CONTACT_CTAS = false;
-
 export type SiteMeta = {
   name: string;
   role: string;

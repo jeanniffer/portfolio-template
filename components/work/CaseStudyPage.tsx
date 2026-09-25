@@ -1,7 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import { getSiteMeta } from "@/lib/content";
-import { SHOW_QUICK_CONTACT_CTAS } from "@/lib/content";
+import { SHOW_QUICK_CONTACT_CTAS } from "@/lib/siteFlags";
 import { getOtherWorkItems, type WorkItem } from "@/lib/work";
 import WorkHeader from "./WorkHeader";
 import WorkFooter from "./WorkFooter";

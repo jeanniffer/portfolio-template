@@ -2,7 +2,7 @@
 
 import { motion } from "framer-motion";
 import type { SiteMeta } from "@/lib/content";
-import { SHOW_QUICK_CONTACT_CTAS } from "@/lib/content";
+import { SHOW_QUICK_CONTACT_CTAS } from "@/lib/siteFlags";
 
 export default function WorkFooter({ meta }: { meta: SiteMeta }) {
   return (

@@ -1,6 +1,6 @@
 import Image from "next/image";
 import type { SiteMeta } from "@/lib/content";
-import { SHOW_QUICK_CONTACT_CTAS } from "@/lib/content";
+import { SHOW_QUICK_CONTACT_CTAS } from "@/lib/siteFlags";
 import HeroBackground from "./HeroBackground";
 import Reveal from "./Reveal";
 
