@@ -5,6 +5,7 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { AnimatePresence, motion } from "framer-motion";
 import type { SiteMeta } from "@/lib/content";
+import { SHOW_QUICK_CONTACT_CTAS } from "@/lib/content";
 
 export default function WorkHeader({
   meta,
@@ -51,15 +52,17 @@ export default function WorkHeader({
         >
           {meta.navAbout || "About"}
         </Link>
-        <motion.a
-          whileHover={{ scale: 1.03 }}
-          whileTap={{ scale: 0.97 }}
-          transition={{ duration: 0.2, ease: "easeOut" }}
-          href={meta.contactEmail ? `mailto:${meta.contactEmail}` : "#"}
-          className="rounded-lg bg-[#1a1a1a] px-4 py-2 font-mono text-sm font-medium uppercase tracking-[-0.56px] text-[#fdfbf5]"
-        >
-          {meta.ctaLabel || "Let's Talk"}
-        </motion.a>
+        {SHOW_QUICK_CONTACT_CTAS ? (
+          <motion.a
+            whileHover={{ scale: 1.03 }}
+            whileTap={{ scale: 0.97 }}
+            transition={{ duration: 0.2, ease: "easeOut" }}
+            href={meta.contactEmail ? `mailto:${meta.contactEmail}` : "#"}
+            className="rounded-lg bg-[#1a1a1a] px-4 py-2 font-mono text-sm font-medium uppercase tracking-[-0.56px] text-[#fdfbf5]"
+          >
+            {meta.ctaLabel || "Let's Talk"}
+          </motion.a>
+        ) : null}
       </nav>
 
       {/* Hamburger toggle -- only shown below 425px. */}
@@ -120,13 +123,15 @@ export default function WorkHeader({
             >
               {meta.navAbout || "About"}
             </Link>
-            <a
-              href={meta.contactEmail ? `mailto:${meta.contactEmail}` : "#"}
-              onClick={() => setMenuOpen(false)}
-              className="rounded-lg bg-[#1a1a1a] px-4 py-2 font-mono text-sm font-medium uppercase tracking-[-0.56px] text-[#fdfbf5]"
-            >
-              {meta.ctaLabel || "Let's Talk"}
-            </a>
+            {SHOW_QUICK_CONTACT_CTAS ? (
+              <a
+                href={meta.contactEmail ? `mailto:${meta.contactEmail}` : "#"}
+                onClick={() => setMenuOpen(false)}
+                className="rounded-lg bg-[#1a1a1a] px-4 py-2 font-mono text-sm font-medium uppercase tracking-[-0.56px] text-[#fdfbf5]"
+              >
+                {meta.ctaLabel || "Let's Talk"}
+              </a>
+            ) : null}
           </motion.nav>
         )}
       </AnimatePresence>

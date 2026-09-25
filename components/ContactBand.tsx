@@ -1,5 +1,6 @@
 import Image from "next/image";
 import type { SiteMeta } from "@/lib/content";
+import { SHOW_QUICK_CONTACT_CTAS } from "@/lib/content";
 import HeroBackground from "./HeroBackground";
 import Reveal from "./Reveal";
 
@@ -29,18 +30,20 @@ export default function ContactBand({ meta }: { meta: SiteMeta }) {
           </h2>
         </Reveal>
 
-        <Reveal delay={0.1}>
-          <a
-            href={primaryCta.href}
-            {...(primaryCta.external
-              ? { target: "_blank", rel: "noreferrer" }
-              : {})}
-            className="inline-flex items-center gap-2 rounded-full bg-accent px-6 py-3 font-body text-lg font-semibold text-ink transition hover:opacity-90"
-          >
-            {primaryCta.label}
-            <span aria-hidden>→</span>
-          </a>
-        </Reveal>
+        {SHOW_QUICK_CONTACT_CTAS ? (
+          <Reveal delay={0.1}>
+            <a
+              href={primaryCta.href}
+              {...(primaryCta.external
+                ? { target: "_blank", rel: "noreferrer" }
+                : {})}
+              className="inline-flex items-center gap-2 rounded-full bg-accent px-6 py-3 font-body text-lg font-semibold text-ink transition hover:opacity-90"
+            >
+              {primaryCta.label}
+              <span aria-hidden>→</span>
+            </a>
+          </Reveal>
+        ) : null}
 
         {meta.socials?.length ? (
           <Reveal delay={0.15}>

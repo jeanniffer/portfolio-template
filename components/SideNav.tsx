@@ -3,6 +3,7 @@
 import { useEffect, useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import type { SiteMeta } from "@/lib/content";
+import { SHOW_QUICK_CONTACT_CTAS } from "@/lib/content";
 
 const NAV_ITEMS = [
   { id: "about", label: "About Me" },
@@ -11,7 +12,8 @@ const NAV_ITEMS = [
   { id: "sneak-peek", label: "More Work" },
   { id: "services", label: "Services" },
   { id: "testimonials", label: "Clients" },
-  { id: "contact", label: "Let's Talk" },
+  // Hidden while SHOW_QUICK_CONTACT_CTAS is false -- see lib/content.ts.
+  ...(SHOW_QUICK_CONTACT_CTAS ? [{ id: "contact", label: "Let's Talk" }] : []),
 ];
 
 /**

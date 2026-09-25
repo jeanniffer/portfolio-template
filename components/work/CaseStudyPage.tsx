@@ -1,6 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import { getSiteMeta } from "@/lib/content";
+import { SHOW_QUICK_CONTACT_CTAS } from "@/lib/content";
 import { getOtherWorkItems, type WorkItem } from "@/lib/work";
 import WorkHeader from "./WorkHeader";
 import WorkFooter from "./WorkFooter";
@@ -143,7 +144,7 @@ export default function CaseStudyPage({ item }: { item: WorkItem }) {
             visuals, the parts that don't fit a grid) as a call instead
             of a wall of extra text. Separate from the closing
             "Interested in collaborating?" CTA, which is about new work. */}
-        {item.sections?.length ? (
+        {item.sections?.length && SHOW_QUICK_CONTACT_CTAS ? (
           <div className="flex w-full flex-col items-center gap-3 py-6 text-center">
             <p className="font-archivo text-lg font-light tracking-[-0.36px] text-[#6e6e6d]">
               Want the full walkthrough of this project?
@@ -195,12 +196,14 @@ export default function CaseStudyPage({ item }: { item: WorkItem }) {
               Whether it's a specific project, a full-time role, or something
               experimental, let's explore it together.
             </p>
-            <a
-              href={meta.contactEmail ? `mailto:${meta.contactEmail}` : "#"}
-              className="rounded-lg bg-[#1a1a1a] px-4 py-2 font-mono text-sm uppercase tracking-[-0.56px] text-[#fdfbf5] transition hover:opacity-90"
-            >
-              Set up a call →
-            </a>
+            {SHOW_QUICK_CONTACT_CTAS ? (
+              <a
+                href={meta.contactEmail ? `mailto:${meta.contactEmail}` : "#"}
+                className="rounded-lg bg-[#1a1a1a] px-4 py-2 font-mono text-sm uppercase tracking-[-0.56px] text-[#fdfbf5] transition hover:opacity-90"
+              >
+                Set up a call →
+              </a>
+            ) : null}
           </div>
         </div>
 

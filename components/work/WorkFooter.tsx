@@ -2,6 +2,7 @@
 
 import { motion } from "framer-motion";
 import type { SiteMeta } from "@/lib/content";
+import { SHOW_QUICK_CONTACT_CTAS } from "@/lib/content";
 
 export default function WorkFooter({ meta }: { meta: SiteMeta }) {
   return (
@@ -11,7 +12,7 @@ export default function WorkFooter({ meta }: { meta: SiteMeta }) {
       transition={{ duration: 0.6, delay: 0.2 }}
       className="flex w-full flex-col items-start gap-4 whitespace-nowrap py-6 font-mono text-sm tracking-[-0.56px] text-[#6e6e6d] sm:flex-row sm:items-center sm:justify-between sm:gap-0"
     >
-      {meta.contactEmail ? (
+      {meta.contactEmail && SHOW_QUICK_CONTACT_CTAS ? (
         <a
           href={`mailto:${meta.contactEmail}`}
           className="transition-colors duration-200 hover:text-[#1a1a1a]"
